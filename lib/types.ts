@@ -1,6 +1,12 @@
-export type Department = 'Finance' | 'IT' | 'Operations';
-export type UserRole = 'FinanceAnalyst' | 'DevOpsEngineer' | 'EnterpriseAdmin';
-export type ClearanceLevel = 'L1' | 'L2' | 'L3' | 'L4';
+export type Department = 'Finance' | 'IT' | 'Operations' | 'Infrastructure' | 'General' | 'System';
+export type UserRole =
+  | 'FinanceDirector'
+  | 'DevOpsEngineer'
+  | 'EnterpriseAdmin'
+  | 'SuperAdmin'
+  | 'Intern'
+  | 'SystemAdmin';
+export type ClearanceLevel = 'L1' | 'L2' | 'L3' | 'L4' | 'L5' | 'L6';
 
 export interface UserContext {
   userId: string;
@@ -19,9 +25,11 @@ export interface EnterprisePersona {
   department: Department;
   role: UserRole;
   clearanceLevel: ClearanceLevel;
+  levelDisplay: string;
   scopes: string[];
   avatar: string;
   description: string;
+  isSystemAdmin?: boolean;
 }
 
 export interface MCPProperty {
@@ -55,7 +63,7 @@ export interface ConnectorManifest {
 
 export interface EnterpriseRecord {
   id: string;
-  domain: 'it_incidents' | 'executive_payroll';
+  domain: string;
   department: Department;
   minClearance: ClearanceLevel;
   classification: 'Public' | 'Internal' | 'Confidential' | 'Restricted';
@@ -107,13 +115,22 @@ export interface OrchestrationStep {
 }
 
 export interface ConsentRequiredError {
-  code: '403 ConsentRequired';
+  code: string;
   message: string;
   requiredRole: UserRole[];
   requiredScopes: string[];
   currentRole: UserRole;
   currentScopes: string[];
   resolutionSteps: string[];
+}
+
+export interface DecisionMeta {
+  type: 'ALLOWED' | 'BLOCKED';
+  badge: string;
+  headline: string;
+  reason: string;
+  policyRule: string;
+  authorizedRoles: string[];
 }
 
 export interface OrchestrationResult {
@@ -134,6 +151,7 @@ export interface OrchestrationResult {
   actionPayload?: any;
   actionResult?: any;
   consentRequired?: ConsentRequiredError;
+  decision?: DecisionMeta;
   executionSteps: OrchestrationStep[];
   telemetry: TelemetryEvent[];
   latencyMs: number;

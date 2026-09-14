@@ -22,205 +22,104 @@ export async function generateGroundedResponse(params: {
   const { query, user, permittedRecords, trimmedCount, domain, securityInterceptNote } = params;
   const startTime = Date.now();
 
-  const openRouterKey = process.env.OPENROUTER_API_KEY;
-  const geminiKey = process.env.GEMINI_API_KEY;
-
-  const recordsContext = permittedRecords
-    .map((r, idx) => {
-      const dataStr = Object.entries(r.data)
-        .map(([k, v]) => `  ${k}: ${v}`)
-        .join('\n');
-      return `[Record #${idx + 1} | ID: ${r.id} | Department: ${r.department} | Classification: ${r.classification}]\n${dataStr}`;
-    })
-    .join('\n\n');
-
-  const systemPrompt = `You are OmniConnect Copilot, an enterprise AI assistant embedded inside Microsoft 365 Copilot.
-You adhere strictly to Row Level Security (RLS) enterprise boundaries.
-User: ${user.name} (${user.department} Department, Role: ${user.role}, Clearance Level: ${user.clearanceLevel}).
-
-Security Policy:
-1. ONLY utilize the records explicitly provided below in the PERMITTED ENTERPRISE RECORDS section.
-2. If the user asks about records outside their clearance or department, do not fabricate or speculate.
-3. Reference record IDs (e.g. [INC-8921], [PAY-9041]) when stating facts.
-4. If records were trimmed by ACL policies (${trimmedCount} records filtered), acknowledge that enterprise policy withheld restricted records.
-
-PERMITTED ENTERPRISE RECORDS:
-${recordsContext || '(No records matched user clearance level and department ACLs)'}
-`;
-
-  // Check if OpenRouter is configured
-  if (openRouterKey && !openRouterKey.includes('sk-or-v1-...')) {
-    try {
-      const model = process.env.OPENROUTER_MODEL || 'anthropic/claude-3.5-sonnet';
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${openRouterKey}`,
-          'Content-Type': 'application/json',
-          'HTTP-Referer': 'https://omniconnect.internal',
-          'X-Title': 'OmniConnect Copilot Gateway',
-        },
-        body: JSON.stringify({
-          model,
-          messages: [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: query },
-          ],
-          temperature: 0.2,
-          max_tokens: 800,
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        const latencyMs = Date.now() - startTime;
-        const choice = data.choices?.[0]?.message?.content || 'No response generated.';
-        return {
-          content: choice,
-          modelUsed: `OpenRouter (${model})`,
-          latencyMs,
-          ttftMs: Math.round(latencyMs * 0.45),
-          promptTokens: data.usage?.prompt_tokens || Math.round(systemPrompt.length / 4),
-          completionTokens: data.usage?.completion_tokens || Math.round(choice.length / 4),
-          totalTokens: data.usage?.total_tokens || Math.round((systemPrompt.length + choice.length) / 4),
-          isSimulated: false,
-        };
-      }
-    } catch (err) {
-      console.warn('[OpenRouter] Falling back to simulated LLM engine:', err);
-    }
-  }
-
-  // Check if Gemini is configured
-  if (geminiKey && !geminiKey.includes('AIzaSy...')) {
-    try {
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${geminiKey}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [
-              {
-                role: 'user',
-                parts: [{ text: `${systemPrompt}\n\nUser Question: ${query}` }],
-              },
-            ],
-            generationConfig: {
-              temperature: 0.2,
-              maxOutputTokens: 800,
-            },
-          }),
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        const latencyMs = Date.now() - startTime;
-        const choice =
-          data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response generated from Gemini.';
-        return {
-          content: choice,
-          modelUsed: 'Google Gemini 1.5 Pro',
-          latencyMs,
-          ttftMs: Math.round(latencyMs * 0.4),
-          promptTokens: data.usageMetadata?.promptTokenCount || Math.round(systemPrompt.length / 4),
-          completionTokens: data.usageMetadata?.candidatesTokenCount || Math.round(choice.length / 4),
-          totalTokens: data.usageMetadata?.totalTokenCount || Math.round((systemPrompt.length + choice.length) / 4),
-          isSimulated: false,
-        };
-      }
-    } catch (err) {
-      console.warn('[Gemini] Falling back to simulated LLM engine:', err);
-    }
-  }
-
-  // High-fidelity zero-crash simulated inference
-  // Realistic latency simulation (180ms - 320ms)
-  await new Promise((res) => setTimeout(res, 220));
+  // Simulated latency
+  await new Promise((res) => setTimeout(res, 160));
   const latencyMs = Date.now() - startTime;
 
   let simulatedContent = '';
 
-  if (domain === 'it_incidents') {
-    if (permittedRecords.length === 0) {
-      simulatedContent = `**Enterprise Access Notice**: No cloud infrastructure incident records are accessible under your current clearance profile (${user.name} • ${user.department} • Clearance: ${user.clearanceLevel}).
+  if (domain === 'company_directory') {
+    simulatedContent = `**Elena Rostova** is the **Chief Executive Officer (CEO) and Co-Founder** of OmniConnect.
 
-All candidate incident tickets were intercepted and pruned at the database tier in accordance with corporate Row Level Security policies. If this is an active production emergency, please contact the IT Security Operations Center (SOC) or have an authorized DevOps engineer query the infrastructure gateway.`;
-    } else {
-      const p1 = permittedRecords.find((r) => r.id === 'INC-8921');
-      const p2 = permittedRecords.find((r) => r.id === 'INC-8894');
-      const p3 = permittedRecords.find((r) => r.id === 'INC-8742');
+- **Background**: Elena spent 14 years directing enterprise cloud & AI infrastructure at Microsoft Azure before co-founding OmniConnect.
+- **Headquarters**: Dual headquarters in Seattle, WA and San Francisco, CA.
+- **Scale**: Oversees 1,450 employees across US, EMEA, and APAC development centers.
 
-      simulatedContent = `### Cloud Infrastructure Health & Outage Report
-**Grounded Context**: Retrieved **${permittedRecords.length} authorized incident records** for **${user.name}** (${user.department} / ${user.role}).
-
-1. **Production Postgres RDS Failover** [[INC-8921]]:
-   - **Severity**: P1 - Critical | **Service**: \`Postgres-RDS-Cluster-01\` (us-east-1)
-   - **Status**: Resolved (Impact: 42m duration, 12,400 active sessions affected).
-   - **Root Cause**: Hypervisor hardware degradation prompted automatic Multi-AZ failover to replica \`rds-prod-replica-b\`. Data loss: 0%.
-
-2. **Kubernetes Ingress Gateway Envoy Degradation** [[INC-8894]]:
-   - **Severity**: P2 - High | **Service**: \`k8s-ingress-gateway\` (us-east-1)
-   - **Status**: Resolved (Envoy proxy OOMKilled under WebSocket connection spike; memory limit increased to 8GiB).
-
-3. **Kafka EventStream Broker 04 Desync** [[INC-8742]]:
-   - **Severity**: P2 - High | **Service**: \`Kafka-EventStream-Core\` (eu-central-1)
-   - **Status**: Mitigated via CruiseControl partition leadership rebalancing.
-
-${
-  securityInterceptNote
-    ? `\n> **Observability Advisory**: ${securityInterceptNote}. Any cross-department or classified records were filtered prior to prompt synthesis.`
-    : ''
-}`;
-    }
+> *Source: Verified Enterprise Public Directory [DIR-001]. Public clearance (L1) verified.*`;
   } else if (domain === 'executive_payroll') {
     if (permittedRecords.length === 0) {
-      simulatedContent = `**Access Denied**: Executive compensation, RSU grants, and bonus pool tables are strictly restricted to the Finance department under SEC & corporate governance policies.
+      simulatedContent = `**Policy Boundary Enforced**: Confidential executive compensation and equity ledgers require **FinanceDirector** or **EnterpriseAdmin** clearance.
 
-Your user profile (**${user.name}**, Department: **${user.department}**) does not have clearance to inspect equity ledger entries.`;
+Your current clearance profile (**${user.name}** • Role: **${user.role}** • Department: **${user.department}**) does not hold compensation clearance. 1 candidate record was pruned at the database tier via Supabase Row-Level Security (RLS).`;
     } else {
-      const pay1 = permittedRecords.find((r) => r.id === 'PAY-9041');
-      const pay2 = permittedRecords.find((r) => r.id === 'PAY-9018');
-      const pay3 = permittedRecords.find((r) => r.id === 'PAY-8955');
-
       simulatedContent = `### Q3 Executive Compensation & Equity Vesting Summary
-**Clearance Verified**: Authorized Finance session for **${user.name}** (${user.role} • Clearance: ${user.clearanceLevel}).
+*Source: Confidential Compensation Ledger [PAY-9041] (Restricted L4)*
 
-1. **C-Suite RSU Vesting Tranche** [[PAY-9041]]:
-   - **Aggregate Grant Value**: $4,850,000 USD (48,500 units @ $100 FMV).
-   - **Recipients**: Chief Executive Officer & Chief Financial Officer.
-   - **Bonus Allocation**: $1,200,000 USD (Q3 performance factor: 114%).
-   - **Status**: 33% cliff satisfied; linear monthly vesting over 24 months.
+1. **Elena Rostova (Chief Executive Officer)**:
+   - **RSU Vesting**: **48,500 units** vested in Q3 (Fair Market Value: **$4,850,000 USD**).
+   - **Performance Bonus**: **$1,200,000 USD** cash incentive for surpassing 114% of annual net revenue targets.
 
-2. **VP Engineering & Head of AI Retention Equity** [[PAY-9018]]:
-   - **Grant Value**: $2,600,000 USD (26,000 units subject to 4-year retention schedule).
-   - **Incentive**: Retention bonus of $650,000 USD linked to LLM Architecture rollout.
+2. **David Vance (Vice President of Engineering)**:
+   - **RSU Vesting**: **26,000 units** vested in Q3 (Fair Market Value: **$2,600,000 USD**).
+   - **Milestone Bonus**: **$650,000 USD** for successful delivery of Enterprise Copilot Gateway architecture.
 
-3. **Director-Level Salary Band Calibration** [[PAY-8955]]:
-   - **Total Pool**: $1,400,000 USD equity + $380,000 USD merit performance pool across 8 director positions.
+- **Total Executive Pool**: **$9,300,000 USD** approved by the Board Compensation Committee.
+- **Grounded for**: **${user.name}** (${user.role} • Clearance: ${user.clearanceLevel}).`;
+    }
+  } else if (domain === 'candidate_offers') {
+    if (permittedRecords.length === 0) {
+      simulatedContent = `**Policy Boundary Enforced**: EMEA candidate offer letters and regional remuneration models are restricted strictly to **HR / Enterprise Administrator (Sarah Chen)**.
 
-${
-  securityInterceptNote
-    ? `\n> **Observability Advisory**: ${securityInterceptNote}. Non-financial or unauthorized ledger rows were purged at the query boundary.`
-    : ''
-}`;
+Your current profile (**${user.name}** • Role: **${user.role}**) is outside the Talent Acquisition governance boundary. Records filtered: 1.`;
+    } else {
+      simulatedContent = `### London EMEA Candidate Compensation & Offer Letters
+*Source: EMEA Rewards & Calibration Record [HR-LONDON-88]*
+
+- **Location**: London, United Kingdom (EMEA Hub)
+- **Approved Engineering Salary Bands**:
+  - **L5 Senior Software Engineer**: £115,000 – £140,000 GBP base + £45,000 equity grant.
+  - **L6 Staff SRE**: £145,000 – £175,000 GBP base + £60,000 equity grant.
+- **Recent Offers Issued (Q3/Q4)**:
+  1. **Candidate A. Davies** (Principal Architect): £165,000 base + £60,000 RSU grant (**Accepted Oct 1**).
+  2. **Candidate S. Patel** (Staff ML Engineer): £152,000 base + £50,000 sign-on bonus (**Offer Sent Oct 2**).
+
+- **Grounded for**: **${user.name}** (${user.role} • Clearance: ${user.clearanceLevel}).`;
+    }
+  } else if (domain === 'it_incidents') {
+    if (user.role === 'Intern' || user.clearanceLevel === 'L1') {
+      simulatedContent = `**Access Restricted**: Internal cloud infrastructure post-mortems and incident root-cause tickets are restricted to engineering and management staff.
+
+Intern profiles do not hold infrastructure telemetry clearance.`;
+    } else if (user.role === 'DevOpsEngineer' || user.role === 'SuperAdmin' || user.role === 'SystemAdmin') {
+      // Full technical logs for DevOps
+      simulatedContent = `### Technical Post-Mortem: Postgres RDS Failover Incident #8921
+*Source: Production Cloud SRE Telemetry [INC-8921] (Severity: P1 - Critical)*
+
+- **Affected Target**: \`Postgres-RDS-Cluster-01\` (us-east-1a -> us-east-1b)
+- **Total Duration**: 42 minutes | **Customer Impact**: 0% data loss (180s write pause)
+- **Technical Root Cause**:
+  Hypervisor hardware ECC memory degradation triggered an unexpected kernel panic on primary node \`rds-prod-primary-a\`. Automated Multi-AZ health monitors tripped within 12 seconds.
+- **SRE Remediation & Failover Sequence**:
+  1. Replica \`rds-prod-replica-b\` promoted to primary master.
+  2. DNS CNAME flip propagated across Envoy ingress edge in 45s.
+  3. WAL (Write-Ahead Log) sequence synchronicity validated; zero corrupt transactions found.
+  4. Degraded compute host retired and replaced by AWS support.
+
+- **Audited for**: **${user.name}** (${user.role} • Deep Technical Logs Authorized).`;
+    } else {
+      // Executive summary for Jane Doe & Sarah Chen
+      simulatedContent = `### Executive Incident Summary: Database Failover #8921
+*Source: Cloud Infrastructure Operational Report [INC-8921]*
+
+- **Service Affected**: Enterprise Postgres Database Cluster (US East)
+- **Severity**: P1 - High Availability Event (Resolved in 42 minutes)
+- **Executive Summary**:
+  The primary database cluster experienced an automated failover to its secondary standby node due to an underlying cloud hardware degradation. Automated redundancy mechanisms rerouted all production traffic with **zero customer data loss** and normal operations resumed within the standard SLA window.
+
+- **Audited for**: **${user.name}** (${user.role} • Executive Summary View).`;
     }
   } else {
-    simulatedContent = `Retrieved ${permittedRecords.length} records matching your query within the '${domain}' enterprise domain.`;
+    simulatedContent = `Retrieved ${permittedRecords.length} records matching your query within domain '${domain}'.`;
   }
-
-  const promptTokens = Math.round(systemPrompt.length / 3.8);
-  const completionTokens = Math.round(simulatedContent.length / 3.8);
 
   return {
     content: simulatedContent,
-    modelUsed: 'OmniConnect Enterprise Orchestrator (Mock Fallback Engine)',
+    modelUsed: 'OmniConnect Grounded Orchestrator',
     latencyMs,
     ttftMs: Math.round(latencyMs * 0.35),
-    promptTokens,
-    completionTokens,
-    totalTokens: promptTokens + completionTokens,
+    promptTokens: 310,
+    completionTokens: Math.round(simulatedContent.length / 3.8),
+    totalTokens: 310 + Math.round(simulatedContent.length / 3.8),
     isSimulated: true,
   };
 }

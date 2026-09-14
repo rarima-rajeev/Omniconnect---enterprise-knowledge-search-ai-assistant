@@ -8,8 +8,8 @@ import {
   trackLLMLatency,
   trackPermissionTrimming,
 } from '@/lib/posthog';
-import { ENTERPRISE_PERSONAS, runSessionScopedRLSQuery, validateActionConsent } from '@/lib/supabase';
-import { OrchestrationResult, OrchestrationStep, UserContext } from '@/lib/types';
+import { ENTERPRISE_PERSONAS, runSessionScopedRLSQuery } from '@/lib/supabase';
+import { DecisionMeta, OrchestrationResult, OrchestrationStep, UserContext } from '@/lib/types';
 
 export async function GET() {
   const stream = getTelemetryStream();
@@ -24,130 +24,117 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const overallStart = Date.now();
   const body = await req.json().catch(() => ({}));
-  const { query = '', personaId, persona: customPersona, actionName, actionPayload } = body;
+  const { query = '', personaId, persona: customPersona, actionName } = body;
 
-  // Resolve user persona
+  // Resolve active persona
   const matchedPersona = ENTERPRISE_PERSONAS.find((p) => p.id === personaId);
-  const user: UserContext = customPersona || (matchedPersona ? {
-    userId: matchedPersona.id,
-    name: matchedPersona.name,
-    email: `${matchedPersona.name.toLowerCase().replace(' ', '.')}@enterprise.internal`,
-    department: matchedPersona.department,
-    role: matchedPersona.role,
-    clearanceLevel: matchedPersona.clearanceLevel,
-    scopes: matchedPersona.scopes,
-  } : {
-    userId: 'usr_anon',
-    name: 'Anonymous Employee',
-    email: 'anon@enterprise.internal',
-    department: 'Finance',
-    role: 'FinanceAnalyst',
-    clearanceLevel: 'L1',
-    scopes: ['read.public.wiki'],
-  });
+  const user: UserContext =
+    customPersona ||
+    (matchedPersona
+      ? {
+          userId: matchedPersona.id,
+          name: matchedPersona.name,
+          email: `${matchedPersona.name.toLowerCase().replace(' ', '.')}@enterprise.internal`,
+          department: matchedPersona.department,
+          role: matchedPersona.role,
+          clearanceLevel: matchedPersona.clearanceLevel,
+          scopes: matchedPersona.scopes,
+        }
+      : {
+          userId: 'usr_neil',
+          name: 'Neil Wright',
+          email: 'neil.wright@enterprise.internal',
+          department: 'General',
+          role: 'Intern',
+          clearanceLevel: 'L1',
+          scopes: ['read.public.directory'],
+        });
 
   const executionSteps: OrchestrationStep[] = [];
-
-  // Determine intent
   const lowerQuery = (query || '').toLowerCase();
-  const isActionIntent =
+
+  // -------------------------------------------------------------------------
+  // 1. [Agent Action - SRE] Restart Bastion Host / API Gateway
+  // Rule: Allowed: Binny Lee (L6) & Jay Seal. Denied: Jane, Alex, Sarah, Neil.
+  // -------------------------------------------------------------------------
+  if (
     actionName === 'restart_service' ||
     lowerQuery.includes('restart') ||
     lowerQuery.includes('reboot') ||
-    lowerQuery.includes('power cycle');
+    lowerQuery.includes('bastion')
+  ) {
+    const isAllowed = user.role === 'SuperAdmin' || user.role === 'SystemAdmin' || user.clearanceLevel === 'L6';
 
-  const isPayrollIntent =
-    !isActionIntent &&
-    (lowerQuery.includes('payroll') ||
-      lowerQuery.includes('rsu') ||
-      lowerQuery.includes('equity') ||
-      lowerQuery.includes('salary') ||
-      lowerQuery.includes('compensation') ||
-      lowerQuery.includes('bonus') ||
-      lowerQuery.includes('c-suite'));
-
-  // -------------------------------------------------------------
-  // BRANCH 1: AGENT ACTION & ADMINISTRATIVE CONSENT (Write Mode)
-  // -------------------------------------------------------------
-  if (isActionIntent) {
-    const step1Start = Date.now();
     executionSteps.push({
       step: 1,
-      name: 'Intent Recognition & Semantic Router',
-      description: 'Identified mutation intent: Bastion host / Cloud service restart action.',
+      name: 'Intent Classification',
+      description: 'Identified SRE Agent Action: restart_service (Production Bastion Host / Envoy Gateway).',
       status: 'completed',
-      durationMs: Date.now() - step1Start + 18,
-      metadata: { target_tool: 'restart_service', category: 'agent_action' },
+      durationMs: 14,
     });
-
-    const step2Start = Date.now();
-    const connector = MCP_CONNECTORS.find((c) => c.category === 'agent_action')!;
     executionSteps.push({
       step: 2,
-      name: 'MCP Schema Selection',
-      description: `Loaded Model Context Protocol manifest: ${connector.name} (v${connector.version}).`,
+      name: 'MCP Scope Verification',
+      description: "Verifying required OAuth scope: 'Cloud.Infrastructure.Write' & L6 Clearance.",
       status: 'completed',
-      durationMs: Date.now() - step2Start + 12,
-      metadata: { tool_declaration: connector.tool.name, required_scopes: connector.requiredScopes },
+      durationMs: 12,
     });
 
-    // Step 3: Action Gatekeeper & Admin Consent Validation
-    const step3Start = Date.now();
-    const consent = validateActionConsent(user, 'restart_service');
-
-    if (!consent.authorized) {
+    if (!isAllowed) {
       executionSteps.push({
         step: 3,
-        name: 'Action Gatekeeper & Consent Evaluation',
-        description: `Access Denied: User role '${user.role}' lacks administrative clearance for write actions.`,
+        name: 'Action Gatekeeper & OAuth Consent Check',
+        description: `Blocked: User '${user.name}' (${user.role}) lacks pre-delegated execution clearance.`,
         status: 'blocked',
-        durationMs: Date.now() - step3Start + 24,
-        metadata: {
-          blocked_reason: consent.reason,
-          required_scopes: consent.requiredScopes,
-          current_role: user.role,
-        },
+        durationMs: 18,
       });
 
-      // PostHog Telemetry: action blocked
       trackActionConsent({
         actionType: 'restart_service',
         status: 'denied',
         latencyMs: Date.now() - overallStart,
         user,
-        reason: consent.reason,
-        requiredScopes: consent.requiredScopes,
+        reason: "This write action requires 'Cloud.Infrastructure.Write' scope. Only Binny Lee (L6) has pre-delegated execution clearance.",
+        requiredScopes: ['Cloud.Infrastructure.Write', 'admin.bastion.reboot'],
       });
 
-      const responsePayload: OrchestrationResult = {
+      const decision: DecisionMeta = {
+        type: 'BLOCKED',
+        badge: '403 Consent Required',
+        headline: 'Missing Write Scope & Execution Clearance',
+        reason: `This write action requires 'Cloud.Infrastructure.Write' scope. Only Binny Lee (L6) has pre-delegated execution clearance.`,
+        policyRule: 'SRE Infrastructure Write Policy: Only Level 6 Super Admins may reboot production compute assets.',
+        authorizedRoles: ['Binny Lee (SuperAdmin - L6)'],
+      };
+
+      const response: OrchestrationResult = {
         success: false,
-        query: query || 'restart_service(service_name="prod-bastion-us-east-1", region="us-east-1")',
+        query,
         persona: user,
         intent: 'agent_action:restart_service',
-        connectorId: connector.id,
+        connectorId: 'm365-connector-bastion-ops',
         recordsScanned: 0,
         recordsPermitted: 0,
         trimRatio: 0,
         scannedRecords: [],
         permittedRecords: [],
         trimmedRecords: [],
-        groundedResponse: `**Security Intercept**: Execution of autonomous action \`restart_service\` has been blocked by the OmniConnect Gatekeeper.
+        decision,
+        groundedResponse: `**403 Consent Required**: This autonomous action \`restart_service\` has been halted by the OmniConnect Gatekeeper.
 
-${consent.reason}
-
-To execute infrastructure modifications, this request must be authorized by an **EnterpriseAdmin** possessing the \`admin.infrastructure.write\` OAuth scope.`,
-        actionExecuted: false,
+- **Attempted Target**: Production Bastion Host (\`prod-bastion-us-east-1\`)
+- **Required OAuth Scope**: \`Cloud.Infrastructure.Write\`
+- **Access Rule**: Only **Binny Lee (L6 | Infrastructure | SuperAdmin)** holds pre-delegated execution clearance. Role \`${user.role}\` (${user.clearanceLevel}) is unauthorized to reboot live servers.`,
         consentRequired: {
-          code: '403 ConsentRequired',
-          message: consent.reason || 'Missing administrative privilege.',
-          requiredRole: ['EnterpriseAdmin'],
-          requiredScopes: consent.requiredScopes || ['admin.infrastructure.write', 'admin.bastion.reboot'],
+          code: '403 Consent Required / Missing Write Scope',
+          message: "This write action requires 'Cloud.Infrastructure.Write' scope. Only Binny Lee (L6) has pre-delegated execution clearance.",
+          requiredRole: ['SuperAdmin'],
+          requiredScopes: ['Cloud.Infrastructure.Write'],
           currentRole: user.role,
           currentScopes: user.scopes,
           resolutionSteps: [
-            '1. Elevate session privilege via PIM (Privileged Identity Management) portal.',
-            '2. Request tenant administrator OAuth consent for scope `admin.infrastructure.write`.',
-            '3. Switch active workbench persona to Sarah Chen (EnterpriseAdmin) to test authorized execution.',
+            '1. Switch persona to Binny Lee (L6 SuperAdmin) in the top-right switcher.',
+            '2. Or submit a PIM Privileged Identity elevation request to the Head of Infrastructure.',
           ],
         },
         executionSteps,
@@ -157,232 +144,724 @@ To execute infrastructure modifications, this request must be authorized by an *
         tokenStats: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
       };
 
-      return NextResponse.json(responsePayload, { status: 403 });
+      return NextResponse.json(response, { status: 403 });
     }
 
-    // Authorized Admin Execution
+    // Authorized execution for Binny Lee
     executionSteps.push({
       step: 3,
-      name: 'Action Gatekeeper & Consent Evaluation',
-      description: `Administrative Consent Verified: User '${user.name}' holds 'EnterpriseAdmin' and required write scopes.`,
+      name: 'Action Gatekeeper Authorization',
+      description: `Authorized: Verified ${user.name} holds 'Cloud.Infrastructure.Write' and Level 6 root clearance.`,
       status: 'completed',
-      durationMs: Date.now() - step3Start + 35,
-      metadata: {
-        authorized_scopes: user.scopes,
-        role: user.role,
-      },
+      durationMs: 25,
     });
-
-    const step4Start = Date.now();
-    const targetService = actionPayload?.service_name || 'prod-bastion-us-east-1';
-    const targetRegion = actionPayload?.region || 'us-east-1';
-    const reason = actionPayload?.reason || 'Scheduled patch reboot and TLS session cache flush';
-
-    // Simulate pod connection draining and host reboot sequence
     executionSteps.push({
       step: 4,
-      name: 'Agent Action Execution (Cloud Bastion Drain & Reboot)',
-      description: `Dispatched RPC call to AWS EC2 & K8s cluster controller for '${targetService}' in '${targetRegion}'.`,
+      name: 'SRE Bastion RPC Execution',
+      description: 'Dispatched node connection drain and hypervisor reboot signal to AWS EC2.',
       status: 'completed',
-      durationMs: Date.now() - step4Start + 160,
-      metadata: {
-        target_service: targetService,
-        region: targetRegion,
-        drain_status: 'completed',
-        reboot_duration: '4.2s',
-      },
+      durationMs: 110,
     });
 
-    const actionLatency = Date.now() - overallStart;
     trackActionConsent({
       actionType: 'restart_service',
       status: 'success',
-      latencyMs: actionLatency,
+      latencyMs: Date.now() - overallStart,
       user,
     });
 
-    const responsePayload: OrchestrationResult = {
+    const decision: DecisionMeta = {
+      type: 'ALLOWED',
+      badge: 'Authorized & Executed',
+      headline: 'Host Gracefully Drained & Rebooted',
+      reason: `Verified ${user.name} holds 'Cloud.Infrastructure.Write' and Level 6 root clearance.`,
+      policyRule: 'SRE Infrastructure Write Policy: SuperAdmin pre-delegated write consent granted.',
+      authorizedRoles: ['Binny Lee (SuperAdmin - L6)'],
+    };
+
+    const response: OrchestrationResult = {
       success: true,
-      query: query || `Trigger Action: Restart ${targetService}`,
+      query,
       persona: user,
       intent: 'agent_action:restart_service',
-      connectorId: connector.id,
+      connectorId: 'm365-connector-bastion-ops',
       recordsScanned: 0,
       recordsPermitted: 0,
       trimRatio: 0,
       scannedRecords: [],
       permittedRecords: [],
       trimmedRecords: [],
-      groundedResponse: `### Operational Action Executed Successfully
-**Authorization Clearance**: Verified **${user.name}** (${user.role} • L4 Global Enterprise Admin).
-
-- **Target Asset**: \`${targetService}\` (${targetRegion})
-- **Operation**: Host Graceful Drain -> Node Reboot -> Health Probe Ping
-- **Execution Output**:
-  - \`[00:00.120]\` Initiated graceful connection drain (0 active dropped packets).
-  - \`[00:01.850]\` Sent reboot signal to AWS EC2 instance hypervisor.
-  - \`[00:03.900]\` Bastion host SSH and WireGuard daemon online.
-  - \`[00:04.150]\` Cluster health check returned HTTP 200 OK.
-- **Audit Stamp**: \`OPS-AUTH-${Date.now().toString(36).toUpperCase()}\``,
       actionExecuted: true,
-      actionPayload: { service_name: targetService, region: targetRegion, reason },
-      actionResult: {
-        status: 'SUCCESS_REBOOTED',
-        asset: targetService,
-        region: targetRegion,
-        execution_timestamp: new Date().toISOString(),
-      },
+      decision,
+      groundedResponse: `### Autonomous SRE Action Executed Successfully
+**Authorized Executive**: **${user.name}** (${user.role} • ${user.clearanceLevel}).
+
+- **Target Host**: \`prod-bastion-us-east-1\` (AWS us-east-1a)
+- **Execution Telemetry**:
+  - \`[00:00.120]\` Initiated graceful client connection drain (0 active dropped packets).
+  - \`[00:01.850]\` Dispatched ACPI reboot pulse to hypervisor controller.
+  - \`[00:03.400]\` WireGuard mesh tunnels and SSH daemons re-initialized.
+  - \`[00:03.880]\` Ingress health probe ping returned HTTP 200 OK.
+- **Audit Stamp**: \`SRE-OPS-${Date.now().toString(36).toUpperCase()}\``,
       executionSteps,
       telemetry: getTelemetryStream(),
-      latencyMs: actionLatency,
-      modelUsed: 'OmniConnect Orchestrator & SRE Agent Controller',
-      tokenStats: { promptTokens: 42, completionTokens: 186, totalTokens: 228 },
+      latencyMs: Date.now() - overallStart,
+      modelUsed: 'OmniConnect SRE Controller',
+      tokenStats: { promptTokens: 42, completionTokens: 145, totalTokens: 187 },
     };
 
-    return NextResponse.json(responsePayload);
+    return NextResponse.json(response);
   }
 
-  // -------------------------------------------------------------
-  // BRANCH 2: SEMANTIC RETRIEVAL & PERMISSION-AWARE TRIMMING
-  // -------------------------------------------------------------
-  const domain = isPayrollIntent ? 'executive_payroll' : 'it_incidents';
-  const connector = MCP_CONNECTORS.find((c) =>
-    domain === 'executive_payroll'
-      ? c.id === 'm365-connector-executive-payroll'
-      : c.id === 'm365-connector-it-incidents'
-  )!;
+  // -------------------------------------------------------------------------
+  // 2. [Agent Action - Finance] Approve vendor invoice #9021 ($150k wire)
+  // Rule: Allowed: Jane Doe (FinanceDirector). Denied: Binny, Alex, Sarah, Neil.
+  // -------------------------------------------------------------------------
+  if (
+    lowerQuery.includes('invoice') ||
+    lowerQuery.includes('wire transfer') ||
+    lowerQuery.includes('ach') ||
+    lowerQuery.includes('150,000') ||
+    actionName === 'approve_wire_transfer'
+  ) {
+    const isAllowed = user.role === 'FinanceDirector';
 
-  // Step 1: Intent Recognition
-  const step1Start = Date.now();
-  executionSteps.push({
-    step: 1,
-    name: 'Intent Recognition & Semantic Router',
-    description: `Analyzed query: Routed to enterprise domain '${domain}'.`,
-    status: 'completed',
-    durationMs: Date.now() - step1Start + 15,
-    metadata: { domain, target_connector: connector.id },
-  });
+    executionSteps.push({
+      step: 1,
+      name: 'Intent Classification',
+      description: 'Identified Treasury Action: approve_wire_transfer ($150,000.00 USD).',
+      status: 'completed',
+      durationMs: 12,
+    });
+    executionSteps.push({
+      step: 2,
+      name: 'Treasury Delegation Verification',
+      description: 'Evaluating SOX compliance: Requires FinanceDirector with statutory disbursement rights.',
+      status: 'completed',
+      durationMs: 10,
+    });
 
-  // Track connector invocation in PostHog
-  trackConnectorCall({
-    connectorId: connector.id,
-    domain,
-    query: query || (domain === 'executive_payroll' ? 'Query Executive Equity' : 'Query IT Outages'),
-    user,
-  });
+    if (!isAllowed) {
+      executionSteps.push({
+        step: 3,
+        name: 'Treasury Gatekeeper Intercept',
+        description: `Blocked: User '${user.name}' (${user.role}) is a non-finance officer.`,
+        status: 'blocked',
+        durationMs: 16,
+      });
 
-  // Step 2: MCP Schema Selection
-  const step2Start = Date.now();
-  executionSteps.push({
-    step: 2,
-    name: 'MCP Schema Selection',
-    description: `Bound tool declaration: '${connector.tool.name}' (Model Context Protocol v1.0).`,
-    status: 'completed',
-    durationMs: Date.now() - step2Start + 10,
-    metadata: { parameters: Object.keys(connector.tool.parameters.properties) },
-  });
+      trackActionConsent({
+        actionType: 'approve_wire_transfer',
+        status: 'denied',
+        latencyMs: Date.now() - overallStart,
+        user,
+        reason: 'Commercial disbursement authority exceeding $100,000 requires statutory Finance Director clearance.',
+        requiredScopes: ['finance.wire.approve'],
+      });
 
-  // Step 3: Supabase Session-Scoped RLS Query
-  const step3Start = Date.now();
-  const rlsResult = await runSessionScopedRLSQuery(user, domain, query);
-  executionSteps.push({
-    step: 3,
-    name: 'Supabase Session-Scoped RLS Query',
-    description: `Executed database query with session parameters [Dept: ${user.department}, Clearance: ${user.clearanceLevel}]. Found ${rlsResult.recordsScanned} candidate records.`,
-    status: 'completed',
-    durationMs: Date.now() - step3Start + 45,
-    metadata: {
-      storage_engine: rlsResult.source,
-      scanned: rlsResult.recordsScanned,
-      user_dept: user.department,
-    },
-  });
+      const decision: DecisionMeta = {
+        type: 'BLOCKED',
+        badge: '403 Forbidden',
+        headline: 'Non-Finance Officer Intercept',
+        reason: `Commercial disbursement authority exceeding $100,000 requires statutory Finance Director clearance. Role '${user.role}' is denied.`,
+        policyRule: 'Treasury Segregation of Duties: Non-Finance personnel cannot release corporate funds.',
+        authorizedRoles: ['Jane Doe (FinanceDirector - L4)'],
+      };
 
-  // Step 4: Permission Trimming Diff & Delta Analysis
-  const step4Start = Date.now();
+      const response: OrchestrationResult = {
+        success: false,
+        query,
+        persona: user,
+        intent: 'agent_action:approve_wire_transfer',
+        connectorId: 'm365-connector-wire-transfer',
+        recordsScanned: 0,
+        recordsPermitted: 0,
+        trimRatio: 0,
+        scannedRecords: [],
+        permittedRecords: [],
+        trimmedRecords: [],
+        decision,
+        groundedResponse: `**403 Forbidden / Non-Finance Officer**: Automated ACH wire transfer intercepted.
+
+- **Invoice Reference**: \`#9021\` ($150,000.00 USD)
+- **Access Rule**: Only **Jane Doe (FinanceDirector)** holds statutory corporate treasury authority to approve wire disbursements over $100k.
+- **Your Role**: User **${user.name}** holds role **${user.role}** (${user.department}), which lacks corporate signing authority.`,
+        consentRequired: {
+          code: '403 Forbidden / Non-Finance Officer',
+          message: 'Only Jane Doe (FinanceDirector) has statutory disbursement authorization.',
+          requiredRole: ['FinanceDirector'],
+          requiredScopes: ['finance.wire.approve'],
+          currentRole: user.role,
+          currentScopes: user.scopes,
+          resolutionSteps: [
+            '1. Switch active persona to Jane Doe (FinanceDirector) to test authorized approval.',
+            '2. Submit invoice for manual multi-signature review in Workday AP portal.',
+          ],
+        },
+        executionSteps,
+        telemetry: getTelemetryStream(),
+        latencyMs: Date.now() - overallStart,
+        modelUsed: 'OmniConnect Treasury Gatekeeper',
+        tokenStats: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
+      };
+
+      return NextResponse.json(response, { status: 403 });
+    }
+
+    // Authorized for Jane Doe
+    executionSteps.push({
+      step: 3,
+      name: 'Treasury Authorization Verification',
+      description: 'Authorized: Verified Jane Doe holds FinanceDirector (L4) with finance.wire.approve scope.',
+      status: 'completed',
+      durationMs: 22,
+    });
+    executionSteps.push({
+      step: 4,
+      name: 'ACH FedLine Release',
+      description: 'Signed digital disbursement certificate and queued transfer batch.',
+      status: 'completed',
+      durationMs: 85,
+    });
+
+    trackActionConsent({
+      actionType: 'approve_wire_transfer',
+      status: 'success',
+      latencyMs: Date.now() - overallStart,
+      user,
+    });
+
+    const decision: DecisionMeta = {
+      type: 'ALLOWED',
+      badge: 'Authorized & Executed',
+      headline: 'Commercial ACH Wire Queued',
+      reason: 'Authorized: Jane Doe is Finance Director (L4) with statutory treasury signing authority.',
+      policyRule: 'Corporate Treasury Governance: Authorized for Finance Director.',
+      authorizedRoles: ['Jane Doe (FinanceDirector - L4)'],
+    };
+
+    const response: OrchestrationResult = {
+      success: true,
+      query,
+      persona: user,
+      intent: 'agent_action:approve_wire_transfer',
+      connectorId: 'm365-connector-wire-transfer',
+      recordsScanned: 0,
+      recordsPermitted: 0,
+      trimRatio: 0,
+      scannedRecords: [],
+      permittedRecords: [],
+      trimmedRecords: [],
+      actionExecuted: true,
+      decision,
+      groundedResponse: `### Commercial Wire Transfer Approved & Queued
+**Authorized Signer**: **${user.name}** (${user.role} • Clearance: ${user.clearanceLevel}).
+
+- **Invoice**: \`#9021\` ($150,000.00 USD - Cloud Infrastructure Hosting Services)
+- **Settlement Method**: Corporate Same-Day ACH Wire Transfer
+- **Federal Reserve Batch Ref**: \`ACH-FED-2025-${Date.now().toString().slice(-6)}\`
+- **Audit Stamp**: Dual-key cryptographic hash signed with Jane Doe enterprise certificate.`,
+      executionSteps,
+      telemetry: getTelemetryStream(),
+      latencyMs: Date.now() - overallStart,
+      modelUsed: 'OmniConnect Treasury Controller',
+      tokenStats: { promptTokens: 38, completionTokens: 128, totalTokens: 166 },
+    };
+
+    return NextResponse.json(response);
+  }
+
+  // -------------------------------------------------------------------------
+  // 3. [Agent Action - Data Governance] Delete inactive customer test records from CRM
+  // Rule: Allowed: Binny Lee (L6) & Jay Seal. Denied: All others.
+  // -------------------------------------------------------------------------
+  if (
+    lowerQuery.includes('delete') &&
+    (lowerQuery.includes('crm') || lowerQuery.includes('customer') || lowerQuery.includes('test records'))
+  ) {
+    const isAllowed = user.role === 'SuperAdmin' || user.role === 'SystemAdmin' || user.clearanceLevel === 'L6';
+
+    executionSteps.push({
+      step: 1,
+      name: 'Intent Classification',
+      description: 'Identified Destructive Action: delete_crm_records (Bulk database purge).',
+      status: 'completed',
+      durationMs: 14,
+    });
+
+    if (!isAllowed) {
+      executionSteps.push({
+        step: 2,
+        name: 'Destructive Action Gatekeeper Intercept',
+        description: `Blocked: User '${user.name}' (${user.role}) lacks root database write clearance.`,
+        status: 'blocked',
+        durationMs: 18,
+      });
+
+      trackActionConsent({
+        actionType: 'delete_crm_records',
+        status: 'denied',
+        latencyMs: Date.now() - overallStart,
+        user,
+        reason: 'Destructive database mutations (DELETE, DROP, TRUNCATE) on production CRM systems are restricted to Super Admin (Binny Lee L6).',
+        requiredScopes: ['admin.crm.delete'],
+      });
+
+      const decision: DecisionMeta = {
+        type: 'BLOCKED',
+        badge: '403 Destructive Action Blocked',
+        headline: 'Zero Data Loss Safeguard Active',
+        reason: `Destructive database mutations (DELETE, DROP, TRUNCATE) on production CRM systems are restricted exclusively to Super Admin (Binny Lee L6).`,
+        policyRule: 'Data Governance Safeguard: Prevents accidental bulk data loss in production.',
+        authorizedRoles: ['Binny Lee (SuperAdmin - L6)'],
+      };
+
+      const response: OrchestrationResult = {
+        success: false,
+        query,
+        persona: user,
+        intent: 'agent_action:delete_crm_records',
+        connectorId: 'm365-connector-crm-mutation',
+        recordsScanned: 0,
+        recordsPermitted: 0,
+        trimRatio: 0,
+        scannedRecords: [],
+        permittedRecords: [],
+        trimmedRecords: [],
+        decision,
+        groundedResponse: `**403 Destructive Action Blocked**: Bulk database deletion rejected by OmniConnect Data Governance.
+
+- **Attempted Command**: Hard-delete test customer records from production CRM database.
+- **Access Rule**: Destructive mutations require **Binny Lee (L6 Super Admin)** possessing scope \`admin.crm.delete\`.
+- **Blocked User**: **${user.name}** (${user.role}) lacks root database write clearance.`,
+        consentRequired: {
+          code: '403 Destructive Action Blocked',
+          message: 'Destructive database mutations are restricted to Super Admin (Binny Lee L6).',
+          requiredRole: ['SuperAdmin'],
+          requiredScopes: ['admin.crm.delete'],
+          currentRole: user.role,
+          currentScopes: user.scopes,
+          resolutionSteps: [
+            '1. Switch persona to Binny Lee (L6 SuperAdmin) in the top-right switcher.',
+            '2. Submit a formal database mutation change-request ticket to Data Engineering.',
+          ],
+        },
+        executionSteps,
+        telemetry: getTelemetryStream(),
+        latencyMs: Date.now() - overallStart,
+        modelUsed: 'OmniConnect Data Protection Gatekeeper',
+        tokenStats: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
+      };
+
+      return NextResponse.json(response, { status: 403 });
+    }
+
+    // Authorized for Binny Lee
+    executionSteps.push({
+      step: 2,
+      name: 'Destructive Action Gatekeeper Check',
+      description: `Authorized: Verified ${user.name} holds SuperAdmin (L6) and admin.crm.delete scope.`,
+      status: 'completed',
+      durationMs: 24,
+    });
+    executionSteps.push({
+      step: 3,
+      name: 'CRM Database Transaction Purge',
+      description: 'Executed safe transaction with rollback point on 1,842 test accounts.',
+      status: 'completed',
+      durationMs: 115,
+    });
+
+    trackActionConsent({
+      actionType: 'delete_crm_records',
+      status: 'success',
+      latencyMs: Date.now() - overallStart,
+      user,
+    });
+
+    const decision: DecisionMeta = {
+      type: 'ALLOWED',
+      badge: 'Authorized & Executed',
+      headline: '1,842 Inactive Test Records Purged',
+      reason: `Verified Binny Lee holds SuperAdmin (L6) root clearance with database write privileges.`,
+      policyRule: 'Data Governance Policy: SuperAdmin root mutation executed with rollback snapshot.',
+      authorizedRoles: ['Binny Lee (SuperAdmin - L6)'],
+    };
+
+    const response: OrchestrationResult = {
+      success: true,
+      query,
+      persona: user,
+      intent: 'agent_action:delete_crm_records',
+      connectorId: 'm365-connector-crm-mutation',
+      recordsScanned: 0,
+      recordsPermitted: 0,
+      trimRatio: 0,
+      scannedRecords: [],
+      permittedRecords: [],
+      trimmedRecords: [],
+      actionExecuted: true,
+      decision,
+      groundedResponse: `### Production CRM Inactive Test Records Purged
+**Authorized Super Admin**: **${user.name}** (${user.role} • L6 Root).
+
+- **Target CRM Cluster**: \`crm-prod-customer-cluster\` (PostgreSQL)
+- **Execution Filter**: \`WHERE account_type = 'INTERNAL_TEST' AND last_active < NOW() - INTERVAL '180 days'\`
+- **Result**: **1,842 records archived and safely purged**.
+- **Pre-Delete Snapshot**: \`crm-snapshot-pre-delete-${Date.now().toString().slice(-4)}\`
+- **Audit Receipt**: \`SEC-DB-PURGE-${Date.now().toString(36).toUpperCase()}\``,
+      executionSteps,
+      telemetry: getTelemetryStream(),
+      latencyMs: Date.now() - overallStart,
+      modelUsed: 'OmniConnect CRM Controller',
+      tokenStats: { promptTokens: 39, completionTokens: 132, totalTokens: 171 },
+    };
+
+    return NextResponse.json(response);
+  }
+
+  // -------------------------------------------------------------------------
+  // 6. [Knowledge Retrieval - Public] "Who is the CEO of this company?"
+  // Rule: Allowed: Everyone (including Neil Wright - Intern).
+  // -------------------------------------------------------------------------
+  if (
+    lowerQuery.includes('ceo') &&
+    !lowerQuery.includes('stock') &&
+    !lowerQuery.includes('vesting') &&
+    !lowerQuery.includes('bonus')
+  ) {
+    const domain = 'company_directory';
+    const rlsResult = await runSessionScopedRLSQuery(user, domain);
+
+    trackConnectorCall({ connectorId: 'm365-connector-directory', domain, query, user });
+    trackPermissionTrimming({
+      recordsScanned: rlsResult.recordsScanned,
+      recordsReturned: rlsResult.recordsPermitted,
+      trimRatio: rlsResult.trimRatio,
+      user,
+      domain,
+    });
+
+    const llm = await generateGroundedResponse({
+      query,
+      user,
+      permittedRecords: rlsResult.permittedRecords,
+      trimmedCount: rlsResult.recordsTrimmed,
+      domain,
+    });
+
+    trackLLMLatency({ modelUsed: llm.modelUsed, ttftMs: llm.ttftMs, totalTokens: llm.totalTokens, latencyMs: llm.latencyMs });
+
+    executionSteps.push({
+      step: 1,
+      name: 'Intent Classification',
+      description: 'Routed to Enterprise Public Directory (Public L1 Clearance).',
+      status: 'completed',
+      durationMs: 10,
+    });
+    executionSteps.push({
+      step: 2,
+      name: 'Supabase RLS Query',
+      description: `Matched 1 record in company_directory. Injected into context (0 trimmed).`,
+      status: 'completed',
+      durationMs: 25,
+    });
+    executionSteps.push({
+      step: 3,
+      name: 'Grounded LLM Response Synthesis',
+      description: 'Synthesized leadership profile from verified enterprise directory.',
+      status: 'completed',
+      durationMs: llm.latencyMs,
+    });
+
+    const decision: DecisionMeta = {
+      type: 'ALLOWED',
+      badge: 'Authorized & Grounded',
+      headline: 'Public Corporate Knowledge Verified',
+      reason: 'Allowed: Company leadership is public information (Clearance L1). Accessible to everyone including interns.',
+      policyRule: 'Public Directory Policy: General corporate hierarchy is unrestricted.',
+      authorizedRoles: ['All Roles (Jane, Alex, Sarah, Binny, Neil Wright)'],
+    };
+
+    const response: OrchestrationResult = {
+      success: true,
+      query,
+      persona: user,
+      intent: 'semantic_retrieval:company_directory',
+      connectorId: 'm365-connector-directory',
+      recordsScanned: rlsResult.recordsScanned,
+      recordsPermitted: rlsResult.recordsPermitted,
+      trimRatio: 0,
+      scannedRecords: rlsResult.allCandidates,
+      permittedRecords: rlsResult.permittedRecords,
+      trimmedRecords: [],
+      decision,
+      groundedResponse: llm.content,
+      executionSteps,
+      telemetry: getTelemetryStream(),
+      latencyMs: Date.now() - overallStart,
+      modelUsed: llm.modelUsed,
+      tokenStats: { promptTokens: llm.promptTokens, completionTokens: llm.completionTokens, totalTokens: llm.totalTokens },
+    };
+
+    return NextResponse.json(response);
+  }
+
+  // -------------------------------------------------------------------------
+  // 4. [Knowledge Retrieval - Confidential] CEO & VP Eng stock vesting & bonus
+  // Rule: Allowed: Jane Doe & Sarah Chen (and Jay Seal). Denied/Masked: Alex, Binny, Neil.
+  // -------------------------------------------------------------------------
+  if (
+    lowerQuery.includes('stock') ||
+    lowerQuery.includes('vesting') ||
+    lowerQuery.includes('bonus') ||
+    lowerQuery.includes('compensation')
+  ) {
+    const domain = 'executive_payroll';
+    const rlsResult = await runSessionScopedRLSQuery(user, domain);
+    const isAllowed = rlsResult.recordsPermitted > 0;
+
+    trackConnectorCall({ connectorId: 'm365-connector-executive-payroll', domain, query, user });
+    trackPermissionTrimming({
+      recordsScanned: rlsResult.recordsScanned,
+      recordsReturned: rlsResult.recordsPermitted,
+      trimRatio: rlsResult.trimRatio,
+      user,
+      domain,
+    });
+
+    const llm = await generateGroundedResponse({
+      query,
+      user,
+      permittedRecords: rlsResult.permittedRecords,
+      trimmedCount: rlsResult.recordsTrimmed,
+      domain,
+      securityInterceptNote: rlsResult.securityInterceptNote,
+    });
+
+    trackLLMLatency({ modelUsed: llm.modelUsed, ttftMs: llm.ttftMs, totalTokens: llm.totalTokens, latencyMs: llm.latencyMs });
+
+    executionSteps.push({
+      step: 1,
+      name: 'Intent Classification',
+      description: 'Routed to Executive Payroll & Equity Ledger (Restricted L4+).',
+      status: 'completed',
+      durationMs: 12,
+    });
+    executionSteps.push({
+      step: 2,
+      name: 'Supabase RLS Evaluation',
+      description: isAllowed
+        ? `Authorized: User '${user.name}' holds ${user.role} clearance. Injected 1 confidential ledger record.`
+        : `Policy Boundary Enforced: 1 record filtered by Supabase Row-Level Security. Role '${user.role}' lacks clearance.`,
+      status: isAllowed ? 'completed' : 'blocked',
+      durationMs: 30,
+    });
+
+    const decision: DecisionMeta = {
+      type: isAllowed ? 'ALLOWED' : 'BLOCKED',
+      badge: isAllowed ? 'Authorized & Grounded' : 'Policy Boundary Enforced',
+      headline: isAllowed ? 'Executive Compensation Ledger Grounded' : 'RLS Trimmed: 0 Records Permitted',
+      reason: isAllowed
+        ? `Authorized: User ${user.name} (${user.role} • ${user.clearanceLevel}) holds executive compensation clearance.`
+        : `Policy Boundary Enforced: 1 record filtered by Supabase Row-Level Security. Role '${user.role}' lacks clearance for confidential compensation files.`,
+      policyRule: 'Executive Equity Policy: Confidential stock ledgers require FinanceDirector or EnterpriseAdmin clearance.',
+      authorizedRoles: ['Jane Doe (FinanceDirector)', 'Sarah Chen (EnterpriseAdmin)'],
+    };
+
+    const response: OrchestrationResult = {
+      success: isAllowed,
+      query,
+      persona: user,
+      intent: 'semantic_retrieval:executive_payroll',
+      connectorId: 'm365-connector-executive-payroll',
+      recordsScanned: rlsResult.recordsScanned,
+      recordsPermitted: rlsResult.recordsPermitted,
+      trimRatio: rlsResult.trimRatio,
+      securityInterceptNote: rlsResult.securityInterceptNote,
+      scannedRecords: rlsResult.allCandidates,
+      permittedRecords: rlsResult.permittedRecords,
+      trimmedRecords: rlsResult.trimmedRecords,
+      decision,
+      groundedResponse: llm.content,
+      executionSteps,
+      telemetry: getTelemetryStream(),
+      latencyMs: Date.now() - overallStart,
+      modelUsed: llm.modelUsed,
+      tokenStats: { promptTokens: llm.promptTokens, completionTokens: llm.completionTokens, totalTokens: llm.totalTokens },
+    };
+
+    return NextResponse.json(response, { status: isAllowed ? 200 : 403 });
+  }
+
+  // -------------------------------------------------------------------------
+  // 5. [Knowledge Retrieval - HR/Comp] London candidate salary range & offer letters
+  // Rule: Allowed: Sarah Chen (EnterpriseAdmin) (& Jay Seal). Denied: Jane, Alex, Binny, Neil.
+  // -------------------------------------------------------------------------
+  if (
+    lowerQuery.includes('london') ||
+    lowerQuery.includes('offer letter') ||
+    lowerQuery.includes('salary range')
+  ) {
+    const domain = 'candidate_offers';
+    const rlsResult = await runSessionScopedRLSQuery(user, domain);
+    const isAllowed = rlsResult.recordsPermitted > 0;
+
+    trackConnectorCall({ connectorId: 'm365-connector-candidate-offers', domain, query, user });
+    trackPermissionTrimming({
+      recordsScanned: rlsResult.recordsScanned,
+      recordsReturned: rlsResult.recordsPermitted,
+      trimRatio: rlsResult.trimRatio,
+      user,
+      domain,
+    });
+
+    const llm = await generateGroundedResponse({
+      query,
+      user,
+      permittedRecords: rlsResult.permittedRecords,
+      trimmedCount: rlsResult.recordsTrimmed,
+      domain,
+      securityInterceptNote: rlsResult.securityInterceptNote,
+    });
+
+    executionSteps.push({
+      step: 1,
+      name: 'Intent Classification',
+      description: 'Routed to Talent Acquisition & EMEA Offer Letter Ledger.',
+      status: 'completed',
+      durationMs: 12,
+    });
+    executionSteps.push({
+      step: 2,
+      name: 'Supabase RLS Evaluation',
+      description: isAllowed
+        ? `Authorized: User '${user.name}' holds HR/EnterpriseAdmin clearance. Injected 1 offer letter record.`
+        : `Policy Boundary Enforced: 1 record filtered by Supabase Row-Level Security. Role '${user.role}' lacks HR clearance.`,
+      status: isAllowed ? 'completed' : 'blocked',
+      durationMs: 28,
+    });
+
+    const decision: DecisionMeta = {
+      type: isAllowed ? 'ALLOWED' : 'BLOCKED',
+      badge: isAllowed ? 'Authorized & Grounded' : 'Policy Boundary Enforced',
+      headline: isAllowed ? 'EMEA Compensation & Offer Letters Grounded' : 'RLS Trimmed: 0 Records Permitted',
+      reason: isAllowed
+        ? `Authorized: ${user.name} (${user.role}) has access to EMEA candidate offer letters.`
+        : `Policy Boundary Enforced: EMEA candidate offer letters are restricted strictly to HR / EnterpriseAdmin (Sarah Chen). Role '${user.role}' is denied.`,
+      policyRule: 'Talent Acquisition Confidentiality: Candidate remuneration letters restricted to Enterprise Operations Admin.',
+      authorizedRoles: ['Sarah Chen (EnterpriseAdmin)'],
+    };
+
+    const response: OrchestrationResult = {
+      success: isAllowed,
+      query,
+      persona: user,
+      intent: 'semantic_retrieval:candidate_offers',
+      connectorId: 'm365-connector-candidate-offers',
+      recordsScanned: rlsResult.recordsScanned,
+      recordsPermitted: rlsResult.recordsPermitted,
+      trimRatio: rlsResult.trimRatio,
+      securityInterceptNote: rlsResult.securityInterceptNote,
+      scannedRecords: rlsResult.allCandidates,
+      permittedRecords: rlsResult.permittedRecords,
+      trimmedRecords: rlsResult.trimmedRecords,
+      decision,
+      groundedResponse: llm.content,
+      executionSteps,
+      telemetry: getTelemetryStream(),
+      latencyMs: Date.now() - overallStart,
+      modelUsed: llm.modelUsed,
+      tokenStats: { promptTokens: llm.promptTokens, completionTokens: llm.completionTokens, totalTokens: llm.totalTokens },
+    };
+
+    return NextResponse.json(response, { status: isAllowed ? 200 : 403 });
+  }
+
+  // -------------------------------------------------------------------------
+  // 7. [Knowledge Retrieval - Technical] Root cause analysis for Postgres RDS failover #8921
+  // Rule: Allowed: Alex Rivera (full technical logs), Sarah/Binny/Jane (executive summary), Neil (Access Restricted).
+  // -------------------------------------------------------------------------
+  const domain = 'it_incidents';
+  const isNeil = user.role === 'Intern' || user.clearanceLevel === 'L1';
+  const rlsResult = await runSessionScopedRLSQuery(user, domain);
+  const isAllowed = !isNeil;
+
+  trackConnectorCall({ connectorId: 'm365-connector-it-incidents', domain, query, user });
   trackPermissionTrimming({
     recordsScanned: rlsResult.recordsScanned,
-    recordsReturned: rlsResult.recordsPermitted,
-    trimRatio: rlsResult.trimRatio,
+    recordsReturned: isAllowed ? 1 : 0,
+    trimRatio: isAllowed ? 0 : 100,
     user,
     domain,
   });
 
-  executionSteps.push({
-    step: 4,
-    name: 'Permission Trimming Diff & Delta Analysis',
-    description:
-      rlsResult.recordsTrimmed > 0
-        ? `Filtered ${rlsResult.recordsTrimmed} of ${rlsResult.recordsScanned} candidate records (${rlsResult.trimRatio}% trimming ratio) violating department/clearance boundaries.`
-        : `Zero records trimmed. All ${rlsResult.recordsPermitted} records passed enterprise clearance verification.`,
-    status: rlsResult.recordsTrimmed > 0 ? 'completed' : 'completed',
-    durationMs: Date.now() - step4Start + 12,
-    metadata: {
-      scanned: rlsResult.recordsScanned,
-      permitted: rlsResult.recordsPermitted,
-      trimmed: rlsResult.recordsTrimmed,
-      trim_ratio: `${rlsResult.trimRatio}%`,
-      intercept_note: rlsResult.securityInterceptNote,
-    },
-  });
-
-  // Step 5: Grounded LLM Response Synthesis
-  const step5Start = Date.now();
-  const llmResponse = await generateGroundedResponse({
-    query: query || (domain === 'executive_payroll' ? 'Summarize Q3 executive payroll' : 'Summarize IT outages'),
+  const llm = await generateGroundedResponse({
+    query,
     user,
-    permittedRecords: rlsResult.permittedRecords,
-    trimmedCount: rlsResult.recordsTrimmed,
+    permittedRecords: isAllowed ? rlsResult.permittedRecords : [],
+    trimmedCount: isAllowed ? 0 : 1,
     domain,
-    securityInterceptNote: rlsResult.securityInterceptNote,
-  });
-
-  trackLLMLatency({
-    modelUsed: llmResponse.modelUsed,
-    ttftMs: llmResponse.ttftMs,
-    totalTokens: llmResponse.totalTokens,
-    latencyMs: llmResponse.latencyMs,
+    securityInterceptNote: isAllowed ? undefined : '1 record filtered by Supabase Row-Level Security.',
   });
 
   executionSteps.push({
-    step: 5,
-    name: 'Grounded LLM Response Synthesis',
-    description: `Synthesized grounded response using strictly permitted records with ${llmResponse.modelUsed}.`,
+    step: 1,
+    name: 'Intent Classification',
+    description: 'Routed to Cloud SRE Telemetry & Post-Mortem Incident Tickets.',
     status: 'completed',
-    durationMs: Date.now() - step5Start + llmResponse.latencyMs,
-    metadata: {
-      model: llmResponse.modelUsed,
-      tokens: llmResponse.totalTokens,
-      ttft: `${llmResponse.ttftMs}ms`,
-    },
+    durationMs: 14,
+  });
+  executionSteps.push({
+    step: 2,
+    name: 'Tiered Incident Clearance Check',
+    description: isNeil
+      ? "Blocked: User holds Intern clearance. Infrastructure post-mortems restricted."
+      : user.role === 'DevOpsEngineer'
+      ? "Authorized: DevOpsEngineer holds deep technical telemetry clearance."
+      : "Authorized: Management profile routed to Executive Summary tier.",
+    status: isAllowed ? 'completed' : 'blocked',
+    durationMs: 25,
   });
 
-  const totalDuration = Date.now() - overallStart;
-
-  const result: OrchestrationResult = {
-    success: true,
-    query: query || (domain === 'executive_payroll' ? 'Query Q3 Executive Payroll & RSUs' : 'Query IT Infrastructure Outages'),
-    persona: user,
-    intent: `semantic_retrieval:${connector.tool.name}`,
-    connectorId: connector.id,
-    recordsScanned: rlsResult.recordsScanned,
-    recordsPermitted: rlsResult.recordsPermitted,
-    trimRatio: rlsResult.trimRatio,
-    securityInterceptNote: rlsResult.securityInterceptNote,
-    scannedRecords: rlsResult.allCandidates,
-    permittedRecords: rlsResult.permittedRecords,
-    trimmedRecords: rlsResult.trimmedRecords,
-    groundedResponse: llmResponse.content,
-    executionSteps,
-    telemetry: getTelemetryStream(),
-    latencyMs: totalDuration,
-    modelUsed: llmResponse.modelUsed,
-    tokenStats: {
-      promptTokens: llmResponse.promptTokens,
-      completionTokens: llmResponse.completionTokens,
-      totalTokens: llmResponse.totalTokens,
-    },
+  const decision: DecisionMeta = {
+    type: isAllowed ? 'ALLOWED' : 'BLOCKED',
+    badge: isAllowed ? 'Authorized & Grounded' : 'Policy Boundary Enforced',
+    headline: isAllowed
+      ? user.role === 'DevOpsEngineer'
+        ? 'Full Technical Root Cause Grounded'
+        : 'Executive Incident Summary Grounded'
+      : 'Access Restricted: Intern Profile',
+    reason: isAllowed
+      ? user.role === 'DevOpsEngineer'
+        ? 'Authorized: Alex Rivera (Staff DevOps) granted full technical log access.'
+        : `Authorized: ${user.name} granted executive incident summary.`
+      : 'Policy Boundary Enforced: 1 record filtered by Supabase Row-Level Security. Interns lack infrastructure telemetry clearance.',
+    policyRule: 'Incident Telemetry Tiering: Deep technical post-mortems for DevOps; executive summaries for management; restricted for interns.',
+    authorizedRoles: ['Alex Rivera (Full Technical Logs)', 'Sarah Chen, Binny Lee, Jane Doe (Executive Summary)'],
   };
 
-  return NextResponse.json(result);
+  const response: OrchestrationResult = {
+    success: isAllowed,
+    query,
+    persona: user,
+    intent: 'semantic_retrieval:it_incidents',
+    connectorId: 'm365-connector-it-incidents',
+    recordsScanned: 1,
+    recordsPermitted: isAllowed ? 1 : 0,
+    trimRatio: isAllowed ? 0 : 100,
+    securityInterceptNote: isAllowed ? undefined : '1 record filtered by Supabase Row-Level Security.',
+    scannedRecords: rlsResult.allCandidates,
+    permittedRecords: isAllowed ? rlsResult.permittedRecords : [],
+    trimmedRecords: isAllowed ? [] : rlsResult.allCandidates,
+    decision,
+    groundedResponse: llm.content,
+    executionSteps,
+    telemetry: getTelemetryStream(),
+    latencyMs: Date.now() - overallStart,
+    modelUsed: llm.modelUsed,
+    tokenStats: { promptTokens: llm.promptTokens, completionTokens: llm.completionTokens, totalTokens: llm.totalTokens },
+  };
+
+  return NextResponse.json(response, { status: isAllowed ? 200 : 403 });
 }
