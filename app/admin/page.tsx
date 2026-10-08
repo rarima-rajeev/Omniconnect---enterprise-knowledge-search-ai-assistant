@@ -81,7 +81,7 @@ export default function AdminObservabilityPage() {
           </div>
           <h1 className="text-base font-bold text-white mb-1">403 Forbidden: Platform Admin Access Required</h1>
           <p className="text-xs text-slate-300 leading-relaxed mb-4">
-            The OmniConnect Observability Deck is restricted strictly to{' '}
+            The OmniConnect Dev Workbench is restricted strictly to{' '}
             <strong className="text-white">Jay Seal (OmniConnect System Admin)</strong>. Your current active session is{' '}
             <strong className="text-rose-300">{activePersona.name}</strong> ({activePersona.role} • {activePersona.levelDisplay}).
           </p>
@@ -105,7 +105,7 @@ export default function AdminObservabilityPage() {
               href="/"
               className="w-full py-2.5 px-4 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white text-xs font-semibold border border-slate-700 block text-center transition-all"
             >
-              &larr; Return to Copilot Chat
+              &larr; Return to Knowledge Assistant
             </Link>
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function AdminObservabilityPage() {
   }
 
   // -------------------------------------------------------------------------
-  // AUTHORIZED ADMIN OBSERVABILITY DECK (Jay Seal)
+  // AUTHORIZED ADMIN DEV WORKBENCH (Jay Seal)
   // -------------------------------------------------------------------------
   return (
     <div className="min-h-screen bg-[#070b14] text-slate-100 flex flex-col font-sans">
@@ -126,20 +126,20 @@ export default function AdminObservabilityPage() {
             className="flex items-center space-x-1.5 text-xs text-slate-400 hover:text-white bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-700 transition-colors font-medium"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
-            <span>Back to Copilot Chat</span>
+            <span>Back to Assistant</span>
           </Link>
 
           <div className="h-4 w-[1px] bg-slate-800" />
 
           <div>
             <div className="flex items-center space-x-2">
-              <span className="font-bold text-white text-sm">OmniConnect Observability Console</span>
+              <span className="font-bold text-white text-sm">OmniConnect — Enterprise Knowledge Search AI Assistant</span>
               <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 font-bold">
-                Platform Admin
+                Dev Workbench
               </span>
             </div>
             <p className="text-[11px] text-slate-400">
-              Session-Scoped RLS Trimming, PostHog Real-Time Telemetry &amp; MCP Tool Inspection
+              Ask questions across company documents with automated role-based permission controls.
             </p>
           </div>
         </div>

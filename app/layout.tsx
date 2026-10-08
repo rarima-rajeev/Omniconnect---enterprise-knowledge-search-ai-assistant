@@ -3,9 +3,9 @@ import './globals.css';
 import { PostHogProvider } from './providers';
 
 export const metadata: Metadata = {
-  title: 'OmniConnect: Copilot Connector Gateway & Dev Workbench',
+  title: 'OmniConnect — Enterprise Knowledge Search AI Assistant',
   description:
-    'Production architecture for Microsoft 365 Copilot Connectors: Semantic Retrieval vs Agent Actions, RLS data trimming, OAuth write gatekeeping, and PostHog observability.',
+    'Ask questions across company documents with automated role-based permission controls.',
 };
 
 export default function RootLayout({

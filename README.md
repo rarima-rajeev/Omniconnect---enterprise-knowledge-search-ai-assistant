@@ -1,6 +1,10 @@
-# OmniConnect: Microsoft 365 Copilot Connector Gateway & Dev Workbench
+# OmniConnect — Enterprise Knowledge Search AI Assistant
 
-OmniConnect is an enterprise-grade developer workbench and gateway that models the exact security and retrieval architecture of Microsoft 365 Copilot Connectors and the Model Context Protocol (MCP).
+> **Subtitle:** *Ask questions across company documents with automated role-based permission controls.*
+
+OmniConnect is an enterprise-grade AI knowledge platform and dev workbench that indexes multi-department company documents (finance, HR, engineering, operations) to answer employee queries with zero data leakage, automated role-based Row Level Security (RLS), and OAuth-gated action execution.
+
+> 📖 **AI Product Manager Case Study**: Read the comprehensive problem statement, architectural tradeoffs, persona evaluation matrix, and business impact metrics in [**CASE_STUDY.md**](./CASE_STUDY.md).
 
 ---
 

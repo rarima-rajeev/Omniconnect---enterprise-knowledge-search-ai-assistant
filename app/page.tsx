@@ -166,7 +166,7 @@ export default function CopilotChatLandingPage() {
               <div className="flex items-center space-x-1.5">
                 <span className="font-bold text-sm tracking-tight text-white">OmniConnect</span>
                 <span className="text-[10px] uppercase font-mono px-1.5 py-0.2 bg-blue-500/10 text-blue-400 border border-blue-500/30 rounded font-semibold">
-                  M365 Gateway
+                  Enterprise AI
                 </span>
               </div>
             </div>
@@ -180,7 +180,7 @@ export default function CopilotChatLandingPage() {
                 href="/admin"
                 className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold shadow-md shadow-purple-500/20 transition-all border border-purple-400/30 animate-in fade-in duration-200"
               >
-                <span>Open Admin Observability Deck</span>
+                <span>Open Dev Workbench</span>
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             )}
@@ -285,14 +285,13 @@ export default function CopilotChatLandingPage() {
         <div className="text-center pt-2 sm:pt-4 pb-2">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900/90 border border-slate-800 text-xs text-slate-400 mb-3 shadow-inner">
             <Sparkles className="h-3.5 w-3.5 text-blue-400" />
-            <span>Microsoft 365 Copilot Connectors • Zero-Trust Gateway</span>
+            <span>Enterprise Knowledge Gateway • Role-Based</span>
           </div>
           <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
-            Ask enterprise knowledge or dispatch agent tools
+            OmniConnect — Enterprise Knowledge Search AI Assistant
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-xl mx-auto leading-relaxed">
-            All requests are session-scoped by Row Level Security (RLS). Write mutations are gated by OAuth administrative
-            delegation.
+          <p className="text-xs sm:text-sm text-slate-400 mt-1.5 max-w-xl mx-auto leading-relaxed">
+            Ask questions across company documents with automated role-based permission controls.
           </p>
         </div>
 
@@ -309,7 +308,7 @@ export default function CopilotChatLandingPage() {
                   executeQuery(inputQuery);
                 }
               }}
-              placeholder={`Ask Copilot as ${selectedPersona.name} (${selectedPersona.role})...`}
+              placeholder={`Ask questions across company documents as ${selectedPersona.name} (${selectedPersona.role})...`}
               className="w-full pl-10 pr-24 py-3.5 rounded-2xl bg-slate-900/80 border border-slate-700/80 hover:border-slate-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-xs sm:text-sm text-slate-100 placeholder-slate-500 shadow-xl focus:outline-none transition-all font-mono"
             />
             <div className="absolute right-2 flex items-center">
