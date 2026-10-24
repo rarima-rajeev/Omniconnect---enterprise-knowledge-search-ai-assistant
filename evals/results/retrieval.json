@@ -1,43 +1,43 @@
 {
-  "runAt": "2026-10-24T15:23:37.307Z",
+  "runAt": "2026-10-24T16:55:41.863Z",
   "embeddingModel": "gemini-embedding-001",
   "k": 5,
   "bySet": {
     "small": {
-      "cases": 330,
-      "scoredCases": 214,
-      "hitAt1": 0.985981308411215,
+      "cases": 360,
+      "scoredCases": 232,
+      "hitAt1": 0.9870689655172413,
       "hitAt3": 1,
-      "mrr": 0.9929906542056075,
+      "mrr": 0.9935344827586207,
       "answerCases": 69,
       "answerAt3": 1,
       "avgContextWords": 356,
       "leakedResults": 0,
-      "wouldHaveLeakedCases": 172
+      "wouldHaveLeakedCases": 187
     },
     "medium": {
-      "cases": 330,
-      "scoredCases": 214,
-      "hitAt1": 0.9252336448598131,
-      "hitAt3": 0.985981308411215,
-      "mrr": 0.9591121495327103,
+      "cases": 360,
+      "scoredCases": 232,
+      "hitAt1": 0.9310344827586207,
+      "hitAt3": 0.9870689655172413,
+      "mrr": 0.9622844827586207,
       "answerCases": 69,
       "answerAt3": 0.9565217391304348,
-      "avgContextWords": 616,
+      "avgContextWords": 614,
       "leakedResults": 0,
-      "wouldHaveLeakedCases": 185
+      "wouldHaveLeakedCases": 204
     },
     "full": {
-      "cases": 330,
-      "scoredCases": 214,
-      "hitAt1": 0.9252336448598131,
-      "hitAt3": 0.9766355140186916,
-      "mrr": 0.9532710280373832,
+      "cases": 360,
+      "scoredCases": 232,
+      "hitAt1": 0.9224137931034483,
+      "hitAt3": 0.978448275862069,
+      "mrr": 0.9511494252873564,
       "answerCases": 69,
       "answerAt3": 0.927536231884058,
-      "avgContextWords": 712,
+      "avgContextWords": 710,
       "leakedResults": 0,
-      "wouldHaveLeakedCases": 200
+      "wouldHaveLeakedCases": 220
     }
   },
   "hardBySet": {
@@ -81,56 +81,56 @@
   "best": "small",
   "byPersona": {
     "Jane Doe": {
-      "cases": 55,
-      "scoredCases": 35,
+      "cases": 60,
+      "scoredCases": 39,
       "hitAt1": 1,
       "hitAt3": 1,
       "mrr": 1,
       "answerCases": 11,
       "answerAt3": 1,
-      "avgContextWords": 353,
+      "avgContextWords": 354,
       "leakedResults": 0,
-      "wouldHaveLeakedCases": 36
+      "wouldHaveLeakedCases": 38
     },
     "Alex Rivera": {
-      "cases": 55,
-      "scoredCases": 35,
-      "hitAt1": 0.9714285714285714,
+      "cases": 60,
+      "scoredCases": 37,
+      "hitAt1": 0.972972972972973,
       "hitAt3": 1,
-      "mrr": 0.9857142857142858,
+      "mrr": 0.9864864864864865,
       "answerCases": 11,
       "answerAt3": 1,
-      "avgContextWords": 359,
+      "avgContextWords": 358,
       "leakedResults": 0,
-      "wouldHaveLeakedCases": 30
+      "wouldHaveLeakedCases": 33
     },
     "Sarah Chen": {
-      "cases": 55,
-      "scoredCases": 38,
+      "cases": 60,
+      "scoredCases": 41,
       "hitAt1": 1,
       "hitAt3": 1,
       "mrr": 1,
       "answerCases": 12,
       "answerAt3": 1,
-      "avgContextWords": 354,
+      "avgContextWords": 355,
       "leakedResults": 0,
-      "wouldHaveLeakedCases": 30
+      "wouldHaveLeakedCases": 33
     },
     "Binny Lee": {
-      "cases": 55,
-      "scoredCases": 36,
-      "hitAt1": 0.9722222222222222,
+      "cases": 60,
+      "scoredCases": 38,
+      "hitAt1": 0.9736842105263158,
       "hitAt3": 1,
-      "mrr": 0.9861111111111112,
+      "mrr": 0.9868421052631579,
       "answerCases": 11,
       "answerAt3": 1,
-      "avgContextWords": 359,
+      "avgContextWords": 358,
       "leakedResults": 0,
-      "wouldHaveLeakedCases": 28
+      "wouldHaveLeakedCases": 31
     },
     "Neil Wright": {
-      "cases": 55,
-      "scoredCases": 15,
+      "cases": 60,
+      "scoredCases": 17,
       "hitAt1": 1,
       "hitAt3": 1,
       "mrr": 1,
@@ -138,14 +138,14 @@
       "answerAt3": 1,
       "avgContextWords": 356,
       "leakedResults": 0,
-      "wouldHaveLeakedCases": 48
+      "wouldHaveLeakedCases": 52
     },
     "Jay Seal": {
-      "cases": 55,
-      "scoredCases": 55,
-      "hitAt1": 0.9818181818181818,
+      "cases": 60,
+      "scoredCases": 60,
+      "hitAt1": 0.9833333333333333,
       "hitAt3": 1,
-      "mrr": 0.990909090909091,
+      "mrr": 0.9916666666666667,
       "answerCases": 20,
       "answerAt3": 1,
       "avgContextWords": 357,
@@ -4829,6 +4829,688 @@
       "rr": 1,
       "answerHit3": null,
       "contextWords": 384,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Jane Doe",
+      "chunkSet": "small",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "DIR-002",
+        "OPS-003"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 343,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "small",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "DIR-002",
+        "OPS-003"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 343,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "small",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "DIR-002",
+        "OPS-003"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 343,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "small",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "DIR-002",
+        "OPS-003"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 343,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "small",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "DIR-002",
+        "DIR-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 359,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "OPS-003"
+      ]
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Jay Seal",
+      "chunkSet": "small",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "DIR-002",
+        "OPS-003"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 343,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Jane Doe",
+      "chunkSet": "small",
+      "expected": [
+        "FIN-003"
+      ],
+      "ranked": [
+        "FIN-003",
+        "OPS-003",
+        "FIN-002",
+        "PAY-9100"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 396,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026"
+      ]
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "small",
+      "expected": [],
+      "ranked": [
+        "OPS-003",
+        "FIN-002",
+        "INJ-002",
+        "NEWS-001"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 355,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-003",
+        "HR-BANDS-2026",
+        "PAY-9100"
+      ]
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "small",
+      "expected": [],
+      "ranked": [
+        "OPS-003",
+        "FIN-002",
+        "HR-BANDS-2026",
+        "PAY-9100",
+        "INJ-002"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 395,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-003"
+      ]
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "small",
+      "expected": [],
+      "ranked": [
+        "OPS-003",
+        "FIN-002",
+        "INJ-002",
+        "NEWS-001"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 355,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-003",
+        "HR-BANDS-2026",
+        "PAY-9100"
+      ]
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "small",
+      "expected": [],
+      "ranked": [
+        "INJ-002",
+        "NEWS-001",
+        "DIR-002"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 317,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-003",
+        "OPS-003",
+        "FIN-002",
+        "HR-BANDS-2026",
+        "PAY-9100"
+      ]
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Jay Seal",
+      "chunkSet": "small",
+      "expected": [
+        "FIN-003"
+      ],
+      "ranked": [
+        "FIN-003",
+        "OPS-003",
+        "FIN-002",
+        "HR-BANDS-2026",
+        "PAY-9100"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 402,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Jane Doe",
+      "chunkSet": "small",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-006",
+        "HB-002"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 358,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "small",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-006",
+        "HB-002"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 358,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "small",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-006",
+        "HB-002"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 358,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "small",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-006",
+        "HB-002"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 358,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "small",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-006",
+        "HB-002"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 358,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Jay Seal",
+      "chunkSet": "small",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-006",
+        "HB-002"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 358,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Jane Doe",
+      "chunkSet": "small",
+      "expected": [
+        "FIN-004"
+      ],
+      "ranked": [
+        "FIN-004",
+        "ENG-001",
+        "OPS-002",
+        "INJ-002"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 367,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "small",
+      "expected": [],
+      "ranked": [
+        "ENG-001",
+        "OPS-002",
+        "INJ-002"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 385,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-004"
+      ]
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "small",
+      "expected": [],
+      "ranked": [
+        "ENG-001",
+        "OPS-002",
+        "INJ-002"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 385,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-004"
+      ]
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "small",
+      "expected": [],
+      "ranked": [
+        "ENG-001",
+        "OPS-002",
+        "INJ-002"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 385,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-004"
+      ]
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "small",
+      "expected": [],
+      "ranked": [
+        "INJ-002",
+        "DIR-002",
+        "NEWS-001",
+        "DIR-003"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 355,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-004",
+        "ENG-001",
+        "OPS-002"
+      ]
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Jay Seal",
+      "chunkSet": "small",
+      "expected": [
+        "FIN-004"
+      ],
+      "ranked": [
+        "FIN-004",
+        "ENG-001",
+        "OPS-002",
+        "INJ-002"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 367,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Jane Doe",
+      "chunkSet": "small",
+      "expected": [],
+      "ranked": [
+        "PAY-9100",
+        "OPS-001",
+        "OPS-003",
+        "FIN-003"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 365,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "small",
+      "expected": [],
+      "ranked": [
+        "OPS-001",
+        "OPS-003",
+        "NEWS-001",
+        "HB-002"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 300,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "small",
+      "expected": [
+        "HR-PIP-17"
+      ],
+      "ranked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "PAY-9100",
+        "OPS-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 362,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "small",
+      "expected": [],
+      "ranked": [
+        "OPS-001",
+        "OPS-003",
+        "NEWS-001",
+        "HB-002"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 300,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "small",
+      "expected": [],
+      "ranked": [
+        "NEWS-001",
+        "HB-002",
+        "INJ-002",
+        "HB-004",
+        "HB-005"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 372,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "PAY-9100",
+        "HR-RIF-2026",
+        "OPS-001"
+      ]
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Jay Seal",
+      "chunkSet": "small",
+      "expected": [
+        "HR-PIP-17"
+      ],
+      "ranked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "PAY-9100",
+        "HR-RIF-2026",
+        "OPS-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 361,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -12554,6 +13236,724 @@
       "rr": 1,
       "answerHit3": null,
       "contextWords": 503,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Jane Doe",
+      "chunkSet": "medium",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "OPS-003",
+        "DIR-002",
+        "HB-004"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 605,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "medium",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "OPS-003",
+        "DIR-002",
+        "HB-004"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 605,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "medium",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "OPS-003",
+        "DIR-002",
+        "HB-004"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 605,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "medium",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "OPS-003",
+        "DIR-002",
+        "HB-004"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 605,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "medium",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "DIR-002",
+        "HB-004",
+        "INJ-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 654,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "OPS-003"
+      ]
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Jay Seal",
+      "chunkSet": "medium",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "OPS-003",
+        "DIR-002",
+        "HB-004"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 605,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Jane Doe",
+      "chunkSet": "medium",
+      "expected": [
+        "FIN-003"
+      ],
+      "ranked": [
+        "FIN-003",
+        "OPS-003",
+        "FIN-002",
+        "PAY-9100",
+        "NEWS-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 404,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "medium",
+      "expected": [],
+      "ranked": [
+        "OPS-003",
+        "FIN-002",
+        "NEWS-001",
+        "INJ-002",
+        "OPS-002"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 437,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-003",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "medium",
+      "expected": [],
+      "ranked": [
+        "OPS-003",
+        "FIN-002",
+        "PAY-9100",
+        "HR-BANDS-2026",
+        "OPS-004"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 494,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-003",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "medium",
+      "expected": [],
+      "ranked": [
+        "OPS-003",
+        "FIN-002",
+        "NEWS-001",
+        "INJ-002",
+        "OPS-002"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 437,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-003",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "medium",
+      "expected": [],
+      "ranked": [
+        "NEWS-001",
+        "INJ-002",
+        "DIR-002",
+        "HB-005",
+        "HB-006"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 705,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-003",
+        "OPS-003",
+        "FIN-002",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Jay Seal",
+      "chunkSet": "medium",
+      "expected": [
+        "FIN-003"
+      ],
+      "ranked": [
+        "FIN-003",
+        "OPS-003",
+        "FIN-002",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 370,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Jane Doe",
+      "chunkSet": "medium",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-002",
+        "HB-001",
+        "FIN-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 664,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026"
+      ]
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "medium",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-002",
+        "HB-001",
+        "FIN-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 664,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026"
+      ]
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "medium",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-002",
+        "HB-001",
+        "FIN-001",
+        "HR-BANDS-2026"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 790,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "medium",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-002",
+        "HB-001",
+        "FIN-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 664,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026"
+      ]
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "medium",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-002",
+        "HB-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 764,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-001",
+        "HR-BANDS-2026"
+      ]
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Jay Seal",
+      "chunkSet": "medium",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-002",
+        "HB-001",
+        "FIN-001",
+        "HR-BANDS-2026"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 790,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Jane Doe",
+      "chunkSet": "medium",
+      "expected": [
+        "FIN-004"
+      ],
+      "ranked": [
+        "FIN-004",
+        "OPS-002",
+        "INJ-002",
+        "ENG-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 637,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "medium",
+      "expected": [],
+      "ranked": [
+        "OPS-002",
+        "INJ-002",
+        "ENG-001",
+        "NEWS-001"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 688,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-004"
+      ]
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "medium",
+      "expected": [],
+      "ranked": [
+        "OPS-002",
+        "INJ-002",
+        "ENG-001",
+        "NEWS-001"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 688,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-004"
+      ]
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "medium",
+      "expected": [],
+      "ranked": [
+        "OPS-002",
+        "INJ-002",
+        "ENG-001",
+        "NEWS-001"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 688,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-004"
+      ]
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "medium",
+      "expected": [],
+      "ranked": [
+        "INJ-002",
+        "NEWS-001",
+        "DIR-002",
+        "DIR-003",
+        "HB-003"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 581,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-004",
+        "OPS-002",
+        "ENG-001"
+      ]
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Jay Seal",
+      "chunkSet": "medium",
+      "expected": [
+        "FIN-004"
+      ],
+      "ranked": [
+        "FIN-004",
+        "OPS-002",
+        "INJ-002",
+        "ENG-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 637,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Jane Doe",
+      "chunkSet": "medium",
+      "expected": [],
+      "ranked": [
+        "OPS-001",
+        "PAY-9100",
+        "OPS-003",
+        "NEWS-001",
+        "DIR-003"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 501,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "medium",
+      "expected": [],
+      "ranked": [
+        "OPS-001",
+        "OPS-003",
+        "NEWS-001",
+        "DIR-003",
+        "HB-004"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 558,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "medium",
+      "expected": [
+        "HR-PIP-17"
+      ],
+      "ranked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "OPS-001",
+        "PAY-9100",
+        "OPS-003"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 413,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "medium",
+      "expected": [],
+      "ranked": [
+        "OPS-001",
+        "OPS-003",
+        "NEWS-001",
+        "DIR-003",
+        "HB-004"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 558,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "medium",
+      "expected": [],
+      "ranked": [
+        "NEWS-001",
+        "DIR-003",
+        "HB-004",
+        "INJ-002",
+        "HB-005"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 629,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "OPS-001",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Jay Seal",
+      "chunkSet": "medium",
+      "expected": [
+        "HR-PIP-17"
+      ],
+      "ranked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "OPS-001",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 421,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -20579,6 +21979,740 @@
       "rr": 1,
       "answerHit3": null,
       "contextWords": 423,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Jane Doe",
+      "chunkSet": "full",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "OPS-003",
+        "DIR-002",
+        "HB-004"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 605,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "full",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "OPS-003",
+        "DIR-002",
+        "HB-004"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 605,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "full",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "OPS-003",
+        "DIR-002",
+        "HB-004"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 605,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "full",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "OPS-003",
+        "DIR-002",
+        "HB-004"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 605,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "full",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "DIR-002",
+        "HB-004",
+        "INJ-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 654,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "OPS-003"
+      ]
+    },
+    {
+      "questionId": "R36",
+      "difficulty": "easy",
+      "persona": "Jay Seal",
+      "chunkSet": "full",
+      "expected": [
+        "DIR-003"
+      ],
+      "ranked": [
+        "DIR-003",
+        "HB-002",
+        "OPS-003",
+        "DIR-002",
+        "HB-004"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 605,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Jane Doe",
+      "chunkSet": "full",
+      "expected": [
+        "FIN-003"
+      ],
+      "ranked": [
+        "OPS-003",
+        "FIN-002",
+        "FIN-003",
+        "PAY-9100",
+        "NEWS-001"
+      ],
+      "hit1": false,
+      "hit3": true,
+      "rr": 0.3333333333333333,
+      "answerHit3": null,
+      "contextWords": 560,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "full",
+      "expected": [],
+      "ranked": [
+        "OPS-003",
+        "FIN-002",
+        "NEWS-001",
+        "INJ-002",
+        "OPS-002"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 437,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-003",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "full",
+      "expected": [],
+      "ranked": [
+        "OPS-003",
+        "FIN-002",
+        "PAY-9100",
+        "OPS-004",
+        "NEWS-001"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 414,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-003",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "full",
+      "expected": [],
+      "ranked": [
+        "OPS-003",
+        "FIN-002",
+        "NEWS-001",
+        "INJ-002",
+        "OPS-002"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 437,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-003",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "full",
+      "expected": [],
+      "ranked": [
+        "NEWS-001",
+        "INJ-002",
+        "DIR-002",
+        "HB-005",
+        "HB-006"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 861,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "OPS-003",
+        "FIN-002",
+        "FIN-003",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R37",
+      "difficulty": "easy",
+      "persona": "Jay Seal",
+      "chunkSet": "full",
+      "expected": [
+        "FIN-003"
+      ],
+      "ranked": [
+        "OPS-003",
+        "FIN-002",
+        "FIN-003",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ],
+      "hit1": false,
+      "hit3": true,
+      "rr": 0.3333333333333333,
+      "answerHit3": null,
+      "contextWords": 526,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Jane Doe",
+      "chunkSet": "full",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-002",
+        "FIN-001",
+        "HB-001",
+        "PAY-9100"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 860,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026"
+      ]
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "full",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-002",
+        "FIN-001",
+        "HB-001",
+        "HB-006"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 1153,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026"
+      ]
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "full",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-002",
+        "FIN-001",
+        "HR-BANDS-2026",
+        "HB-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 989,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "full",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-002",
+        "FIN-001",
+        "HB-001",
+        "HB-006"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 1153,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026"
+      ]
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "full",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-002",
+        "HB-001",
+        "HB-006",
+        "HB-004"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 1210,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-001",
+        "HR-BANDS-2026"
+      ]
+    },
+    {
+      "questionId": "R38",
+      "difficulty": "easy",
+      "persona": "Jay Seal",
+      "chunkSet": "full",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-002",
+        "FIN-001",
+        "HR-BANDS-2026",
+        "HB-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 989,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Jane Doe",
+      "chunkSet": "full",
+      "expected": [
+        "FIN-004"
+      ],
+      "ranked": [
+        "FIN-004",
+        "OPS-002",
+        "INJ-002",
+        "ENG-001",
+        "NEWS-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 715,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-005"
+      ]
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "full",
+      "expected": [],
+      "ranked": [
+        "OPS-002",
+        "INJ-002",
+        "ENG-001",
+        "NEWS-001",
+        "INC-8790"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 727,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-004",
+        "FIN-005"
+      ]
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "full",
+      "expected": [],
+      "ranked": [
+        "OPS-002",
+        "INJ-002",
+        "ENG-001",
+        "NEWS-001",
+        "PAY-9041"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 744,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-004",
+        "FIN-005"
+      ]
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "full",
+      "expected": [],
+      "ranked": [
+        "OPS-002",
+        "INJ-002",
+        "ENG-001",
+        "NEWS-001",
+        "INC-8790"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 727,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-004",
+        "FIN-005"
+      ]
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "full",
+      "expected": [],
+      "ranked": [
+        "INJ-002",
+        "NEWS-001",
+        "DIR-002",
+        "DIR-003",
+        "HB-003"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 581,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "FIN-004",
+        "OPS-002",
+        "ENG-001",
+        "FIN-005"
+      ]
+    },
+    {
+      "questionId": "R39",
+      "difficulty": "easy",
+      "persona": "Jay Seal",
+      "chunkSet": "full",
+      "expected": [
+        "FIN-004"
+      ],
+      "ranked": [
+        "FIN-004",
+        "OPS-002",
+        "INJ-002",
+        "ENG-001",
+        "FIN-005"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 687,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Jane Doe",
+      "chunkSet": "full",
+      "expected": [],
+      "ranked": [
+        "OPS-001",
+        "PAY-9100",
+        "OPS-003",
+        "NEWS-001",
+        "DIR-003"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 501,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "full",
+      "expected": [],
+      "ranked": [
+        "OPS-001",
+        "OPS-003",
+        "NEWS-001",
+        "DIR-003",
+        "HB-004"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 558,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "full",
+      "expected": [
+        "HR-PIP-17"
+      ],
+      "ranked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "OPS-001",
+        "PAY-9100",
+        "OPS-003"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 413,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "full",
+      "expected": [],
+      "ranked": [
+        "OPS-001",
+        "OPS-003",
+        "NEWS-001",
+        "DIR-003",
+        "HB-004"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 558,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "full",
+      "expected": [],
+      "ranked": [
+        "NEWS-001",
+        "DIR-003",
+        "HB-004",
+        "INJ-002",
+        "HB-005"
+      ],
+      "hit1": null,
+      "hit3": null,
+      "rr": null,
+      "answerHit3": null,
+      "contextWords": 629,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "OPS-001",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ]
+    },
+    {
+      "questionId": "R40",
+      "difficulty": "easy",
+      "persona": "Jay Seal",
+      "chunkSet": "full",
+      "expected": [
+        "HR-PIP-17"
+      ],
+      "ranked": [
+        "HR-PIP-17",
+        "OPS-004",
+        "OPS-001",
+        "PAY-9100",
+        "HR-RIF-2026"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 421,
       "leaked": [],
       "wouldHaveLeaked": []
     },

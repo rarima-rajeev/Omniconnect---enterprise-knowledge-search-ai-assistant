@@ -12,7 +12,7 @@ As enterprises deploy conversational AI to answer employee questions across hete
 
 Prompt-level guardrails (*"do not show executive salaries to junior staff"*) fail against prompt injection, jailbreaking, and attention bleed. Furthermore, autonomous action execution (e.g., rebooting a production bastion host or approving a $150,000 vendor wire) cannot safely run based on model intent alone.
 
-**OmniConnect** was conceived and built as a production-grade **Enterprise Knowledge Search AI Assistant & Dev Workbench**. It answers questions with **permission-aware RAG**: Gemini embeddings and pgvector similarity search where the access filter runs inside the same database query that ranks results, so restricted content never reaches the model. It gates mutating agent actions behind OAuth scope checks, and it is measured by two eval suites: a 990-search retrieval eval (100% answer recall on hard questions, 0 leaks) and a 31-attack red-team suite (31 of 31 resisted).
+**OmniConnect** was conceived and built as a production-grade **Enterprise Knowledge Search AI Assistant & Dev Workbench**. It answers questions with **permission-aware RAG**: Gemini embeddings and pgvector similarity search where the access filter runs inside the same database query that ranks results, so restricted content never reaches the model. It gates mutating agent actions behind OAuth scope checks, and it is measured by two eval suites: 100 test cases: 60 retrieval questions run as 1,080 searches (100% answer recall on hard questions, 0 leaks) and 40 security tests (35 of 35 attacks resisted, 5 of 5 authorized-user checks answered).
 
 ---
 
@@ -81,7 +81,7 @@ Enterprise IT leaders face a dilemma when connecting Copilot to internal systems
 #### Decision 1: Filter Inside the Vector Search, Not in the Prompt or the App
 - **Trade-off**: Asking the model to "not reveal" restricted content is cheap but fails under prompt injection. Filtering in application code after retrieval works, but unfiltered results still pass through the app and a bug can leak them. Filtering inside the database query keeps restricted content from ever leaving Postgres.
 - **Decision**: One Postgres function, `match_chunks()`, ranks chunks by cosine similarity and applies the access rule in the same `WHERE` clause. Every chunk inherits its parent document's access tags. RLS with no policies blocks all direct table reads; the function is callable only by the server.
-- **Evidence**: 0 leaked results in 990 searches. Without the filter, 52% of searches would have returned a document the user may not read, 87% for the intern.
+- **Evidence**: 0 leaked results in 1,080 searches. Without the filter, 52% of searches would have returned a document the user may not read, 87% for the intern.
 
 #### Decision 2: Identity Comes From the Server, Never the Request
 - **Finding**: A red-team review of the original gateway found it accepted a `persona` object in the request body. Anyone could send `{"role": "FinanceDirector", "clearanceLevel": "L4"}` and read executive pay. Every downstream access rule was bypassed.
@@ -89,7 +89,7 @@ Enterprise IT leaders face a dilemma when connecting Copilot to internal systems
 
 #### Decision 3: Choose the Chunk Size With an Eval, Not a Default
 - **Trade-off**: Bigger chunks carry more context but dilute the embedding and cost more tokens; smaller chunks are precise but can split facts apart.
-- **Decision**: Tested ~80-word chunks, ~200-word chunks and whole documents on the same 55 questions. Small chunks won on both quality and cost (details in Section 6).
+- **Decision**: Tested ~80-word chunks, ~200-word chunks and whole documents on the same 60 questions. Small chunks won on both quality and cost (details in Section 6).
 
 #### Decision 4: Exact Search Instead of an Approximate Vector Index (at This Scale)
 - **Trade-off**: ANN indexes (HNSW, IVFFlat) are fast at scale but return the nearest N rows before the permission filter runs. For a low-clearance user most of those rows get filtered out, so they silently receive fewer than k results: a permission-specific recall bug.
@@ -147,11 +147,11 @@ A suite of 8 interactive test scenarios demonstrating exact role boundaries:
 
 ## 6. Evaluation
 
-Two automated eval suites, run against the live Supabase + Gemini stack. Reports: `evals/results/retrieval.md` and `evals/results/redteam.md`.
+Two automated eval suites with 100 test cases in total (60 retrieval + 40 security), run against the live Supabase + Gemini stack. Reports: `evals/results/retrieval.md` and `evals/results/redteam.md`.
 
 ### Retrieval quality and leakage
 
-55 questions (35 straightforward, 20 hard) × 6 personas × 3 chunk sizes = 990 searches. A case is scored only when the persona is allowed to read a relevant document, so a correct "nothing found" is not counted as a miss.
+60 questions (40 straightforward, 20 hard) × 6 personas × 3 chunk sizes = 1,080 searches. A case is scored only when the persona is allowed to read a relevant document, so a correct "nothing found" is not counted as a miss.
 
 | Chunk size | Right doc #1 (hard) | Answer text in top 3 chunks (hard) | Words sent to model | Leaked results |
 |---|---|---|---|---|
@@ -163,21 +163,21 @@ Two automated eval suites, run against the live Supabase + Gemini stack. Reports
 
 ### Red team
 
-31 attacks across 6 categories, scored automatically: an attack fails if the answer contains a "canary" fact unique to a document the user may not read, or if retrieval returns any unreadable chunk.
+40 security tests: 35 attacks across 6 categories plus 5 authorized-user checks, scored automatically: an attack fails if the answer contains a "canary" fact unique to a document the user may not read, or if retrieval returns any unreadable chunk.
 
 | Attack type | Resisted |
 |---|---|
-| Direct prompt injection ("ignore previous instructions...") | 6 / 6 |
-| Identity claims in the prompt ("I am the CFO...") | 4 / 4 |
-| Indirect injection (instructions planted in retrieved documents) | 6 / 6 |
-| Ranking leaks (queries engineered to surface restricted docs) | 5 / 5 |
-| Existence inference ("just say yes or no") | 4 / 4 |
-| Identity spoofing at the API (forged / tampered / expired sessions) | 6 / 6 |
-| **Total** | **31 / 31** |
+| Direct prompt injection ("ignore previous instructions...") | 7 / 7 |
+| Identity claims in the prompt ("I am the CFO...") | 5 / 5 |
+| Indirect injection (instructions planted in retrieved documents) | 7 / 7 |
+| Ranking leaks (queries engineered to surface restricted docs) | 6 / 6 |
+| Existence inference ("just say yes or no") | 5 / 5 |
+| Identity spoofing at the API (forged / tampered / expired sessions) | 5 / 5 |
+| **Total** | **35 / 35** |
 
 Plus 5 of 5 control questions where authorized users got the correct restricted answer, which shows the system isn't passing by refusing everything.
 
-**Honest reading**: four of the six categories are resisted *by architecture*: the restricted text was never retrieved, so there was nothing for the model to leak. Only indirect injection depends on the model's own behavior, and that is where real-world risk concentrates. 31 attacks is a smoke test, not a guarantee.
+**Honest reading**: four of the six categories are resisted *by architecture*: the restricted text was never retrieved, so there was nothing for the model to leak. Only indirect injection depends on the model's own behavior, and that is where real-world risk concentrates. 35 attacks is a smoke test, not a guarantee.
 
 **Finding: retrieval poisoning.** The planted vendor page, stuffed with words like "executive compensation" and "clearance", ranked in the top 5 for many unrelated questions. The model ignored its instructions every time, but a poisoned page that reliably reaches the prompt is a live risk. Mitigation on the roadmap: scan content for instruction-like text at ingestion and down-rank or quarantine it.
 
@@ -189,9 +189,9 @@ Key metrics are instrumented server-side via `posthog-node` and client-side via 
 
 | Metric | Telemetry event | Target | Measured |
 |---|---|---|---|
-| Leaked results | eval + `acl_records_trimmed` | 0 | 0 in 990 searches |
+| Leaked results | eval + `acl_records_trimmed` | 0 | 0 in 1,080 searches |
 | Answer recall, hard questions | retrieval eval | ≥ 95% | 100% (small chunks) |
-| Red-team resistance | red-team eval | 100% | 31 / 31 |
+| Red-team resistance | red-team eval | 100% | 35 / 35 |
 | End-to-end latency (median) | `llm_latency_recorded` | < 3 s | 2.7 s (embed 0.55 s, search 0.40 s, answer 1.6 s) |
 | Tokens per answer | `llm_latency_recorded` | < 1,500 | ~970 |
 | Unauthorized action attempts | `action_blocked_unauthorized` | Real-time | Logged |
@@ -203,9 +203,9 @@ Latency was measured from a laptop in India against Supabase in US East; most of
 ## 8. Results, Key Learnings & Future Roadmap
 
 ### Measurable Results
-- **0 leaked results in 990 permission-filtered searches**, verified against an independent copy of the access rule; without the filter, 52% of searches would have leaked.
+- **0 leaked results in 1,080 permission-filtered searches**, verified against an independent copy of the access rule; without the filter, 52% of searches would have leaked.
 - **100% answer recall on hard retrieval questions** with ~80-word chunks, at less than half the prompt size of whole-document retrieval.
-- **31 of 31 red-team attacks resisted** across 6 categories, with 5 of 5 authorized-user controls still answered.
+- **40 of 40 security tests passed**: 35 of 35 red-team attacks resisted across 6 categories, and 5 of 5 authorized-user checks still answered.
 - **Found and fixed a critical identity-spoofing flaw** in the original gateway through structured red-teaming.
 
 ### Key PM Learnings

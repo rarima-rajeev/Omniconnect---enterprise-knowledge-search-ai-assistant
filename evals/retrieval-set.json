@@ -284,6 +284,46 @@
     "difficulty": "easy"
   },
   {
+    "id": "R36",
+    "difficulty": "easy",
+    "question": "Where are the company's offices located?",
+    "relevant": [
+      "DIR-003"
+    ]
+  },
+  {
+    "id": "R37",
+    "difficulty": "easy",
+    "question": "How many new hires is the board being asked to approve for next year?",
+    "relevant": [
+      "FIN-003"
+    ]
+  },
+  {
+    "id": "R38",
+    "difficulty": "easy",
+    "question": "Is there a monthly stipend for wellness?",
+    "relevant": [
+      "HB-005"
+    ]
+  },
+  {
+    "id": "R39",
+    "difficulty": "easy",
+    "question": "Who owns the contract for the data labeling platform?",
+    "relevant": [
+      "FIN-004"
+    ]
+  },
+  {
+    "id": "R40",
+    "difficulty": "easy",
+    "question": "What are the goals in the London sales performance improvement plan?",
+    "relevant": [
+      "HR-PIP-17"
+    ]
+  },
+  {
     "id": "H01",
     "difficulty": "hard",
     "question": "What did the CFO receive as the second installment of his sign-on bonus?",
