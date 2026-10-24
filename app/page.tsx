@@ -24,7 +24,7 @@ import { EnterprisePersona, OrchestrationResult } from '@/lib/types';
 import { MarkdownAnswer } from './markdown-answer';
 import { useAnalytics } from './providers';
 
-interface PopularQuery {
+interface SampleQuery {
   id: string;
   tag: string;
   tagType: 'action' | 'confidential' | 'hr' | 'public' | 'tech';
@@ -43,8 +43,8 @@ export default function CopilotChatLandingPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [showMicroAudit, setShowMicroAudit] = useState(false);
 
-  // Popular Queries specified in the PRD
-  const popularQueries: PopularQuery[] = [
+  // Sample queries shown on the landing page
+  const sampleQueries: SampleQuery[] = [
     {
       id: 'q4',
       tag: 'Knowledge Retrieval - Confidential',
@@ -493,7 +493,7 @@ export default function CopilotChatLandingPage() {
         <div className="pt-2">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-              Popular Test Scenarios
+              Sample Test Scenarios
             </h2>
             <span className="text-[11px] text-slate-500 font-mono">
               Evaluating as: <strong className="text-slate-300">{selectedPersona.name}</strong>
@@ -501,7 +501,7 @@ export default function CopilotChatLandingPage() {
           </div>
 
           <div className="space-y-2.5">
-            {popularQueries.map((item, idx) => {
+            {sampleQueries.map((item, idx) => {
               const isTagAction = item.tagType === 'action';
               const isTagConf = item.tagType === 'confidential';
               const isTagPublic = item.tagType === 'public';
