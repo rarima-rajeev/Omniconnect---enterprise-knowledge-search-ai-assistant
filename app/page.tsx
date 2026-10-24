@@ -184,15 +184,22 @@ export default function CopilotChatLandingPage() {
             <div>
               <div className="flex items-center space-x-1.5">
                 <span className="font-bold text-sm tracking-tight text-white">OmniConnect</span>
-                <span className="text-[10px] uppercase font-mono px-1.5 py-0.2 bg-blue-500/10 text-blue-400 border border-blue-500/30 rounded font-semibold">
+                <span className="hidden sm:inline text-[10px] uppercase font-mono px-1.5 py-0.2 bg-blue-500/10 text-blue-400 border border-blue-500/30 rounded font-semibold">
                   Enterprise AI
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Right Header: Jay Seal Admin Link & Persona Switcher */}
+          {/* Right Header: Metrics link, Jay Seal Admin Link & Persona Switcher */}
           <div className="flex items-center space-x-3">
+            <Link
+              href="/metrics"
+              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg border border-slate-700/80 bg-slate-900 hover:border-blue-500/60 text-slate-200 hover:text-white text-xs font-semibold transition-all"
+            >
+              <Zap className="h-3.5 w-3.5 text-blue-400" />
+              <span>Metrics</span>
+            </Link>
             {/* Prominent Secondary Button for Jay Seal */}
             {isJaySeal && (
               <Link
