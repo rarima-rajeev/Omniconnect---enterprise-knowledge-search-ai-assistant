@@ -399,7 +399,8 @@ export default function CopilotChatLandingPage() {
                     : 'bg-rose-500/10 text-rose-300 border-rose-500/30'
                 }`}
               >
-                {currentResult.success ? '200 OK' : currentResult.consentRequired?.code || '403 Forbidden'}
+                {currentResult.statusLabel ||
+                  (currentResult.success ? '200 OK' : currentResult.consentRequired?.code || '403 Forbidden')}
               </span>
             </div>
 

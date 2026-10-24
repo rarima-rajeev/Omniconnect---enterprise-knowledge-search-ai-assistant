@@ -57,13 +57,19 @@ export interface GenerateResult {
   totalTokens: number;
 }
 
-export async function generate(params: { system: string; prompt: string; temperature?: number }): Promise<GenerateResult> {
+export async function generate(params: {
+  system: string;
+  prompt: string;
+  temperature?: number;
+  responseSchema?: object; // when set, the model must reply with JSON matching this schema
+}): Promise<GenerateResult> {
   const start = Date.now();
   const data = await callGemini(`models/${CHAT_MODEL}:generateContent`, {
     systemInstruction: { parts: [{ text: params.system }] },
     contents: [{ role: 'user', parts: [{ text: params.prompt }] }],
     generationConfig: {
       temperature: params.temperature ?? 0.2,
+      ...(params.responseSchema ? { responseMimeType: 'application/json', responseSchema: params.responseSchema } : {}),
       // 2.5 Flash "thinks" by default; a grounded lookup doesn't need it and it adds latency.
       ...(CHAT_MODEL.includes('2.5-flash') ? { thinkingConfig: { thinkingBudget: 0 } } : {}),
     },

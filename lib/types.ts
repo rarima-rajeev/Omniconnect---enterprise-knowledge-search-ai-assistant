@@ -155,6 +155,7 @@ export interface OrchestrationResult {
   trimmedRecords: EnterpriseRecord[];
   sources?: SourceCitation[];
   groundedResponse: string;
+  statusLabel?: string; // overrides the default 200 OK / 403 pill text
   actionExecuted?: boolean;
   actionPayload?: any;
   actionResult?: any;

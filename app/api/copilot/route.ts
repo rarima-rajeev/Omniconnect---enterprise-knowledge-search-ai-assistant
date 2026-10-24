@@ -605,19 +605,30 @@ export async function POST(req: NextRequest) {
     },
   );
 
-  const decision: DecisionMeta = {
-    type: 'ALLOWED',
-    badge: sources.length ? 'Authorized & Grounded' : 'No Accessible Sources',
-    headline: sources.length
-      ? `Answered from ${sources.length} document${sources.length > 1 ? 's' : ''} you can access`
-      : 'Nothing found in the documents you can access',
-    reason:
-      'Search ran only over documents your role, department and clearance allow. Restricted content is filtered inside the database query, so the AI never sees it.',
-    policyRule: 'Permission-aware retrieval: rank by meaning and filter by access in one query.',
-  };
+  // Red whenever the documents this user may read don't contain the answer. This is
+  // deliberately the same for "restricted document exists" and "no document exists":
+  // telling users which one it is would reveal that confidential content exists.
+  const decision: DecisionMeta = rag.answered
+    ? {
+        type: 'ALLOWED',
+        badge: 'Authorized & Grounded',
+        headline: `Answered from ${sources.length} document${sources.length > 1 ? 's' : ''} you can access`,
+        reason:
+          'Search ran only over documents your role, department and clearance allow. Restricted content is filtered inside the database query, so the AI never sees it.',
+        policyRule: 'Permission-aware retrieval: rank by meaning and filter by access in one query.',
+      }
+    : {
+        type: 'BLOCKED',
+        badge: 'Not Authorized or Not Found',
+        headline: "You're not authorized to see this, or it isn't in any company document",
+        reason:
+          "Search ran only over documents your role, department and clearance allow, and none of them answer this question. For security, OmniConnect doesn't say which of the two it is: confirming that a restricted document exists would itself reveal confidential information.",
+        policyRule: 'Permission-aware retrieval: rank by meaning and filter by access in one query.',
+      };
 
   const response: OrchestrationResult = {
-    success: true,
+    success: rag.answered,
+    statusLabel: rag.answered ? undefined : 'NOT FOUND',
     query,
     persona: user,
     intent: 'semantic_retrieval',

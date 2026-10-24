@@ -95,9 +95,10 @@ Enterprise IT leaders face a dilemma when connecting Copilot to internal systems
 - **Trade-off**: ANN indexes (HNSW, IVFFlat) are fast at scale but return the nearest N rows before the permission filter runs. For a low-clearance user most of those rows get filtered out, so they silently receive fewer than k results: a permission-specific recall bug.
 - **Decision**: With ~175 chunks an exact scan takes milliseconds and is always correct. At scale, the path is HNSW with pgvector's iterative index scans, or partitioning the index by access tier.
 
-#### Decision 5: Never Tell Users That Something Was Hidden
-- **Finding**: The original UI said "1 candidate record was pruned by RLS". That tells an intern a restricted document on the topic exists, which is an information leak in itself.
-- **Decision**: Users see only "nothing found in the documents you can access". The withheld count goes to admin telemetry only.
+#### Decision 5: Show a Clear Boundary Without Confirming What's Behind It
+- **Finding**: The original UI said "1 candidate record was pruned by RLS" and "executive compensation ledgers require FinanceDirector clearance". That tells an intern a restricted document exists, and even which role unlocks it: an information leak in itself.
+- **Trade-off**: Users still need an unmistakable signal when they can't get an answer; a green "Authorized" badge on a non-answer is misleading.
+- **Decision**: The model returns a structured `answered` flag (JSON output, not parsed prose). When the permitted documents don't contain the answer, the card turns red: "You're not authorized to see this, or it isn't in any company document". The card is identical whether a restricted document exists or not, so it reveals nothing. The withheld count goes to admin telemetry only.
 
 #### Decision 6: Model Context Protocol (MCP) Standard for Tool Manifests
 - **Decision**: Standardized all tool definitions under the Model Context Protocol (MCP v1.0).
