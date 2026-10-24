@@ -340,6 +340,9 @@ export default function CopilotChatLandingPage() {
               </button>
             </div>
           </div>
+          <p className="mt-2 px-1 text-[11px] text-slate-500">
+            Try asking about time off, travel, IT help, incidents, finance or HR.
+          </p>
         </div>
 
         {/* ================================================================== */}
