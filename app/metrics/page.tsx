@@ -19,7 +19,7 @@ import retrievalSet from '@/evals/retrieval-set.json';
 
 export const metadata: Metadata = {
   title: 'Evaluation & Architecture — OmniConnect',
-  description: 'Permission-aware RAG, measured with 100 automated use cases.',
+  description: 'Permission-aware RAG, measured with 100 automated test cases.',
 };
 
 const CASE_STUDY_URL =
@@ -65,7 +65,7 @@ export default function MetricsPage() {
   const kpis = [
     {
       value: String(retrievalCount + securityCount),
-      label: 'Automated eval use cases',
+      label: 'Automated eval test cases',
       detail: `${retrievalCount} retrieval · ${securityCount} security`,
       tone: 'text-white',
     },
@@ -154,7 +154,7 @@ export default function MetricsPage() {
         <div>
           <div className="text-[10px] uppercase tracking-[0.18em] font-mono text-blue-400">Evaluation & architecture</div>
           <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight mt-0.5">
-            Permission-aware RAG, measured with {retrievalCount + securityCount} automated use cases
+            Permission-aware RAG, measured with {retrievalCount + securityCount} automated test cases
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 mt-1">
             Semantic search that only retrieves what the signed-in employee is cleared to see, evaluated for retrieval
