@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { ENTERPRISE_PERSONAS } from '@/lib/supabase';
 import { EnterprisePersona, OrchestrationResult } from '@/lib/types';
+import { MarkdownAnswer } from './markdown-answer';
 import { useAnalytics } from './providers';
 
 interface PopularQuery {
@@ -417,8 +418,8 @@ export default function CopilotChatLandingPage() {
             </div>
 
             {/* Grounded LLM Response Body */}
-            <div className="text-xs sm:text-sm text-slate-200 leading-relaxed whitespace-pre-wrap bg-slate-950/90 p-4 rounded-xl border border-slate-800 font-sans">
-              {currentResult.groundedResponse}
+            <div className="text-xs sm:text-sm text-slate-200 leading-relaxed bg-slate-950/90 p-4 rounded-xl border border-slate-800 font-sans">
+              <MarkdownAnswer text={currentResult.groundedResponse} />
             </div>
 
             {/* Cited sources: only documents this persona is allowed to read */}
