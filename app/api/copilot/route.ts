@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { MCP_CONNECTORS } from '@/lib/mcp-manifest';
-import { generateGroundedResponse } from '@/lib/openrouter';
 import {
   getTelemetryStream,
   trackActionConsent,
@@ -8,8 +7,10 @@ import {
   trackLLMLatency,
   trackPermissionTrimming,
 } from '@/lib/posthog';
-import { ENTERPRISE_PERSONAS, runSessionScopedRLSQuery } from '@/lib/supabase';
-import { DecisionMeta, OrchestrationResult, OrchestrationStep, UserContext } from '@/lib/types';
+import { answerQuestion, DEFAULT_TOP_K, RagAnswer } from '@/lib/rag';
+import { resolveUser, SESSION_COOKIE } from '@/lib/session';
+import { ENTERPRISE_PERSONAS } from '@/lib/supabase';
+import { DecisionMeta, OrchestrationResult, OrchestrationStep, SourceCitation, UserContext } from '@/lib/types';
 
 export async function GET() {
   const stream = getTelemetryStream();
@@ -24,31 +25,12 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const overallStart = Date.now();
   const body = await req.json().catch(() => ({}));
-  const { query = '', personaId, persona: customPersona, actionName } = body;
+  const { query = '', actionName } = body;
 
-  // Resolve active persona
-  const matchedPersona = ENTERPRISE_PERSONAS.find((p) => p.id === personaId);
-  const user: UserContext =
-    customPersona ||
-    (matchedPersona
-      ? {
-          userId: matchedPersona.id,
-          name: matchedPersona.name,
-          email: `${matchedPersona.name.toLowerCase().replace(' ', '.')}@enterprise.internal`,
-          department: matchedPersona.department,
-          role: matchedPersona.role,
-          clearanceLevel: matchedPersona.clearanceLevel,
-          scopes: matchedPersona.scopes,
-        }
-      : {
-          userId: 'usr_neil',
-          name: 'Neil Wright',
-          email: 'neil.wright@enterprise.internal',
-          department: 'General',
-          role: 'Intern',
-          clearanceLevel: 'L1',
-          scopes: ['read.public.directory'],
-        });
+  // Identity comes only from the signed session cookie. Persona fields in the request
+  // body are ignored: the old API trusted a client-sent persona object, so anyone could
+  // claim FinanceDirector / L4 and read payroll (found in the red-team pass).
+  const user: UserContext = resolveUser(req.cookies.get(SESSION_COOKIE)?.value);
 
   const executionSteps: OrchestrationStep[] = [];
   const lowerQuery = (query || '').toLowerCase();
@@ -521,347 +503,144 @@ export async function POST(req: NextRequest) {
   }
 
   // -------------------------------------------------------------------------
-  // 6. [Knowledge Retrieval - Public] "Who is the CEO of this company?"
-  // Rule: Allowed: Everyone (including Neil Wright - Intern).
+  // Knowledge retrieval: every question that is not an agent action goes through
+  // permission-aware RAG. Embed the question, search only the chunks this user may
+  // read (filtered inside the database query), then answer from them with citations.
   // -------------------------------------------------------------------------
-  if (
-    lowerQuery.includes('ceo') &&
-    !lowerQuery.includes('stock') &&
-    !lowerQuery.includes('vesting') &&
-    !lowerQuery.includes('bonus')
-  ) {
-    const domain = 'company_directory';
-    const rlsResult = await runSessionScopedRLSQuery(user, domain);
-
-    trackConnectorCall({ connectorId: 'm365-connector-directory', domain, query, user });
-    trackPermissionTrimming({
-      recordsScanned: rlsResult.recordsScanned,
-      recordsReturned: rlsResult.recordsPermitted,
-      trimRatio: rlsResult.trimRatio,
-      user,
-      domain,
-    });
-
-    const llm = await generateGroundedResponse({
-      query,
-      user,
-      permittedRecords: rlsResult.permittedRecords,
-      trimmedCount: rlsResult.recordsTrimmed,
-      domain,
-    });
-
-    trackLLMLatency({ modelUsed: llm.modelUsed, ttftMs: llm.ttftMs, totalTokens: llm.totalTokens, latencyMs: llm.latencyMs });
-
-    executionSteps.push({
-      step: 1,
-      name: 'Intent Classification',
-      description: 'Routed to Enterprise Public Directory (Public L1 Clearance).',
-      status: 'completed',
-      durationMs: 10,
-    });
-    executionSteps.push({
-      step: 2,
-      name: 'Supabase RLS Query',
-      description: `Matched 1 record in company_directory. Injected into context (0 trimmed).`,
-      status: 'completed',
-      durationMs: 25,
-    });
-    executionSteps.push({
-      step: 3,
-      name: 'Grounded LLM Response Synthesis',
-      description: 'Synthesized leadership profile from verified enterprise directory.',
-      status: 'completed',
-      durationMs: llm.latencyMs,
-    });
-
-    const decision: DecisionMeta = {
-      type: 'ALLOWED',
-      badge: 'Authorized & Grounded',
-      headline: 'Public Corporate Knowledge Verified',
-      reason: 'Allowed: Company leadership is public information (Clearance L1). Accessible to everyone including interns.',
-      policyRule: 'Public Directory Policy: General corporate hierarchy is unrestricted.',
-      authorizedRoles: ['All Roles (Jane, Alex, Sarah, Binny, Neil Wright)'],
-    };
-
-    const response: OrchestrationResult = {
-      success: true,
+  let rag: RagAnswer;
+  try {
+    rag = await answerQuestion(user, query);
+  } catch (e) {
+    console.error('RAG pipeline failed:', e);
+    const failure: OrchestrationResult = {
+      success: false,
       query,
       persona: user,
-      intent: 'semantic_retrieval:company_directory',
-      connectorId: 'm365-connector-directory',
-      recordsScanned: rlsResult.recordsScanned,
-      recordsPermitted: rlsResult.recordsPermitted,
+      intent: 'semantic_retrieval',
+      connectorId: 'omni-rag-gateway',
+      recordsScanned: 0,
+      recordsPermitted: 0,
       trimRatio: 0,
-      scannedRecords: rlsResult.allCandidates,
-      permittedRecords: rlsResult.permittedRecords,
+      scannedRecords: [],
+      permittedRecords: [],
       trimmedRecords: [],
-      decision,
-      groundedResponse: llm.content,
+      groundedResponse:
+        'The knowledge search is unavailable right now. Check that GEMINI_API_KEY, NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are set and that the corpus has been ingested (npm run ingest).',
+      decision: {
+        type: 'BLOCKED',
+        badge: 'Service Unavailable',
+        headline: 'Retrieval pipeline not configured',
+        reason: 'The search backend could not be reached.',
+        policyRule: 'Fail closed: no answer is generated without permission-filtered sources.',
+      },
       executionSteps,
       telemetry: getTelemetryStream(),
       latencyMs: Date.now() - overallStart,
-      modelUsed: llm.modelUsed,
-      tokenStats: { promptTokens: llm.promptTokens, completionTokens: llm.completionTokens, totalTokens: llm.totalTokens },
+      modelUsed: 'none',
+      tokenStats: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
     };
-
-    return NextResponse.json(response);
+    return NextResponse.json(failure, { status: 503 });
   }
 
-  // -------------------------------------------------------------------------
-  // 4. [Knowledge Retrieval - Confidential] CEO & VP Eng stock vesting & bonus
-  // Rule: Allowed: Jane Doe & Sarah Chen (and Jay Seal). Denied/Masked: Alex, Binny, Neil.
-  // -------------------------------------------------------------------------
-  if (
-    lowerQuery.includes('stock') ||
-    lowerQuery.includes('vesting') ||
-    lowerQuery.includes('bonus') ||
-    lowerQuery.includes('compensation')
-  ) {
-    const domain = 'executive_payroll';
-    const rlsResult = await runSessionScopedRLSQuery(user, domain);
-    const isAllowed = rlsResult.recordsPermitted > 0;
-
-    trackConnectorCall({ connectorId: 'm365-connector-executive-payroll', domain, query, user });
-    trackPermissionTrimming({
-      recordsScanned: rlsResult.recordsScanned,
-      recordsReturned: rlsResult.recordsPermitted,
-      trimRatio: rlsResult.trimRatio,
-      user,
-      domain,
-    });
-
-    const llm = await generateGroundedResponse({
-      query,
-      user,
-      permittedRecords: rlsResult.permittedRecords,
-      trimmedCount: rlsResult.recordsTrimmed,
-      domain,
-      securityInterceptNote: rlsResult.securityInterceptNote,
-    });
-
-    trackLLMLatency({ modelUsed: llm.modelUsed, ttftMs: llm.ttftMs, totalTokens: llm.totalTokens, latencyMs: llm.latencyMs });
-
-    executionSteps.push({
-      step: 1,
-      name: 'Intent Classification',
-      description: 'Routed to Executive Payroll & Equity Ledger (Restricted L4+).',
-      status: 'completed',
-      durationMs: 12,
-    });
-    executionSteps.push({
-      step: 2,
-      name: 'Supabase RLS Evaluation',
-      description: isAllowed
-        ? `Authorized: User '${user.name}' holds ${user.role} clearance. Injected 1 confidential ledger record.`
-        : `Policy Boundary Enforced: 1 record filtered by Supabase Row-Level Security. Role '${user.role}' lacks clearance.`,
-      status: isAllowed ? 'completed' : 'blocked',
-      durationMs: 30,
-    });
-
-    const decision: DecisionMeta = {
-      type: isAllowed ? 'ALLOWED' : 'BLOCKED',
-      badge: isAllowed ? 'Authorized & Grounded' : 'Policy Boundary Enforced',
-      headline: isAllowed ? 'Executive Compensation Ledger Grounded' : 'RLS Trimmed: 0 Records Permitted',
-      reason: isAllowed
-        ? `Authorized: User ${user.name} (${user.role} • ${user.clearanceLevel}) holds executive compensation clearance.`
-        : `Policy Boundary Enforced: 1 record filtered by Supabase Row-Level Security. Role '${user.role}' lacks clearance for confidential compensation files.`,
-      policyRule: 'Executive Equity Policy: Confidential stock ledgers require FinanceDirector or EnterpriseAdmin clearance.',
-      authorizedRoles: ['Jane Doe (FinanceDirector)', 'Sarah Chen (EnterpriseAdmin)'],
-    };
-
-    const response: OrchestrationResult = {
-      success: isAllowed,
-      query,
-      persona: user,
-      intent: 'semantic_retrieval:executive_payroll',
-      connectorId: 'm365-connector-executive-payroll',
-      recordsScanned: rlsResult.recordsScanned,
-      recordsPermitted: rlsResult.recordsPermitted,
-      trimRatio: rlsResult.trimRatio,
-      securityInterceptNote: rlsResult.securityInterceptNote,
-      scannedRecords: rlsResult.allCandidates,
-      permittedRecords: rlsResult.permittedRecords,
-      trimmedRecords: rlsResult.trimmedRecords,
-      decision,
-      groundedResponse: llm.content,
-      executionSteps,
-      telemetry: getTelemetryStream(),
-      latencyMs: Date.now() - overallStart,
-      modelUsed: llm.modelUsed,
-      tokenStats: { promptTokens: llm.promptTokens, completionTokens: llm.completionTokens, totalTokens: llm.totalTokens },
-    };
-
-    return NextResponse.json(response, { status: isAllowed ? 200 : 403 });
-  }
-
-  // -------------------------------------------------------------------------
-  // 5. [Knowledge Retrieval - HR/Comp] London candidate salary range & offer letters
-  // Rule: Allowed: Sarah Chen (EnterpriseAdmin) (& Jay Seal). Denied: Jane, Alex, Binny, Neil.
-  // -------------------------------------------------------------------------
-  if (
-    lowerQuery.includes('london') ||
-    lowerQuery.includes('offer letter') ||
-    lowerQuery.includes('salary range')
-  ) {
-    const domain = 'candidate_offers';
-    const rlsResult = await runSessionScopedRLSQuery(user, domain);
-    const isAllowed = rlsResult.recordsPermitted > 0;
-
-    trackConnectorCall({ connectorId: 'm365-connector-candidate-offers', domain, query, user });
-    trackPermissionTrimming({
-      recordsScanned: rlsResult.recordsScanned,
-      recordsReturned: rlsResult.recordsPermitted,
-      trimRatio: rlsResult.trimRatio,
-      user,
-      domain,
-    });
-
-    const llm = await generateGroundedResponse({
-      query,
-      user,
-      permittedRecords: rlsResult.permittedRecords,
-      trimmedCount: rlsResult.recordsTrimmed,
-      domain,
-      securityInterceptNote: rlsResult.securityInterceptNote,
-    });
-
-    executionSteps.push({
-      step: 1,
-      name: 'Intent Classification',
-      description: 'Routed to Talent Acquisition & EMEA Offer Letter Ledger.',
-      status: 'completed',
-      durationMs: 12,
-    });
-    executionSteps.push({
-      step: 2,
-      name: 'Supabase RLS Evaluation',
-      description: isAllowed
-        ? `Authorized: User '${user.name}' holds HR/EnterpriseAdmin clearance. Injected 1 offer letter record.`
-        : `Policy Boundary Enforced: 1 record filtered by Supabase Row-Level Security. Role '${user.role}' lacks HR clearance.`,
-      status: isAllowed ? 'completed' : 'blocked',
-      durationMs: 28,
-    });
-
-    const decision: DecisionMeta = {
-      type: isAllowed ? 'ALLOWED' : 'BLOCKED',
-      badge: isAllowed ? 'Authorized & Grounded' : 'Policy Boundary Enforced',
-      headline: isAllowed ? 'EMEA Compensation & Offer Letters Grounded' : 'RLS Trimmed: 0 Records Permitted',
-      reason: isAllowed
-        ? `Authorized: ${user.name} (${user.role}) has access to EMEA candidate offer letters.`
-        : `Policy Boundary Enforced: EMEA candidate offer letters are restricted strictly to HR / EnterpriseAdmin (Sarah Chen). Role '${user.role}' is denied.`,
-      policyRule: 'Talent Acquisition Confidentiality: Candidate remuneration letters restricted to Enterprise Operations Admin.',
-      authorizedRoles: ['Sarah Chen (EnterpriseAdmin)'],
-    };
-
-    const response: OrchestrationResult = {
-      success: isAllowed,
-      query,
-      persona: user,
-      intent: 'semantic_retrieval:candidate_offers',
-      connectorId: 'm365-connector-candidate-offers',
-      recordsScanned: rlsResult.recordsScanned,
-      recordsPermitted: rlsResult.recordsPermitted,
-      trimRatio: rlsResult.trimRatio,
-      securityInterceptNote: rlsResult.securityInterceptNote,
-      scannedRecords: rlsResult.allCandidates,
-      permittedRecords: rlsResult.permittedRecords,
-      trimmedRecords: rlsResult.trimmedRecords,
-      decision,
-      groundedResponse: llm.content,
-      executionSteps,
-      telemetry: getTelemetryStream(),
-      latencyMs: Date.now() - overallStart,
-      modelUsed: llm.modelUsed,
-      tokenStats: { promptTokens: llm.promptTokens, completionTokens: llm.completionTokens, totalTokens: llm.totalTokens },
-    };
-
-    return NextResponse.json(response, { status: isAllowed ? 200 : 403 });
-  }
-
-  // -------------------------------------------------------------------------
-  // 7. [Knowledge Retrieval - Technical] Root cause analysis for Postgres RDS failover #8921
-  // Rule: Allowed: Alex Rivera (full technical logs), Sarah/Binny/Jane (executive summary), Neil (Access Restricted).
-  // -------------------------------------------------------------------------
-  const domain = 'it_incidents';
-  const isNeil = user.role === 'Intern' || user.clearanceLevel === 'L1';
-  const rlsResult = await runSessionScopedRLSQuery(user, domain);
-  const isAllowed = !isNeil;
-
-  trackConnectorCall({ connectorId: 'm365-connector-it-incidents', domain, query, user });
+  const connectorId = 'omni-rag-gateway';
+  trackConnectorCall({ connectorId, domain: 'all', query, user });
+  // Admin telemetry only: how many of the unfiltered top-k matches were withheld.
   trackPermissionTrimming({
-    recordsScanned: rlsResult.recordsScanned,
-    recordsReturned: isAllowed ? 1 : 0,
-    trimRatio: isAllowed ? 0 : 100,
+    recordsScanned: rag.chunks.length + rag.withheldCount,
+    recordsReturned: rag.chunks.length,
+    trimRatio: Math.round((rag.withheldCount / DEFAULT_TOP_K) * 100),
     user,
-    domain,
+    domain: 'all',
+  });
+  trackLLMLatency({
+    modelUsed: rag.llm.model,
+    ttftMs: rag.llm.latencyMs,
+    totalTokens: rag.llm.totalTokens,
+    latencyMs: rag.llm.latencyMs,
   });
 
-  const llm = await generateGroundedResponse({
-    query,
-    user,
-    permittedRecords: isAllowed ? rlsResult.permittedRecords : [],
-    trimmedCount: isAllowed ? 0 : 1,
-    domain,
-    securityInterceptNote: isAllowed ? undefined : '1 record filtered by Supabase Row-Level Security.',
-  });
+  // One citation per document, keeping its best-matching chunk's similarity.
+  const sourcesById = new Map<string, SourceCitation>();
+  for (const c of rag.chunks) {
+    const existing = sourcesById.get(c.documentId);
+    if (!existing || c.similarity > existing.similarity) {
+      sourcesById.set(c.documentId, {
+        documentId: c.documentId,
+        title: c.title,
+        classification: c.classification,
+        similarity: Math.round(c.similarity * 1000) / 1000,
+      });
+    }
+  }
+  const sources = Array.from(sourcesById.values());
 
-  executionSteps.push({
-    step: 1,
-    name: 'Intent Classification',
-    description: 'Routed to Cloud SRE Telemetry & Post-Mortem Incident Tickets.',
-    status: 'completed',
-    durationMs: 14,
-  });
-  executionSteps.push({
-    step: 2,
-    name: 'Tiered Incident Clearance Check',
-    description: isNeil
-      ? "Blocked: User holds Intern clearance. Infrastructure post-mortems restricted."
-      : user.role === 'DevOpsEngineer'
-      ? "Authorized: DevOpsEngineer holds deep technical telemetry clearance."
-      : "Authorized: Management profile routed to Executive Summary tier.",
-    status: isAllowed ? 'completed' : 'blocked',
-    durationMs: 25,
-  });
+  executionSteps.push(
+    {
+      step: 1,
+      name: 'Identity Resolution',
+      description: `Signed session resolved to ${user.name} (${user.role}, ${user.department}, ${user.clearanceLevel}) from the server-side directory.`,
+      status: 'completed',
+      durationMs: 0,
+    },
+    {
+      step: 2,
+      name: 'Query Embedding',
+      description: 'Question converted to a 768-dimension vector with Gemini embeddings.',
+      status: 'completed',
+      durationMs: rag.embedMs,
+    },
+    {
+      step: 3,
+      name: 'Permission-Aware Vector Search',
+      description: `Top ${DEFAULT_TOP_K} '${rag.chunkSet}' chunks by similarity, filtered by role, department and clearance inside the same database query.`,
+      status: 'completed',
+      durationMs: rag.retrieveMs,
+    },
+    {
+      step: 4,
+      name: 'Grounded Answer Generation',
+      description: `${rag.llm.model} answered from ${sources.length} source document(s) with citations.`,
+      status: 'completed',
+      durationMs: rag.llm.latencyMs,
+    },
+  );
 
   const decision: DecisionMeta = {
-    type: isAllowed ? 'ALLOWED' : 'BLOCKED',
-    badge: isAllowed ? 'Authorized & Grounded' : 'Policy Boundary Enforced',
-    headline: isAllowed
-      ? user.role === 'DevOpsEngineer'
-        ? 'Full Technical Root Cause Grounded'
-        : 'Executive Incident Summary Grounded'
-      : 'Access Restricted: Intern Profile',
-    reason: isAllowed
-      ? user.role === 'DevOpsEngineer'
-        ? 'Authorized: Alex Rivera (Staff DevOps) granted full technical log access.'
-        : `Authorized: ${user.name} granted executive incident summary.`
-      : 'Policy Boundary Enforced: 1 record filtered by Supabase Row-Level Security. Interns lack infrastructure telemetry clearance.',
-    policyRule: 'Incident Telemetry Tiering: Deep technical post-mortems for DevOps; executive summaries for management; restricted for interns.',
-    authorizedRoles: ['Alex Rivera (Full Technical Logs)', 'Sarah Chen, Binny Lee, Jane Doe (Executive Summary)'],
+    type: 'ALLOWED',
+    badge: sources.length ? 'Authorized & Grounded' : 'No Accessible Sources',
+    headline: sources.length
+      ? `Answered from ${sources.length} document${sources.length > 1 ? 's' : ''} you can access`
+      : 'Nothing found in the documents you can access',
+    reason:
+      'Search ran only over documents your role, department and clearance allow. Restricted content is filtered inside the database query, so the AI never sees it.',
+    policyRule: 'Permission-aware retrieval: rank by meaning and filter by access in one query.',
   };
 
   const response: OrchestrationResult = {
-    success: isAllowed,
+    success: true,
     query,
     persona: user,
-    intent: 'semantic_retrieval:it_incidents',
-    connectorId: 'm365-connector-it-incidents',
-    recordsScanned: 1,
-    recordsPermitted: isAllowed ? 1 : 0,
-    trimRatio: isAllowed ? 0 : 100,
-    securityInterceptNote: isAllowed ? undefined : '1 record filtered by Supabase Row-Level Security.',
-    scannedRecords: rlsResult.allCandidates,
-    permittedRecords: isAllowed ? rlsResult.permittedRecords : [],
-    trimmedRecords: isAllowed ? [] : rlsResult.allCandidates,
+    intent: 'semantic_retrieval',
+    connectorId,
+    recordsScanned: rag.chunks.length,
+    recordsPermitted: rag.chunks.length,
+    trimRatio: 0,
+    scannedRecords: [],
+    permittedRecords: [],
+    trimmedRecords: [],
+    sources,
     decision,
-    groundedResponse: llm.content,
+    groundedResponse: rag.answer,
     executionSteps,
     telemetry: getTelemetryStream(),
     latencyMs: Date.now() - overallStart,
-    modelUsed: llm.modelUsed,
-    tokenStats: { promptTokens: llm.promptTokens, completionTokens: llm.completionTokens, totalTokens: llm.totalTokens },
+    modelUsed: rag.llm.model,
+    tokenStats: {
+      promptTokens: rag.llm.promptTokens,
+      completionTokens: rag.llm.completionTokens,
+      totalTokens: rag.llm.totalTokens,
+    },
   };
 
-  return NextResponse.json(response, { status: isAllowed ? 200 : 403 });
+  return NextResponse.json(response);
 }

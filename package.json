@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "ingest": "tsx --env-file=.env.local scripts/ingest.ts",
+    "eval:retrieval": "tsx --env-file=.env.local scripts/eval-retrieval.ts",
+    "eval:redteam": "tsx --env-file=.env.local scripts/eval-redteam.ts",
+    "access-matrix": "tsx scripts/access-matrix.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",
@@ -26,6 +30,7 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
+    "tsx": "^4.23.15",
     "typescript": "^5.6.3"
   }
 }

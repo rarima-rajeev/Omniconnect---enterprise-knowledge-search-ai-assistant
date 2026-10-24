@@ -1,0 +1,467 @@
+[
+  {
+    "id": "R01",
+    "question": "Who is the CEO?",
+    "relevant": [
+      "DIR-001",
+      "DIR-002"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R02",
+    "question": "Who is the chief financial officer?",
+    "relevant": [
+      "DIR-002"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R03",
+    "question": "How many vacation days do US employees get each year?",
+    "relevant": [
+      "HB-001"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R04",
+    "question": "How long is parental leave?",
+    "relevant": [
+      "HB-001"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R05",
+    "question": "When am I eligible for a sabbatical?",
+    "relevant": [
+      "HB-001"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R06",
+    "question": "What is the hotel limit per night in London on a business trip?",
+    "relevant": [
+      "HB-002"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R07",
+    "question": "How can I report harassment anonymously?",
+    "relevant": [
+      "HB-003"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R08",
+    "question": "I forgot my password, how do I reset it?",
+    "relevant": [
+      "HB-004"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R09",
+    "question": "Does the company match retirement savings?",
+    "relevant": [
+      "HB-005"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R10",
+    "question": "How does code get deployed to production?",
+    "relevant": [
+      "HB-006"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R11",
+    "question": "How fast did revenue grow last quarter?",
+    "relevant": [
+      "NEWS-001",
+      "FIN-003"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R12",
+    "question": "What happened during the October database outage?",
+    "relevant": [
+      "IT-SUM-8921",
+      "INC-8921"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R13",
+    "question": "Why were European customers logged out in September?",
+    "relevant": [
+      "IT-SUM-8877",
+      "INC-8877"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R14",
+    "question": "What are the company goals for Q4?",
+    "relevant": [
+      "OPS-001"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R15",
+    "question": "Which vendor contracts need sign-off from the CEO?",
+    "relevant": [
+      "OPS-002"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R16",
+    "question": "What is the spending limit for taking a client to dinner?",
+    "relevant": [
+      "FIN-001"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R17",
+    "question": "When does the board approve next year's budget?",
+    "relevant": [
+      "FIN-002"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R18",
+    "question": "How does the platform stop users from seeing documents they shouldn't?",
+    "relevant": [
+      "ENG-001"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R19",
+    "question": "Why did API calls fail for customers in Asia in October?",
+    "relevant": [
+      "INC-9012"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R20",
+    "question": "What should the on-call engineer do when the primary database fails over?",
+    "relevant": [
+      "RUN-001"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R21",
+    "question": "How do engineers get access to production servers?",
+    "relevant": [
+      "RUN-002"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R22",
+    "question": "How much stock and bonus did the CEO receive in Q3?",
+    "relevant": [
+      "PAY-9041"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R23",
+    "question": "What is the proposed bonus structure for executives next year?",
+    "relevant": [
+      "PAY-9100"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R24",
+    "question": "How many months of cash runway do we have?",
+    "relevant": [
+      "FIN-003"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R25",
+    "question": "What salary ranges and recent offers do we have for engineers in London?",
+    "relevant": [
+      "HR-LONDON-88"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R26",
+    "question": "What offers did we recently make to candidates in Berlin?",
+    "relevant": [
+      "HR-BERLIN-41"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R27",
+    "question": "By how much are engineering pay bands going up in 2026?",
+    "relevant": [
+      "HR-BANDS-2026"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R28",
+    "question": "What rent is the landlord asking for our London office renewal?",
+    "relevant": [
+      "OPS-004"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R29",
+    "question": "Has a cloud access key ever been leaked publicly?",
+    "relevant": [
+      "SEC-001"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R30",
+    "question": "Has the $150,000 data labeling invoice been approved?",
+    "relevant": [
+      "FIN-004"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R31",
+    "question": "Which connection pool setting made the database incident last longer?",
+    "relevant": [
+      "INC-8921"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R32",
+    "question": "When did we upgrade the Postgres version?",
+    "relevant": [
+      "INC-8790"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R33",
+    "question": "When will the Berlin office get more space?",
+    "relevant": [
+      "OPS-003"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R34",
+    "question": "Are we planning to buy another company?",
+    "relevant": [
+      "FIN-005"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "R35",
+    "question": "Is there a plan to restructure the sales organization?",
+    "relevant": [
+      "HR-RIF-2026"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": "H01",
+    "difficulty": "hard",
+    "question": "What did the CFO receive as the second installment of his sign-on bonus?",
+    "relevant": [
+      "PAY-8817"
+    ],
+    "answer": "980,000"
+  },
+  {
+    "id": "H02",
+    "difficulty": "hard",
+    "question": "How many shares vested for the head of engineering in the quarter that ended in June?",
+    "relevant": [
+      "PAY-8817"
+    ],
+    "answer": "22,500"
+  },
+  {
+    "id": "H03",
+    "difficulty": "hard",
+    "question": "What's the top of the base pay range for a staff site reliability engineer in the UK?",
+    "relevant": [
+      "HR-LONDON-88"
+    ],
+    "answer": "175,000"
+  },
+  {
+    "id": "H04",
+    "difficulty": "hard",
+    "question": "How much base pay was the engineering manager candidate in Germany offered?",
+    "relevant": [
+      "HR-BERLIN-41"
+    ],
+    "answer": "138,000"
+  },
+  {
+    "id": "H05",
+    "difficulty": "hard",
+    "question": "How do pay levels in India compare with San Francisco?",
+    "relevant": [
+      "HR-BANDS-2026"
+    ],
+    "answer": "35%"
+  },
+  {
+    "id": "H06",
+    "difficulty": "hard",
+    "question": "Who has to sign off when an offer goes above the top of its band?",
+    "relevant": [
+      "HR-BANDS-2026"
+    ],
+    "answer": "Chief People Officer"
+  },
+  {
+    "id": "H07",
+    "difficulty": "hard",
+    "question": "How long did it take the standby to take over when the hardware failed in October?",
+    "relevant": [
+      "INC-8921"
+    ],
+    "answer": "71 seconds"
+  },
+  {
+    "id": "H08",
+    "difficulty": "hard",
+    "question": "How long did the blue/green switchover take during the August maintenance?",
+    "relevant": [
+      "INC-8790"
+    ],
+    "answer": "38 seconds"
+  },
+  {
+    "id": "H09",
+    "difficulty": "hard",
+    "question": "How many people were kicked out of the console during the cache problem?",
+    "relevant": [
+      "INC-8877",
+      "IT-SUM-8877"
+    ],
+    "answer": "41,000"
+  },
+  {
+    "id": "H10",
+    "difficulty": "hard",
+    "question": "What do I get if I'm paged at 3 a.m. during my on-call week?",
+    "relevant": [
+      "HB-006"
+    ],
+    "answer": "day off"
+  },
+  {
+    "id": "H11",
+    "difficulty": "hard",
+    "question": "Can I work fewer hours when I come back after having a baby?",
+    "relevant": [
+      "HB-001"
+    ],
+    "answer": "80%"
+  },
+  {
+    "id": "H12",
+    "difficulty": "hard",
+    "question": "How many days off do I get if my grandmother dies?",
+    "relevant": [
+      "HB-001"
+    ],
+    "answer": "3 days"
+  },
+  {
+    "id": "H13",
+    "difficulty": "hard",
+    "question": "How much replication lag is acceptable before taking a read replica out of rotation?",
+    "relevant": [
+      "RUN-001"
+    ],
+    "answer": "10 seconds"
+  },
+  {
+    "id": "H14",
+    "difficulty": "hard",
+    "question": "For how long does a production access grant last?",
+    "relevant": [
+      "RUN-002"
+    ],
+    "answer": "8 hours"
+  },
+  {
+    "id": "H15",
+    "difficulty": "hard",
+    "question": "What share of recurring revenue comes from our three biggest customers?",
+    "relevant": [
+      "FIN-003"
+    ],
+    "answer": "14%"
+  },
+  {
+    "id": "H16",
+    "difficulty": "hard",
+    "question": "How much additional borrowing is management asking the board to approve?",
+    "relevant": [
+      "FIN-003"
+    ],
+    "answer": "15M"
+  },
+  {
+    "id": "H17",
+    "difficulty": "hard",
+    "question": "What percentage of operating expenses went to R&D last quarter?",
+    "relevant": [
+      "FIN-003"
+    ],
+    "answer": "52%"
+  },
+  {
+    "id": "H18",
+    "difficulty": "hard",
+    "question": "How long are a user's group memberships cached?",
+    "relevant": [
+      "ENG-001"
+    ],
+    "answer": "five minutes"
+  },
+  {
+    "id": "H19",
+    "difficulty": "hard",
+    "question": "Which tool do we use for distributed tracing?",
+    "relevant": [
+      "ENG-001"
+    ],
+    "answer": "Honeycomb"
+  },
+  {
+    "id": "H20",
+    "difficulty": "hard",
+    "question": "When do unused vacation days that rolled over expire?",
+    "relevant": [
+      "HB-001"
+    ],
+    "answer": "March 31"
+  }
+]

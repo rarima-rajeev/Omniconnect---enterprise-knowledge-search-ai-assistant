@@ -130,7 +130,14 @@ export interface DecisionMeta {
   headline: string;
   reason: string;
   policyRule: string;
-  authorizedRoles: string[];
+  authorizedRoles?: string[];
+}
+
+export interface SourceCitation {
+  documentId: string;
+  title: string;
+  classification: string;
+  similarity: number;
 }
 
 export interface OrchestrationResult {
@@ -146,6 +153,7 @@ export interface OrchestrationResult {
   scannedRecords: EnterpriseRecord[];
   permittedRecords: EnterpriseRecord[];
   trimmedRecords: EnterpriseRecord[];
+  sources?: SourceCitation[];
   groundedResponse: string;
   actionExecuted?: boolean;
   actionPayload?: any;

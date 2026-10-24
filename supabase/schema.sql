@@ -1,121 +1,139 @@
 -- ====================================================================
--- OmniConnect: Microsoft 365 Copilot Connector Gateway Database Schema
--- Production PostgreSQL Schema with Row Level Security (RLS)
+-- OmniConnect: permission-aware retrieval schema (Supabase / Postgres + pgvector)
+--
+-- Run once in the Supabase SQL editor. Safe to re-run.
+--
+-- Security model:
+--   * RLS is enabled on every table with no policies, so the public anon key
+--     and signed-in Supabase users can read nothing directly.
+--   * The only way to read chunks is match_chunks(), which filters by the
+--     caller's access rights inside the same query that ranks by similarity.
+--     Unauthorized chunks never leave the database.
+--   * match_chunks() is executable only by service_role, which is used only on
+--     the server. The user id passed in comes from a verified session cookie.
 -- ====================================================================
 
--- 1. Create custom enum types
-CREATE TYPE enterprise_department AS ENUM ('Finance', 'IT', 'Operations');
-CREATE TYPE clearance_level AS ENUM ('L1', 'L2', 'L3', 'L4');
-CREATE TYPE classification_tier AS ENUM ('Public', 'Internal', 'Confidential', 'Restricted');
+create extension if not exists vector with schema extensions;
 
--- 2. Cloud Infrastructure Incidents Table
-CREATE TABLE IF NOT EXISTS it_incidents (
-    id TEXT PRIMARY KEY,
-    title TEXT NOT NULL,
-    service TEXT NOT NULL,
-    region TEXT NOT NULL,
-    severity TEXT NOT NULL,
-    status TEXT NOT NULL,
-    duration TEXT NOT NULL,
-    summary TEXT NOT NULL,
-    impact TEXT NOT NULL,
-    resolution TEXT NOT NULL,
-    department enterprise_department NOT NULL DEFAULT 'IT',
-    min_clearance clearance_level NOT NULL DEFAULT 'L3',
-    classification classification_tier NOT NULL DEFAULT 'Restricted',
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    owner TEXT NOT NULL
+-- 1. Users and their access attributes (the server-side directory) -----------
+create table if not exists app_users (
+  user_id     text primary key,
+  name        text not null,
+  role        text not null,
+  department  text not null,
+  clearance   smallint not null check (clearance between 1 and 6)
 );
 
--- 3. Executive Payroll & Equity Table
-CREATE TABLE IF NOT EXISTS executive_payroll (
-    id TEXT PRIMARY KEY,
-    title TEXT NOT NULL,
-    quarter TEXT NOT NULL,
-    fiscal_year TEXT NOT NULL,
-    employee_band TEXT NOT NULL,
-    recipient TEXT NOT NULL,
-    rsu_grant_value TEXT NOT NULL,
-    bonus_pool_allocation TEXT NOT NULL,
-    vesting_schedule TEXT NOT NULL,
-    tax_withholding_status TEXT NOT NULL,
-    department enterprise_department NOT NULL DEFAULT 'Finance',
-    min_clearance clearance_level NOT NULL DEFAULT 'L2',
-    classification classification_tier NOT NULL DEFAULT 'Restricted',
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    owner TEXT NOT NULL
+-- 2. Documents and their access tags ------------------------------------------
+create table if not exists documents (
+  id                  text primary key,
+  title               text not null,
+  domain              text not null,
+  department          text not null,
+  classification      text not null check (classification in ('Public', 'Internal', 'Confidential', 'Restricted')),
+  min_clearance       smallint not null check (min_clearance between 1 and 6),
+  allowed_roles       text[] not null default '{}',  -- empty = any role meeting the clearance
+  allowed_departments text[] not null default '{}',  -- empty = any department
+  owner               text not null,
+  created_at          date not null,
+  body                text not null
 );
 
--- 4. Enable Row Level Security on both tables
-ALTER TABLE it_incidents ENABLE ROW LEVEL SECURITY;
-ALTER TABLE executive_payroll ENABLE ROW LEVEL SECURITY;
-
--- ====================================================================
--- 5. RLS POLICIES FOR IT INCIDENTS
--- ====================================================================
-
--- Public / L1 records are visible to any authenticated enterprise user
-CREATE POLICY "Public IT notices accessible to all"
-ON it_incidents
-FOR SELECT
-TO authenticated
-USING (
-    classification = 'Public' OR min_clearance = 'L1'
+-- 3. Chunks with embeddings. Each chunk inherits its document's access tags ----
+create table if not exists chunks (
+  id           text primary key,
+  document_id  text not null references documents (id) on delete cascade,
+  chunk_set    text not null check (chunk_set in ('small', 'medium', 'full')),
+  chunk_index  int not null,
+  content      text not null,
+  embedding    extensions.vector(768) not null
 );
+create index if not exists chunks_document_set_idx on chunks (document_id, chunk_set);
 
--- IT department staff with appropriate clearance
-CREATE POLICY "IT Department staff incident clearance"
-ON it_incidents
-FOR SELECT
-TO authenticated
-USING (
-    current_setting('app.current_department', true) = 'IT'
-    AND (
-        (min_clearance = 'L2' AND current_setting('app.current_clearance', true) IN ('L2', 'L3', 'L4'))
-        OR
-        (min_clearance = 'L3' AND current_setting('app.current_clearance', true) IN ('L3', 'L4'))
-    )
-);
+-- No ANN (HNSW/IVFFlat) index on purpose. At this size (~175 chunks) an exact scan
+-- takes a few milliseconds. With an ANN index, a filtered query can return fewer
+-- than k rows: the index finds the nearest N first and the permission filter then
+-- removes most of them for low-clearance users. At scale, use HNSW with pgvector's
+-- iterative index scans (hnsw.iterative_scan) or partition by access tier.
 
--- EnterpriseAdmin has global override access
-CREATE POLICY "EnterpriseAdmin global override for IT incidents"
-ON it_incidents
-FOR SELECT
-TO authenticated
-USING (
-    current_setting('app.current_role', true) = 'EnterpriseAdmin'
-    OR current_setting('app.current_clearance', true) = 'L4'
-);
+alter table app_users enable row level security;
+alter table documents enable row level security;
+alter table chunks enable row level security;
 
--- ====================================================================
--- 6. RLS POLICIES FOR EXECUTIVE PAYROLL
--- ====================================================================
+-- 4. The access rule. Mirrored in lib/access.ts as the eval oracle -------------
+create or replace function can_read(u app_users, d documents)
+returns boolean
+language sql
+immutable
+as $$
+  select u.role = 'SystemAdmin'
+      or (    u.clearance >= d.min_clearance
+          and (cardinality(d.allowed_roles) = 0 or u.role = any (d.allowed_roles))
+          and (cardinality(d.allowed_departments) = 0 or u.department = any (d.allowed_departments)));
+$$;
 
--- Public benefits documents visible to all employees
-CREATE POLICY "Public employee benefit documents accessible to all"
-ON executive_payroll
-FOR SELECT
-TO authenticated
-USING (
-    classification = 'Public' OR min_clearance = 'L1'
-);
+-- 5. Permission-aware similarity search: one query ranks by meaning and filters
+--    by access. An unknown user id matches no app_users row, so it returns nothing.
+create or replace function match_chunks(
+  p_user_id         text,
+  p_query_embedding extensions.vector(768),
+  p_chunk_set       text,
+  p_match_count     int default 5
+)
+returns table (
+  chunk_id       text,
+  document_id    text,
+  title          text,
+  classification text,
+  content        text,
+  similarity     float
+)
+language sql
+stable
+security definer
+set search_path = public, extensions
+as $$
+  select c.id, d.id, d.title, d.classification, c.content,
+         1 - (c.embedding <=> p_query_embedding) as similarity
+  from chunks c
+  join documents d on d.id = c.document_id
+  join app_users u on u.user_id = p_user_id
+  where c.chunk_set = p_chunk_set
+    and can_read(u, d)
+  order by c.embedding <=> p_query_embedding
+  limit least(greatest(p_match_count, 1), 20);
+$$;
 
--- Finance department staff with L2+ clearance
-CREATE POLICY "Finance staff compensation clearance"
-ON executive_payroll
-FOR SELECT
-TO authenticated
-USING (
-    current_setting('app.current_department', true) = 'Finance'
-    AND current_setting('app.current_clearance', true) IN ('L2', 'L3', 'L4')
-);
+-- 6. Audit only: how many of the unfiltered top-k matches this user could not see.
+--    Logged to admin telemetry; never returned to the end user, because even a count
+--    tells someone that a restricted document on the topic exists.
+create or replace function count_withheld(
+  p_user_id         text,
+  p_query_embedding extensions.vector(768),
+  p_chunk_set       text,
+  p_match_count     int default 5
+)
+returns int
+language sql
+stable
+security definer
+set search_path = public, extensions
+as $$
+  select count(*)::int
+  from (
+    select c.document_id
+    from chunks c
+    where c.chunk_set = p_chunk_set
+    order by c.embedding <=> p_query_embedding
+    limit least(greatest(p_match_count, 1), 20)
+  ) top
+  join documents d on d.id = top.document_id
+  left join app_users u on u.user_id = p_user_id
+  where u.user_id is null or not can_read(u, d);
+$$;
 
--- EnterpriseAdmin global clearance override
-CREATE POLICY "EnterpriseAdmin global override for Payroll"
-ON executive_payroll
-FOR SELECT
-TO authenticated
-USING (
-    current_setting('app.current_role', true) = 'EnterpriseAdmin'
-    OR current_setting('app.current_clearance', true) = 'L4'
-);
+revoke all on function can_read(app_users, documents) from public, anon, authenticated;
+revoke all on function match_chunks(text, extensions.vector, text, int) from public, anon, authenticated;
+revoke all on function count_withheld(text, extensions.vector, text, int) from public, anon, authenticated;
+grant execute on function match_chunks(text, extensions.vector, text, int) to service_role;
+grant execute on function count_withheld(text, extensions.vector, text, int) to service_role;
