@@ -112,7 +112,7 @@ Embedding 0.55 s · vector search 0.40 s (mostly network; a few ms when the serv
 
 ## 4. Personas & Access Matrix
 
-| Persona | Department | Role | Clearance | Can read | Actions |
+| Persona | Department | Role | Clearance | Can read | May request (permission check only) |
 |---|---|---|---|---|---|
 | **Neil Wright** | General | Intern | L1 | Public docs only (12) | None |
 | **Alex Rivera** | IT | DevOpsEngineer | L3 | + internal docs, technical post-mortems, runbooks (26) | None |

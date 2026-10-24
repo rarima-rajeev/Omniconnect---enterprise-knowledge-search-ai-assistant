@@ -46,32 +46,18 @@ export default function CopilotChatLandingPage() {
   // Popular Queries specified in the PRD
   const popularQueries: PopularQuery[] = [
     {
-      id: 'q1',
-      tag: 'Agent Action - SRE',
-      tagType: 'action',
-      query: 'The website seems slow, can you restart the production bastion host or reboot the API gateway?',
-      accessRule: 'Allowed: Binny Lee (L6) • Denied: Jane, Alex, Sarah, Neil (403 Consent Required)',
-    },
-    {
-      id: 'q2',
-      tag: 'Agent Action - Finance',
-      tagType: 'action',
-      query: 'Approve vendor invoice #9021 for $150,000 and queue the ACH wire transfer.',
-      accessRule: 'Allowed: Jane Doe (FinanceDirector) • Denied: Binny, Alex, Sarah, Neil (403 Forbidden)',
-    },
-    {
-      id: 'q3',
-      tag: 'Agent Action - Data Governance',
-      tagType: 'action',
-      query: 'Delete all inactive customer test records from the production CRM database.',
-      accessRule: 'Allowed: Binny Lee (L6) • Denied: All others (403 Destructive Action Blocked)',
-    },
-    {
       id: 'q4',
       tag: 'Knowledge Retrieval - Confidential',
       tagType: 'confidential',
       query: "What was the CEO’s and VP of Engineering's total stock vesting value and bonus last quarter?",
       accessRule: 'Allowed: Jane Doe & Sarah Chen • Denied / Masked: Alex, Binny, Neil (RLS Trimmed)',
+    },
+    {
+      id: 'q6',
+      tag: 'Knowledge Retrieval - Public',
+      tagType: 'public',
+      query: 'Who is the CEO of this company?',
+      accessRule: 'Allowed: Everyone (including Neil Wright - Intern)',
     },
     {
       id: 'q5',
@@ -81,11 +67,25 @@ export default function CopilotChatLandingPage() {
       accessRule: 'Allowed: Sarah Chen (EnterpriseAdmin) • Denied: Jane, Alex, Binny, Neil',
     },
     {
-      id: 'q6',
-      tag: 'Knowledge Retrieval - Public',
-      tagType: 'public',
-      query: 'Who is the CEO of this company?',
-      accessRule: 'Allowed: Everyone (including Neil Wright - Intern)',
+      id: 'q1',
+      tag: 'Agent Action - SRE',
+      tagType: 'action',
+      query: 'The website seems slow, can you restart the production bastion host or reboot the API gateway?',
+      accessRule: 'Permission check only • Allowed: Binny Lee (L6) • Denied: Jane, Alex, Sarah, Neil (403 Consent Required)',
+    },
+    {
+      id: 'q2',
+      tag: 'Agent Action - Finance',
+      tagType: 'action',
+      query: 'Approve vendor invoice #9021 for $150,000 and queue the ACH wire transfer.',
+      accessRule: 'Permission check only • Allowed: Jane Doe (FinanceDirector) • Denied: Binny, Alex, Sarah, Neil (403 Forbidden)',
+    },
+    {
+      id: 'q3',
+      tag: 'Agent Action - Data Governance',
+      tagType: 'action',
+      query: 'Delete all inactive customer test records from the production CRM database.',
+      accessRule: 'Permission check only • Allowed: Binny Lee (L6) • Denied: All others (403 Destructive Action Blocked)',
     },
     {
       id: 'q7',

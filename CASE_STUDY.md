@@ -100,11 +100,15 @@ Enterprise IT leaders face a dilemma when connecting Copilot to internal systems
 - **Trade-off**: Users still need an unmistakable signal when they can't get an answer; a green "Authorized" badge on a non-answer is misleading.
 - **Decision**: The model returns a structured `answered` flag (JSON output, not parsed prose). When the permitted documents don't contain the answer, the card turns red: "You're not authorized to see this, or it isn't in any company document". The card is identical whether a restricted document exists or not, so it reveals nothing. The withheld count goes to admin telemetry only.
 
-#### Decision 6: Model Context Protocol (MCP) Standard for Tool Manifests
+#### Decision 6: Check Action Permissions, Never Execute
+- **Trade-off**: A knowledge assistant that can also reboot servers, move money or delete data is a much larger attack surface, and a demo that shows fake "executed" receipts overstates what the product does.
+- **Decision**: Action requests (restart a host, approve a payment, delete records) only run the permission check. Authorized users see "Authorized · Not Executed" with the system that would actually carry it out (a change ticket, the finance approval workflow); unauthorized users get a red 403. Nothing is executed.
+
+#### Decision 7: Model Context Protocol (MCP) Standard for Tool Manifests
 - **Decision**: Standardized all tool definitions under the Model Context Protocol (MCP v1.0).
 - **Impact**: Connectors are instantly portable between Microsoft 365 Copilot, Claude Desktop, and autonomous LangChain/CrewAI agents without rewriting schemas.
 
-#### Decision 7: Dual-Route UX Pivot (Conversational Front-End vs. Observability Deck)
+#### Decision 8: Dual-Route UX Pivot (Conversational Front-End vs. Observability Deck)
 - **Problem**: Early testing showed that combining deep technical telemetry (RLS diffs, JSON schemas, latency traces) on the main chat screen created cognitive overload for business users.
 - **Product Pivot**: Split the application into two dedicated interfaces:
   1. **Route `/`**: A minimalist, persona-driven conversational interface for daily query execution.

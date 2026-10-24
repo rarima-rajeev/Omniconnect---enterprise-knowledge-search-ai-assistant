@@ -139,10 +139,10 @@ export async function POST(req: NextRequest) {
     });
     executionSteps.push({
       step: 4,
-      name: 'SRE Bastion RPC Execution',
-      description: 'Dispatched node connection drain and hypervisor reboot signal to AWS EC2.',
+      name: 'Hand-off (Not Executed)',
+      description: 'Request routed to the SRE change-management workflow. Nothing was executed by OmniConnect.',
       status: 'completed',
-      durationMs: 110,
+      durationMs: 0,
     });
 
     trackActionConsent({
@@ -154,10 +154,10 @@ export async function POST(req: NextRequest) {
 
     const decision: DecisionMeta = {
       type: 'ALLOWED',
-      badge: 'Authorized & Executed',
-      headline: 'Host Gracefully Drained & Rebooted',
-      reason: `Verified ${user.name} holds 'Cloud.Infrastructure.Write' and Level 6 root clearance.`,
-      policyRule: 'SRE Infrastructure Write Policy: SuperAdmin pre-delegated write consent granted.',
+      badge: 'Authorized · Not Executed',
+      headline: 'You may request this restart. It was not performed.',
+      reason: `Verified ${user.name} holds 'Cloud.Infrastructure.Write' and Level 6 root clearance. OmniConnect is a read-only knowledge assistant: it checks whether you may request an action, but never executes one.`,
+      policyRule: 'SRE Infrastructure Write Policy: only SuperAdmin may request infrastructure restarts.',
       authorizedRoles: ['Binny Lee (SuperAdmin - L6)'],
     };
 
@@ -173,23 +173,20 @@ export async function POST(req: NextRequest) {
       scannedRecords: [],
       permittedRecords: [],
       trimmedRecords: [],
-      actionExecuted: true,
+      actionExecuted: false,
+      statusLabel: 'AUTHORIZED',
       decision,
-      groundedResponse: `### Autonomous SRE Action Executed Successfully
-**Authorized Executive**: **${user.name}** (${user.role} • ${user.clearanceLevel}).
+      groundedResponse: `### Permission check passed: restart not performed
+**${user.name}** (${user.role} • ${user.clearanceLevel}) is authorized to request a restart of the production bastion host.
 
-- **Target Host**: \`prod-bastion-us-east-1\` (AWS us-east-1a)
-- **Execution Telemetry**:
-  - \`[00:00.120]\` Initiated graceful client connection drain (0 active dropped packets).
-  - \`[00:01.850]\` Dispatched ACPI reboot pulse to hypervisor controller.
-  - \`[00:03.400]\` WireGuard mesh tunnels and SSH daemons re-initialized.
-  - \`[00:03.880]\` Ingress health probe ping returned HTTP 200 OK.
-- **Audit Stamp**: \`SRE-OPS-${Date.now().toString(36).toUpperCase()}\``,
+- **Executed by OmniConnect**: nothing. This is a knowledge assistant, not an operations tool.
+- **Where it would go**: an SRE change request (for example a ServiceNow change ticket) for the on-call team to approve and run.
+- **Before restarting**: the bastion runbook requires announcing in #sre at least 15 minutes ahead, since a reboot ends all active sessions.`,
       executionSteps,
       telemetry: getTelemetryStream(),
       latencyMs: Date.now() - overallStart,
-      modelUsed: 'OmniConnect SRE Controller',
-      tokenStats: { promptTokens: 42, completionTokens: 145, totalTokens: 187 },
+      modelUsed: 'OmniConnect Action Gatekeeper',
+      tokenStats: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
     };
 
     return NextResponse.json(response);
@@ -300,10 +297,10 @@ export async function POST(req: NextRequest) {
     });
     executionSteps.push({
       step: 4,
-      name: 'ACH FedLine Release',
-      description: 'Signed digital disbursement certificate and queued transfer batch.',
+      name: 'Hand-off (Not Executed)',
+      description: 'Request routed to the treasury approval workflow. No payment was made by OmniConnect.',
       status: 'completed',
-      durationMs: 85,
+      durationMs: 0,
     });
 
     trackActionConsent({
@@ -315,10 +312,10 @@ export async function POST(req: NextRequest) {
 
     const decision: DecisionMeta = {
       type: 'ALLOWED',
-      badge: 'Authorized & Executed',
-      headline: 'Commercial ACH Wire Queued',
-      reason: 'Authorized: Jane Doe is Finance Director (L4) with statutory treasury signing authority.',
-      policyRule: 'Corporate Treasury Governance: Authorized for Finance Director.',
+      badge: 'Authorized · Not Executed',
+      headline: 'You may approve this payment. No money was moved.',
+      reason: `Verified ${user.name} is Finance Director (L4) with treasury signing authority. OmniConnect is a read-only knowledge assistant: it checks whether you may request an action, but never executes one.`,
+      policyRule: 'Corporate Treasury Governance: payments over $100,000 require Finance Director approval.',
       authorizedRoles: ['Jane Doe (FinanceDirector - L4)'],
     };
 
@@ -334,20 +331,20 @@ export async function POST(req: NextRequest) {
       scannedRecords: [],
       permittedRecords: [],
       trimmedRecords: [],
-      actionExecuted: true,
+      actionExecuted: false,
+      statusLabel: 'AUTHORIZED',
       decision,
-      groundedResponse: `### Commercial Wire Transfer Approved & Queued
-**Authorized Signer**: **${user.name}** (${user.role} • Clearance: ${user.clearanceLevel}).
+      groundedResponse: `### Permission check passed: payment not made
+**${user.name}** (${user.role} • ${user.clearanceLevel}) has the authority to approve invoice #9021 for $150,000.
 
-- **Invoice**: \`#9021\` ($150,000.00 USD - Cloud Infrastructure Hosting Services)
-- **Settlement Method**: Corporate Same-Day ACH Wire Transfer
-- **Federal Reserve Batch Ref**: \`ACH-FED-2025-${Date.now().toString().slice(-6)}\`
-- **Audit Stamp**: Dual-key cryptographic hash signed with Jane Doe enterprise certificate.`,
+- **Executed by OmniConnect**: nothing. No approval was recorded and no wire was queued.
+- **Where it would go**: the accounts-payable approval workflow in the finance system, which records the approval and releases the payment.
+- **Status in the documents you can read**: invoice #9021 is awaiting Finance Director approval [FIN-004].`,
       executionSteps,
       telemetry: getTelemetryStream(),
       latencyMs: Date.now() - overallStart,
-      modelUsed: 'OmniConnect Treasury Controller',
-      tokenStats: { promptTokens: 38, completionTokens: 128, totalTokens: 166 },
+      modelUsed: 'OmniConnect Action Gatekeeper',
+      tokenStats: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
     };
 
     return NextResponse.json(response);
@@ -448,10 +445,10 @@ export async function POST(req: NextRequest) {
     });
     executionSteps.push({
       step: 3,
-      name: 'CRM Database Transaction Purge',
-      description: 'Executed safe transaction with rollback point on 1,842 test accounts.',
+      name: 'Hand-off (Not Executed)',
+      description: 'Request routed to the data-governance change workflow. No records were deleted by OmniConnect.',
       status: 'completed',
-      durationMs: 115,
+      durationMs: 0,
     });
 
     trackActionConsent({
@@ -463,10 +460,10 @@ export async function POST(req: NextRequest) {
 
     const decision: DecisionMeta = {
       type: 'ALLOWED',
-      badge: 'Authorized & Executed',
-      headline: '1,842 Inactive Test Records Purged',
-      reason: `Verified Binny Lee holds SuperAdmin (L6) root clearance with database write privileges.`,
-      policyRule: 'Data Governance Policy: SuperAdmin root mutation executed with rollback snapshot.',
+      badge: 'Authorized · Not Executed',
+      headline: 'You may request this deletion. No records were deleted.',
+      reason: `Verified ${user.name} holds SuperAdmin (L6) clearance with database write privileges. OmniConnect is a read-only knowledge assistant: it checks whether you may request an action, but never executes one.`,
+      policyRule: 'Data Governance Policy: only SuperAdmin may request destructive changes to production data.',
       authorizedRoles: ['Binny Lee (SuperAdmin - L6)'],
     };
 
@@ -482,21 +479,19 @@ export async function POST(req: NextRequest) {
       scannedRecords: [],
       permittedRecords: [],
       trimmedRecords: [],
-      actionExecuted: true,
+      actionExecuted: false,
+      statusLabel: 'AUTHORIZED',
       decision,
-      groundedResponse: `### Production CRM Inactive Test Records Purged
-**Authorized Super Admin**: **${user.name}** (${user.role} • L6 Root).
+      groundedResponse: `### Permission check passed: no records deleted
+**${user.name}** (${user.role} • ${user.clearanceLevel}) is authorized to request a deletion of inactive test records from the production CRM.
 
-- **Target CRM Cluster**: \`crm-prod-customer-cluster\` (PostgreSQL)
-- **Execution Filter**: \`WHERE account_type = 'INTERNAL_TEST' AND last_active < NOW() - INTERVAL '180 days'\`
-- **Result**: **1,842 records archived and safely purged**.
-- **Pre-Delete Snapshot**: \`crm-snapshot-pre-delete-${Date.now().toString().slice(-4)}\`
-- **Audit Receipt**: \`SEC-DB-PURGE-${Date.now().toString(36).toUpperCase()}\``,
+- **Executed by OmniConnect**: nothing. This is a knowledge assistant and has no write access to the CRM.
+- **Where it would go**: a data-governance change request, run by the CRM owners with a backup taken first.`,
       executionSteps,
       telemetry: getTelemetryStream(),
       latencyMs: Date.now() - overallStart,
-      modelUsed: 'OmniConnect CRM Controller',
-      tokenStats: { promptTokens: 39, completionTokens: 132, totalTokens: 171 },
+      modelUsed: 'OmniConnect Action Gatekeeper',
+      tokenStats: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
     };
 
     return NextResponse.json(response);
