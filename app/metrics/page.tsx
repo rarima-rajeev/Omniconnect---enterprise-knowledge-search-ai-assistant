@@ -89,7 +89,7 @@ export default function MetricsPage() {
             <span className="text-slate-300">{retrievalCount} standard RAG evals:</span> does it find the right document?
           </span>
           <span className="block text-slate-500 italic">
-            e.g. "Days off if my grandmother dies?" → leave policy: 3 days
+            e.g. "Who approves an above-band offer?" → Chief People Officer
           </span>
           <span className="block">
             <span className="text-slate-300">{securityCount} red-team evals:</span> can it be tricked?
