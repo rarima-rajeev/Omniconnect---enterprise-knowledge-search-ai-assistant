@@ -80,7 +80,7 @@ flowchart TD
 
 **100 test cases in total: 60 retrieval questions and 40 security tests.**
 
-Full reports: [`evals/results/retrieval.md`](./evals/results/retrieval.md) and [`evals/results/redteam.md`](./evals/results/redteam.md).
+All 100 test cases in one readable list: [`evals/TEST_CASES.md`](./evals/TEST_CASES.md). Full reports with every answer: [`evals/results/retrieval.md`](./evals/results/retrieval.md) and [`evals/results/redteam.md`](./evals/results/redteam.md).
 
 ### Retrieval: 60 questions × 6 personas × 3 chunk sizes (1,080 searches)
 
