@@ -170,21 +170,21 @@ export default function CopilotChatLandingPage() {
   const isJaySeal = selectedPersona.id === 'persona-jay';
 
   return (
-    <div className="min-h-screen bg-[#070b14] text-slate-100 flex flex-col font-sans selection:bg-blue-600/40">
+    <div className="min-h-screen text-zinc-900 flex flex-col font-sans selection:bg-lime-200">
       {/* ==================================================================== */}
       {/* TOP-RIGHT HEADER WITH PERSONA SWITCHER & ADMIN OBSERVABILITY LINK     */}
       {/* ==================================================================== */}
-      <header className="sticky top-0 z-50 border-b border-slate-800/80 bg-[#090e1c]/90 backdrop-blur-md px-4 sm:px-6 py-3">
+      <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/70 backdrop-blur-md px-4 sm:px-6 py-3">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
           {/* Logo */}
           <div className="flex items-center space-x-2.5">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20 font-bold text-xs">
+            <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-lime-400 flex items-center justify-center text-white shadow-md shadow-cyan-500/20 font-bold text-xs">
               <Cpu className="h-4 w-4 text-white" />
             </div>
             <div>
               <div className="flex items-center space-x-1.5">
-                <span className="font-bold text-sm tracking-tight text-white">AskWell</span>
-                <span className="hidden sm:inline text-[10px] uppercase font-mono px-1.5 py-0.2 bg-blue-500/10 text-blue-400 border border-blue-500/30 rounded font-semibold">
+                <span className="font-bold text-sm tracking-tight text-zinc-900">AskWell</span>
+                <span className="hidden sm:inline text-[10px] uppercase font-mono px-1.5 py-0.2 bg-cyan-50 text-cyan-700 border border-cyan-200 rounded font-semibold">
                   Enterprise AI
                 </span>
               </div>
@@ -195,16 +195,16 @@ export default function CopilotChatLandingPage() {
           <div className="flex items-center space-x-3">
             <Link
               href="/metrics"
-              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg border border-slate-700/80 bg-slate-900 hover:border-blue-500/60 text-slate-200 hover:text-white text-xs font-semibold transition-all"
+              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg border border-zinc-300 bg-white hover:border-cyan-200 text-zinc-800 hover:text-zinc-900 text-xs font-semibold transition-all"
             >
-              <Zap className="h-3.5 w-3.5 text-blue-400" />
+              <Zap className="h-3.5 w-3.5 text-cyan-700" />
               <span>Metrics</span>
             </Link>
             {/* Prominent Secondary Button for Jay Seal */}
             {isJaySeal && (
               <Link
                 href="/admin"
-                className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-semibold shadow-md shadow-purple-500/20 transition-all border border-purple-400/30 animate-in fade-in duration-200"
+                className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-500 hover:to-cyan-700 text-white text-xs font-semibold shadow-md shadow-cyan-500/20 transition-all border border-cyan-200 animate-in fade-in duration-200"
               >
                 <span>Open Dev Workbench</span>
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -215,41 +215,41 @@ export default function CopilotChatLandingPage() {
             <div className="relative">
               <button
                 onClick={() => setIsPersonaDropdownOpen(!isPersonaDropdownOpen)}
-                className="flex items-center space-x-2.5 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700/80 hover:border-slate-600 transition-all text-left shadow-sm"
+                className="flex items-center space-x-2.5 px-3 py-1.5 rounded-lg bg-white border border-zinc-300 hover:border-zinc-400 transition-all text-left shadow-sm"
               >
                 <img
                   src={selectedPersona.avatar}
                   alt={selectedPersona.name}
-                  className="h-7 w-7 rounded-full object-cover ring-1 ring-blue-500/40"
+                  className="h-7 w-7 rounded-full object-cover ring-1 ring-cyan-500/40"
                 />
                 <div className="text-left hidden sm:block">
                   <div className="flex items-center space-x-1.5">
-                    <span className="text-xs font-bold text-white">{selectedPersona.name}</span>
+                    <span className="text-xs font-bold text-zinc-900">{selectedPersona.name}</span>
                     <span
                       className={`text-[9px] font-mono font-bold px-1.5 py-0.2 rounded ${
                         selectedPersona.clearanceLevel === 'L6'
-                          ? 'bg-purple-500/20 text-purple-300 border border-purple-500/40'
+                          ? 'bg-cyan-50 text-cyan-700 border border-cyan-200'
                           : selectedPersona.clearanceLevel === 'L4'
-                          ? 'bg-blue-500/20 text-blue-300 border border-blue-500/40'
+                          ? 'bg-cyan-50 text-cyan-700 border border-cyan-200'
                           : selectedPersona.clearanceLevel === 'L3'
-                          ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
-                          : 'bg-slate-800 text-slate-400 border border-slate-700'
+                          ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                          : 'bg-zinc-100 text-zinc-500 border border-zinc-300'
                       }`}
                     >
                       {selectedPersona.levelDisplay}
                     </span>
                   </div>
-                  <div className="text-[10px] text-slate-400">
+                  <div className="text-[10px] text-zinc-500">
                     {selectedPersona.department} • {selectedPersona.role}
                   </div>
                 </div>
-                <ChevronDown className="h-3.5 w-3.5 text-slate-400 ml-1" />
+                <ChevronDown className="h-3.5 w-3.5 text-zinc-500 ml-1" />
               </button>
 
               {/* Persona Dropdown Menu */}
               {isPersonaDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-80 rounded-xl bg-[#0d1424] border border-slate-700 shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-100">
-                  <div className="px-3 py-2 border-b border-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                <div className="absolute right-0 mt-2 w-80 rounded-xl bg-white border border-zinc-200 shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-100">
+                  <div className="px-3 py-2 border-b border-zinc-200 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">
                     Switch Active Enterprise Persona
                   </div>
                   <div className="mt-1 space-y-1">
@@ -261,36 +261,36 @@ export default function CopilotChatLandingPage() {
                           onClick={() => handleSelectPersona(p)}
                           className={`w-full flex items-start space-x-3 p-2.5 rounded-lg text-left transition-all ${
                             isCurrent
-                              ? 'bg-blue-600/20 border border-blue-500/40 text-white'
-                              : 'hover:bg-slate-800/60 text-slate-300 border border-transparent'
+                              ? 'bg-cyan-50 border border-cyan-200 text-zinc-900'
+                              : 'hover:bg-zinc-100 text-zinc-700 border border-transparent'
                           }`}
                         >
                           <img
                             src={p.avatar}
                             alt={p.name}
-                            className="h-8 w-8 rounded-full object-cover ring-1 ring-slate-600 mt-0.5"
+                            className="h-8 w-8 rounded-full object-cover ring-1 ring-zinc-300 mt-0.5"
                           />
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between">
-                              <span className="text-xs font-bold text-white truncate">{p.name}</span>
+                              <span className="text-xs font-bold text-zinc-900 truncate">{p.name}</span>
                               <span
                                 className={`text-[9px] font-mono px-1.5 py-0.2 rounded font-bold ${
                                   p.clearanceLevel === 'L6'
-                                    ? 'bg-purple-500/20 text-purple-300'
+                                    ? 'bg-cyan-50 text-cyan-700'
                                     : p.clearanceLevel === 'L4'
-                                    ? 'bg-blue-500/20 text-blue-300'
+                                    ? 'bg-cyan-50 text-cyan-700'
                                     : p.clearanceLevel === 'L3'
-                                    ? 'bg-emerald-500/20 text-emerald-300'
-                                    : 'bg-slate-800 text-slate-400'
+                                    ? 'bg-emerald-50 text-emerald-700'
+                                    : 'bg-zinc-100 text-zinc-500'
                                 }`}
                               >
                                 {p.levelDisplay}
                               </span>
                             </div>
-                            <div className="text-[10px] text-blue-300 truncate">
+                            <div className="text-[10px] text-cyan-700 truncate">
                               {p.department} • {p.role}
                             </div>
-                            <div className="text-[10px] text-slate-400 mt-0.5 line-clamp-1">{p.description}</div>
+                            <div className="text-[10px] text-zinc-500 mt-0.5 line-clamp-1">{p.description}</div>
                           </div>
                         </button>
                       );
@@ -309,14 +309,14 @@ export default function CopilotChatLandingPage() {
       <main className="flex-1 max-w-4xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col justify-start space-y-6">
         {/* Minimal Hero Header */}
         <div className="text-center pt-2 sm:pt-4 pb-2">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900/90 border border-slate-800 text-xs text-slate-400 mb-3 shadow-inner">
-            <Sparkles className="h-3.5 w-3.5 text-blue-400" />
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white border border-zinc-200 text-xs text-zinc-500 mb-3 shadow-inner">
+            <Sparkles className="h-3.5 w-3.5 text-cyan-700" />
             <span>Enterprise Knowledge Gateway • Role-Based</span>
           </div>
-          <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-extrabold text-zinc-900 tracking-tight">
             AskWell — Enterprise Knowledge Search AI Assistant
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1.5 max-w-xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-zinc-500 mt-1.5 max-w-xl mx-auto leading-relaxed">
             Ask questions across company documents with automated role-based permission controls.
           </p>
         </div>
@@ -324,7 +324,7 @@ export default function CopilotChatLandingPage() {
         {/* Search / Command Input Bar */}
         <div className="relative">
           <div className="relative flex items-center">
-            <Search className="absolute left-3.5 h-4 w-4 text-slate-400 pointer-events-none" />
+            <Search className="absolute left-3.5 h-4 w-4 text-zinc-500 pointer-events-none" />
             <input
               type="text"
               value={inputQuery}
@@ -335,19 +335,19 @@ export default function CopilotChatLandingPage() {
                 }
               }}
               placeholder={`Ask questions across company documents as ${selectedPersona.name} (${selectedPersona.role})...`}
-              className="w-full pl-10 pr-24 py-3.5 rounded-2xl bg-slate-900/80 border border-slate-700/80 hover:border-slate-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-xs sm:text-sm text-slate-100 placeholder-slate-500 shadow-xl focus:outline-none transition-all font-mono"
+              className="w-full pl-10 pr-24 py-3.5 rounded-2xl bg-white border border-zinc-300 hover:border-zinc-400 focus:border-cyan-600 focus:ring-1 focus:ring-cyan-500 text-xs sm:text-sm text-zinc-900 placeholder-zinc-400 shadow-xl focus:outline-none transition-all font-mono"
             />
             <div className="absolute right-2 flex items-center">
               <button
                 onClick={() => executeQuery(inputQuery)}
                 disabled={isLoading || !inputQuery.trim()}
-                className="px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:bg-slate-800 text-white text-xs font-semibold shadow transition-all flex items-center space-x-1"
+                className="px-3 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-700 disabled:bg-zinc-300 text-white text-xs font-semibold shadow transition-all flex items-center space-x-1"
               >
                 {isLoading ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <span>Dispatch</span>}
               </button>
             </div>
           </div>
-          <p className="mt-2 px-1 text-[11px] text-slate-500">
+          <p className="mt-2 px-1 text-[11px] text-zinc-500">
             Try asking about time off, travel, IT help, incidents, finance or HR.
           </p>
         </div>
@@ -356,10 +356,10 @@ export default function CopilotChatLandingPage() {
         {/* INTERACTION STATE: RESPONSE CARD DIRECTLY BELOW SEARCH BAR         */}
         {/* ================================================================== */}
         {isLoading ? (
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6 text-center shadow-lg">
-            <RefreshCw className="h-5 w-5 text-blue-400 animate-spin mx-auto mb-2" />
-            <div className="text-xs font-semibold text-slate-200">Evaluating Gateway Security Boundary...</div>
-            <div className="text-[11px] text-slate-400 mt-0.5">
+          <div className="rounded-2xl border border-zinc-200 bg-white p-6 text-center shadow-lg">
+            <RefreshCw className="h-5 w-5 text-cyan-700 animate-spin mx-auto mb-2" />
+            <div className="text-xs font-semibold text-zinc-800">Evaluating Gateway Security Boundary...</div>
+            <div className="text-[11px] text-zinc-500 mt-0.5">
               Checking Row Level Security &amp; OAuth write authorization for {selectedPersona.name}
             </div>
           </div>
@@ -367,19 +367,19 @@ export default function CopilotChatLandingPage() {
           <div
             className={`rounded-2xl border p-5 sm:p-6 shadow-xl transition-all ${
               currentResult.success
-                ? 'bg-emerald-950/15 border-emerald-500/40 shadow-emerald-950/10'
-                : 'bg-rose-950/20 border-rose-500/40 shadow-rose-950/10'
+                ? 'bg-emerald-50/60 border-emerald-200 shadow-zinc-200/50'
+                : 'bg-rose-50/60 border-rose-200 shadow-zinc-200/50'
             }`}
           >
             {/* Status Header Badge */}
-            <div className="flex flex-wrap items-start justify-between gap-3 pb-3 border-b border-slate-800/80">
+            <div className="flex flex-wrap items-start justify-between gap-3 pb-3 border-b border-zinc-200">
               <div className="flex items-center space-x-2.5">
                 {currentResult.success ? (
-                  <div className="h-7 w-7 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
+                  <div className="h-7 w-7 rounded-full bg-emerald-50 text-emerald-700 flex items-center justify-center flex-shrink-0">
                     <CheckCircle2 className="h-5 w-5" />
                   </div>
                 ) : (
-                  <div className="h-7 w-7 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center flex-shrink-0">
+                  <div className="h-7 w-7 rounded-full bg-rose-50 text-rose-700 flex items-center justify-center flex-shrink-0">
                     <XCircle className="h-5 w-5" />
                   </div>
                 )}
@@ -387,16 +387,16 @@ export default function CopilotChatLandingPage() {
                   <div className="flex items-center space-x-2">
                     <span
                       className={`text-xs font-bold uppercase tracking-wider ${
-                        currentResult.success ? 'text-emerald-400' : 'text-rose-400'
+                        currentResult.success ? 'text-emerald-700' : 'text-rose-700'
                       }`}
                     >
                       {currentResult.decision?.badge || (currentResult.success ? 'Authorized & Grounded' : 'Access Denied')}
                     </span>
-                    <span className="text-[10px] font-mono text-slate-400 bg-slate-800 px-1.5 py-0.2 rounded">
+                    <span className="text-[10px] font-mono text-zinc-500 bg-zinc-100 px-1.5 py-0.2 rounded">
                       Persona: {currentResult.persona.name} ({currentResult.persona.role})
                     </span>
                   </div>
-                  <div className="text-xs text-slate-300 font-medium mt-0.5">
+                  <div className="text-xs text-zinc-700 font-medium mt-0.5">
                     {currentResult.decision?.headline || currentResult.query}
                   </div>
                 </div>
@@ -405,8 +405,8 @@ export default function CopilotChatLandingPage() {
               <span
                 className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${
                   currentResult.success
-                    ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30'
-                    : 'bg-rose-500/10 text-rose-300 border-rose-500/30'
+                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                    : 'bg-rose-50 text-rose-700 border-rose-200'
                 }`}
               >
                 {currentResult.statusLabel ||
@@ -415,34 +415,34 @@ export default function CopilotChatLandingPage() {
             </div>
 
             {/* Policy Reason & Rule Banner */}
-            <div className="my-3 p-2.5 rounded-xl bg-slate-950/70 border border-slate-800/80 text-xs space-y-1">
-              <div className="text-slate-200 leading-snug">
-                <strong className="text-slate-400">Enforcement Reason: </strong>
+            <div className="my-3 p-2.5 rounded-xl bg-cyan-50/50 border border-cyan-100 text-xs space-y-1">
+              <div className="text-zinc-800 leading-snug">
+                <strong className="text-zinc-500">Enforcement Reason: </strong>
                 {currentResult.decision?.reason}
               </div>
               {currentResult.decision?.authorizedRoles && (
-                <div className="text-[11px] text-blue-300 font-mono">
-                  <strong className="text-slate-400 font-sans">Authorized Roles: </strong>
+                <div className="text-[11px] text-cyan-700 font-mono">
+                  <strong className="text-zinc-500 font-sans">Authorized Roles: </strong>
                   {currentResult.decision.authorizedRoles.join(', ')}
                 </div>
               )}
             </div>
 
             {/* Grounded LLM Response Body */}
-            <div className="text-xs sm:text-sm text-slate-200 leading-relaxed bg-slate-950/90 p-4 rounded-xl border border-slate-800 font-sans">
+            <div className="text-xs sm:text-sm text-zinc-800 leading-relaxed bg-white/80 p-4 rounded-xl border border-cyan-100 font-sans">
               <MarkdownAnswer text={currentResult.groundedResponse} />
             </div>
 
             {/* Cited sources: only documents this persona is allowed to read */}
             {currentResult.sources && currentResult.sources.length > 0 && (
               <div className="mt-3 space-y-1">
-                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Sources retrieved</div>
+                <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Sources retrieved</div>
                 {currentResult.sources.map((s) => (
-                  <div key={s.documentId} className="flex items-center justify-between gap-2 text-[11px] font-mono text-slate-300">
+                  <div key={s.documentId} className="flex items-center justify-between gap-2 text-[11px] font-mono text-zinc-700">
                     <span className="truncate">
-                      <span className="text-blue-400">[{s.documentId}]</span> {s.title}
+                      <span className="text-cyan-700">[{s.documentId}]</span> {s.title}
                     </span>
-                    <span className="flex-shrink-0 text-slate-500">
+                    <span className="flex-shrink-0 text-zinc-500">
                       {s.classification} • sim {s.similarity.toFixed(2)}
                     </span>
                   </div>
@@ -451,18 +451,18 @@ export default function CopilotChatLandingPage() {
             )}
 
             {/* Subtle 1-line Link for Policy Enforcement Log */}
-            <div className="mt-3 pt-2 flex items-center justify-between text-xs text-slate-400">
+            <div className="mt-3 pt-2 flex items-center justify-between text-xs text-zinc-500">
               <div className="flex items-center space-x-2 font-mono text-[11px]">
                 <span>Latency: {currentResult.latencyMs}ms</span>
                 {currentResult.trimRatio > 0 && (
-                  <span className="text-amber-400">Pruned: {currentResult.trimRatio}% by RLS</span>
+                  <span className="text-amber-700">Pruned: {currentResult.trimRatio}% by RLS</span>
                 )}
               </div>
 
               {isJaySeal ? (
                 <Link
                   href="/admin"
-                  className="flex items-center space-x-1 text-purple-400 hover:text-purple-300 font-medium text-[11px] transition-colors"
+                  className="flex items-center space-x-1 text-cyan-700 hover:text-cyan-800 font-medium text-[11px] transition-colors"
                 >
                   <span>View policy enforcement log in Admin Deck</span>
                   <ArrowRight className="h-3 w-3" />
@@ -470,7 +470,7 @@ export default function CopilotChatLandingPage() {
               ) : (
                 <button
                   onClick={() => setShowMicroAudit(!showMicroAudit)}
-                  className="flex items-center space-x-1 text-blue-400 hover:text-blue-300 font-medium text-[11px] transition-colors"
+                  className="flex items-center space-x-1 text-cyan-700 hover:text-cyan-800 font-medium text-[11px] transition-colors"
                 >
                   <span>{showMicroAudit ? 'Hide policy enforcement trace' : 'View policy enforcement trace'}</span>
                   {showMicroAudit ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
@@ -480,13 +480,13 @@ export default function CopilotChatLandingPage() {
 
             {/* Expandable Micro-Audit Drawer for Non-Jay-Seal users */}
             {showMicroAudit && (
-              <div className="mt-3 p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono space-y-1.5 animate-in fade-in duration-150">
-                <div className="text-slate-400 font-bold mb-1">Gateway Pipeline Trace:</div>
+              <div className="mt-3 p-3 rounded-xl bg-cyan-50/50 border border-cyan-100 text-xs font-mono space-y-1.5 animate-in fade-in duration-150">
+                <div className="text-zinc-500 font-bold mb-1">Gateway Pipeline Trace:</div>
                 {currentResult.executionSteps.map((s) => (
-                  <div key={s.step} className="flex items-start space-x-2 text-[11px] text-slate-300">
-                    <span className="text-blue-400">Stage {s.step}:</span>
+                  <div key={s.step} className="flex items-start space-x-2 text-[11px] text-zinc-700">
+                    <span className="text-cyan-700">Stage {s.step}:</span>
                     <span>{s.name}</span>
-                    <span className="text-slate-500">({s.durationMs}ms)</span>
+                    <span className="text-zinc-500">({s.durationMs}ms)</span>
                   </div>
                 ))}
               </div>
@@ -499,11 +499,11 @@ export default function CopilotChatLandingPage() {
         {/* ================================================================== */}
         <div className="pt-2">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+            <h2 className="text-xs font-bold text-zinc-500 uppercase tracking-wider">
               Sample Test Scenarios
             </h2>
-            <span className="text-[11px] text-slate-500 font-mono">
-              Evaluating as: <strong className="text-slate-300">{selectedPersona.name}</strong>
+            <span className="text-[11px] text-zinc-500 font-mono">
+              Evaluating as: <strong className="text-zinc-700">{selectedPersona.name}</strong>
             </span>
           </div>
 
@@ -513,25 +513,25 @@ export default function CopilotChatLandingPage() {
               const isTagConf = item.tagType === 'confidential';
               const isTagPublic = item.tagType === 'public';
 
-              let badgeColor = 'bg-blue-500/10 text-blue-300 border-blue-500/30';
-              if (isTagAction) badgeColor = 'bg-rose-500/10 text-rose-300 border-rose-500/30';
-              else if (isTagConf) badgeColor = 'bg-amber-500/10 text-amber-300 border-amber-500/30';
-              else if (isTagPublic) badgeColor = 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30';
+              let badgeColor = 'bg-cyan-50 text-cyan-700 border-cyan-200';
+              if (isTagAction) badgeColor = 'bg-rose-50 text-rose-700 border-rose-200';
+              else if (isTagConf) badgeColor = 'bg-amber-50 text-amber-700 border-amber-200';
+              else if (isTagPublic) badgeColor = 'bg-emerald-50 text-emerald-700 border-emerald-200';
 
               return (
                 <button
                   key={item.id}
                   onClick={() => executeQuery(item.query)}
                   disabled={isLoading}
-                  className="w-full text-left p-3.5 rounded-xl border border-slate-800/90 bg-slate-900/40 hover:bg-slate-800/50 hover:border-slate-700 transition-all flex items-start justify-between gap-3 group"
+                  className="w-full text-left p-3.5 rounded-xl border border-zinc-200 bg-white hover:bg-zinc-100 hover:border-zinc-400 transition-all flex flex-col-reverse sm:flex-row items-start sm:justify-between gap-2 sm:gap-3 group"
                 >
                   <div className="flex items-start space-x-3">
-                    <span className="text-xs font-mono font-bold text-slate-500 mt-0.5">{idx + 1}.</span>
+                    <span className="text-xs font-mono font-bold text-zinc-500 mt-0.5">{idx + 1}.</span>
                     <div>
-                      <div className="text-xs sm:text-sm font-medium text-slate-200 group-hover:text-blue-300 transition-colors leading-snug">
+                      <div className="text-xs sm:text-sm font-medium text-zinc-800 group-hover:text-cyan-700 transition-colors leading-snug">
                         {item.query}
                       </div>
-                      <div className="text-[11px] text-slate-400 mt-1 font-mono">{item.accessRule}</div>
+                      <div className="text-[11px] text-zinc-500 mt-1 font-mono">{item.accessRule}</div>
                     </div>
                   </div>
 
