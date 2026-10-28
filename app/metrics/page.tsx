@@ -83,6 +83,7 @@ export default function MetricsPage() {
   const evalRows = [
     {
       name: 'Eval coverage',
+      emoji: '🧪',
       alias: 'golden set size',
       score: String(retrievalCount + securityCount),
       unit: 'test cases',
@@ -104,6 +105,7 @@ export default function MetricsPage() {
     },
     {
       name: 'Leakage rate',
+      emoji: '🔒',
       alias: 'access control',
       score: `${leaks}`,
       unit: `leaks in ${searches.toLocaleString()} searches`,
@@ -114,6 +116,7 @@ export default function MetricsPage() {
     },
     {
       name: 'Attack resistance rate',
+      emoji: '🛡️',
       alias: 'red-team pass rate',
       score: `${resisted}/${attacks.length}`,
       unit: 'attacks blocked',
@@ -124,6 +127,7 @@ export default function MetricsPage() {
     },
     {
       name: 'Recall@3',
+      emoji: '🎯',
       alias: 'retrieval accuracy',
       score: pct(hard[best].answerAt3),
       unit: `on the ${hardCount} hardest questions`,
@@ -134,6 +138,7 @@ export default function MetricsPage() {
     },
     {
       name: 'Baseline exposure',
+      emoji: '🔬',
       alias: 'ablation',
       score: `${Math.round(wouldLeak * 100)}%`,
       unit: 'would leak unfiltered',
@@ -208,38 +213,46 @@ export default function MetricsPage() {
         </div>
 
         {/* Evals table */}
-        <div className="rounded-xl border border-zinc-200 bg-white overflow-hidden">
-          <div className="hidden md:grid grid-cols-[230px_160px_1fr_250px] gap-3 px-3 py-1.5 border-b border-zinc-200 text-xs font-bold uppercase tracking-wider text-zinc-500">
-            <span>Eval</span>
-            <span>Score</span>
-            <span>What did we test?</span>
-            <span>What it measures</span>
+        <div className="rounded-xl border border-zinc-300 bg-white overflow-hidden">
+          <div className="hidden md:grid md:grid-cols-[52px_250px_170px_1fr_250px] divide-x divide-zinc-300 border-b border-zinc-300 bg-cyan-50 text-sm font-bold text-zinc-900">
+            <span className="px-3 py-2 text-center">#</span>
+            <span className="px-3 py-2">Eval</span>
+            <span className="px-3 py-2">Score</span>
+            <span className="px-3 py-2">What did we test?</span>
+            <span className="px-3 py-2">What it measures</span>
           </div>
-          {evalRows.map((r) => (
+          {evalRows.map((r, i) => (
             <div
               key={r.name}
-              className="grid grid-cols-1 md:grid-cols-[230px_160px_1fr_250px] gap-1 md:gap-3 px-3 py-1.5 border-b border-zinc-200 last:border-b-0 items-center"
+              className="grid grid-cols-1 md:grid-cols-[52px_250px_170px_1fr_250px] md:divide-x divide-zinc-200 border-b border-zinc-200 last:border-b-0 py-2 md:py-0"
             >
-              <div>
-                <div className="text-sm font-semibold text-zinc-900">{r.name}</div>
-                <div className="flex items-center gap-1.5 mt-0.5">
-                  <span className={`text-[11px] font-semibold px-1.5 py-px rounded border ${TAG_STYLE[r.tag]}`}>{r.tag}</span>
+              <div className="hidden md:flex items-center justify-center px-3 py-2 text-sm font-bold text-zinc-400 font-mono">
+                {i + 1}
+              </div>
+              <div className="px-3 py-1 md:py-2">
+                <div className="text-sm font-semibold text-zinc-900">
+                  <span className="md:hidden text-zinc-400 font-mono mr-1">{i + 1}.</span>
+                  <span className="mr-1.5">{r.emoji}</span>
+                  {r.name}
+                </div>
+                <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 mt-1">
+                  <span className={`whitespace-nowrap text-[11px] font-semibold px-1.5 py-px rounded border ${TAG_STYLE[r.tag]}`}>{r.tag}</span>
                   <span className="text-xs text-zinc-500 font-mono">{r.alias}</span>
                 </div>
               </div>
-              <div className="flex items-baseline gap-1.5 md:block">
+              <div className="flex items-baseline gap-1.5 md:block px-3 py-1 md:py-2">
                 <div className={`text-2xl font-bold font-mono leading-none ${r.tone}`}>{r.score}</div>
-                <div className="text-xs text-zinc-500 md:mt-0.5">{r.unit}</div>
+                <div className="text-xs text-zinc-500 md:mt-1">{r.unit}</div>
               </div>
-              <div className="text-[13px] text-zinc-500 leading-snug">{r.test}</div>
-              <div className="text-[13px] text-zinc-500 leading-snug">{r.measures}</div>
+              <div className="px-3 py-1 md:py-2 text-[13px] text-zinc-800 leading-snug">{r.test}</div>
+              <div className="px-3 py-1 md:py-2 text-[13px] text-zinc-600 leading-snug">{r.measures}</div>
             </div>
           ))}
         </div>
 
         {/* How a question is answered */}
         <div className="rounded-xl border border-zinc-200 bg-white px-3 py-2.5">
-          <div className="text-[13px] font-bold uppercase tracking-wider text-zinc-500 mb-1.5">
+          <div className="text-base font-bold tracking-tight text-zinc-900 mb-1.5">
             How a question gets answered
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-5 gap-2">
@@ -267,7 +280,7 @@ export default function MetricsPage() {
           <div className="rounded-xl border border-zinc-200 bg-white p-3">
             <div className="flex items-center gap-1.5 mb-1">
               <FileSearch className="h-4 w-4 text-cyan-700" />
-              <span className="text-[13px] font-bold uppercase tracking-wider text-zinc-500">
+              <span className="text-base font-bold tracking-tight text-zinc-900">
                 Experiment: best passage size
               </span>
             </div>
@@ -302,7 +315,7 @@ export default function MetricsPage() {
           <div className="rounded-xl border border-zinc-200 bg-white p-3">
             <div className="flex items-center gap-1.5 mb-1">
               <Swords className="h-4 w-4 text-rose-700" />
-              <span className="text-[13px] font-bold uppercase tracking-wider text-zinc-500">
+              <span className="text-base font-bold tracking-tight text-zinc-900">
                 Hacking attempts blocked
               </span>
             </div>
@@ -327,7 +340,7 @@ export default function MetricsPage() {
           <div className="rounded-xl border border-zinc-200 bg-white p-3">
             <div className="flex items-center gap-1.5 mb-2">
               <ShieldCheck className="h-4 w-4 text-cyan-700" />
-              <span className="text-[13px] font-bold uppercase tracking-wider text-zinc-500">Built with</span>
+              <span className="text-base font-bold tracking-tight text-zinc-900">Built with</span>
             </div>
             <div className="flex flex-wrap gap-1.5">
               {builtWith.map((t) => (
