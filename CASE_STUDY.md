@@ -1,4 +1,4 @@
-# Case Study: OmniConnect — Enterprise Knowledge Search AI Assistant & Permission Gateway
+# Case Study: AskWell — Enterprise Knowledge Search AI Assistant & Permission Gateway
 
 **Role**: Lead AI Product Manager & Platform Architect  
 **Domain**: Enterprise Generative AI, Retrieval-Augmented Generation (RAG), Role-Based Security (RLS), Observability  
@@ -12,7 +12,7 @@ As enterprises deploy conversational AI to answer employee questions across hete
 
 Prompt-level guardrails (*"do not show executive salaries to junior staff"*) fail against prompt injection, jailbreaking, and attention bleed. Furthermore, autonomous action execution (e.g., rebooting a production bastion host or approving a $150,000 vendor wire) cannot safely run based on model intent alone.
 
-**OmniConnect** was conceived and built as a production-grade **Enterprise Knowledge Search AI Assistant & Dev Workbench**. It answers questions with **permission-aware RAG**: Gemini embeddings and pgvector similarity search where the access filter runs inside the same database query that ranks results, so restricted content never reaches the model. It gates mutating agent actions behind OAuth scope checks, and it is measured by two eval suites: 100 test cases: 60 retrieval questions run as 1,080 searches (100% answer recall on hard questions, 0 leaks) and 40 security tests (35 of 35 attacks resisted, 5 of 5 authorized-user checks answered).
+**AskWell** was conceived and built as a production-grade **Enterprise Knowledge Search AI Assistant & Dev Workbench**. It answers questions with **permission-aware RAG**: Gemini embeddings and pgvector similarity search where the access filter runs inside the same database query that ranks results, so restricted content never reaches the model. It gates mutating agent actions behind OAuth scope checks, and it is measured by two eval suites: 100 test cases: 60 retrieval questions run as 1,080 searches (100% answer recall on hard questions, 0 leaks) and 40 security tests (35 of 35 attacks resisted, 5 of 5 authorized-user checks answered).
 
 ---
 
@@ -46,7 +46,7 @@ Enterprise IT leaders face a dilemma when connecting Copilot to internal systems
 | **Jane Doe** | Finance Director (L4) | Review executive equity ledgers and approve commercial vendor invoices. | Statutory authorization for wire transfers ($100k+); blocked from cloud reboot tools. |
 | **Sarah Chen** | Enterprise Operations Admin (L4) | Calibrate global headcount models and audit EMEA candidate offer letters. | Authorized for HR/Comp benchmarks; lacks root infrastructure write access. |
 | **Binny Lee** | Head of Infrastructure / Super Admin (L6) | Execute high-privilege SRE actions (rebooting bastion hosts, data purge). | Holds `Cloud.Infrastructure.Write` scope; barred from commercial wire approvals. |
-| **Jay Seal** | OmniConnect Platform Admin | Monitor connector health, inspect RLS trimming deltas, and review PostHog telemetry. | Exclusive access to the `/admin` Observability Console. |
+| **Jay Seal** | AskWell Platform Admin | Monitor connector health, inspect RLS trimming deltas, and review PostHog telemetry. | Exclusive access to the `/admin` Observability Console. |
 
 ---
 
@@ -57,7 +57,7 @@ Enterprise IT leaders face a dilemma when connecting Copilot to internal systems
           │
           ▼
 ┌──────────────────────────────────────────────────────────────┐
-│                    OmniConnect Gateway                       │
+│                    AskWell Gateway                       │
 │                                                              │
 │  1. Identity ──► signed session cookie → server directory    │
 │  2. Router ──► agent action? → Action Gatekeeper (scopes)    │
@@ -155,9 +155,9 @@ Two automated eval suites with 100 test cases in total (60 retrieval + 40 securi
 
 | Chunk size | Right doc #1 (hard) | Answer text in top 3 chunks (hard) | Words sent to model | Leaked results |
 |---|---|---|---|---|
-| **Small (~80 words), chosen** | **95.8%** | **100%** | **357** | **0** |
-| Medium (~200 words) | 84.5% | 95.7% | 648 | 0 |
-| Whole document | 84.5% | 92.8% | 763 | 0 |
+| **Small (~80 words), chosen** | **95.8%** | **100%** | **356** | **0** |
+| Medium (~200 words) | 84.5% | 95.7% | 644 | 0 |
+| Whole document | 81.7% | 92.8% | 767 | 0 |
 
 **Reading the result**: small chunks were more accurate *and* sent less than half as much text to the model, so the decision didn't involve a trade-off at this corpus size. On easy questions all three sizes found the right document in the top 3 every time; the hard set (paraphrases, near-duplicates, facts buried in long documents) is what separated them. The first version of the eval had only easy questions and scored 100% everywhere, which measured nothing. Adding a hard set was the fix.
 

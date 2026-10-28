@@ -33,7 +33,7 @@ const telemetryBuffer: TelemetryEvent[] = [
     eventName: 'llm_latency_recorded',
     timestamp: new Date(Date.now() - 1000 * 60 * 10).toISOString(),
     properties: {
-      model_used: 'OmniConnect Enterprise Orchestrator',
+      model_used: 'AskWell Enterprise Orchestrator',
       ttft_ms: 112,
       total_tokens: 348,
       latency_ms: 284,
@@ -89,7 +89,7 @@ export function recordTelemetryEvent(
         event: eventName,
         properties: {
           ...properties,
-          $app_name: 'OmniConnect Copilot Gateway',
+          $app_name: 'AskWell Copilot Gateway',
           $lib: 'posthog-node',
         },
       });

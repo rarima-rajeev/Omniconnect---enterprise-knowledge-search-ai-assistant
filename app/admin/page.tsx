@@ -81,8 +81,8 @@ export default function AdminObservabilityPage() {
           </div>
           <h1 className="text-base font-bold text-white mb-1">403 Forbidden: Platform Admin Access Required</h1>
           <p className="text-xs text-slate-300 leading-relaxed mb-4">
-            The OmniConnect Dev Workbench is restricted strictly to{' '}
-            <strong className="text-white">Jay Seal (OmniConnect System Admin)</strong>. Your current active session is{' '}
+            The AskWell Dev Workbench is restricted strictly to{' '}
+            <strong className="text-white">Jay Seal (AskWell System Admin)</strong>. Your current active session is{' '}
             <strong className="text-rose-300">{activePersona.name}</strong> ({activePersona.role} • {activePersona.levelDisplay}).
           </p>
 
@@ -133,7 +133,7 @@ export default function AdminObservabilityPage() {
 
           <div>
             <div className="flex items-center space-x-2">
-              <span className="font-bold text-white text-sm">OmniConnect — Enterprise Knowledge Search AI Assistant</span>
+              <span className="font-bold text-white text-sm">AskWell — Enterprise Knowledge Search AI Assistant</span>
               <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 font-bold">
                 Dev Workbench
               </span>

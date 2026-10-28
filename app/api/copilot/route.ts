@@ -102,7 +102,7 @@ export async function POST(req: NextRequest) {
         permittedRecords: [],
         trimmedRecords: [],
         decision,
-        groundedResponse: `**403 Consent Required**: This autonomous action \`restart_service\` has been halted by the OmniConnect Gatekeeper.
+        groundedResponse: `**403 Consent Required**: This autonomous action \`restart_service\` has been halted by the AskWell Gatekeeper.
 
 - **Attempted Target**: Production Bastion Host (\`prod-bastion-us-east-1\`)
 - **Required OAuth Scope**: \`Cloud.Infrastructure.Write\`
@@ -122,7 +122,7 @@ export async function POST(req: NextRequest) {
         executionSteps,
         telemetry: getTelemetryStream(),
         latencyMs: Date.now() - overallStart,
-        modelUsed: 'OmniConnect Policy Gatekeeper',
+        modelUsed: 'AskWell Policy Gatekeeper',
         tokenStats: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
       };
 
@@ -140,7 +140,7 @@ export async function POST(req: NextRequest) {
     executionSteps.push({
       step: 4,
       name: 'Hand-off (Not Executed)',
-      description: 'Request routed to the SRE change-management workflow. Nothing was executed by OmniConnect.',
+      description: 'Request routed to the SRE change-management workflow. Nothing was executed by AskWell.',
       status: 'completed',
       durationMs: 0,
     });
@@ -156,7 +156,7 @@ export async function POST(req: NextRequest) {
       type: 'ALLOWED',
       badge: 'Authorized · Not Executed',
       headline: 'You may request this restart. It was not performed.',
-      reason: `Verified ${user.name} holds 'Cloud.Infrastructure.Write' and Level 6 root clearance. OmniConnect is a read-only knowledge assistant: it checks whether you may request an action, but never executes one.`,
+      reason: `Verified ${user.name} holds 'Cloud.Infrastructure.Write' and Level 6 root clearance. AskWell is a read-only knowledge assistant: it checks whether you may request an action, but never executes one.`,
       policyRule: 'SRE Infrastructure Write Policy: only SuperAdmin may request infrastructure restarts.',
       authorizedRoles: ['Binny Lee (SuperAdmin - L6)'],
     };
@@ -179,13 +179,13 @@ export async function POST(req: NextRequest) {
       groundedResponse: `### Permission check passed: restart not performed
 **${user.name}** (${user.role} • ${user.clearanceLevel}) is authorized to request a restart of the production bastion host.
 
-- **Executed by OmniConnect**: nothing. This is a knowledge assistant, not an operations tool.
+- **Executed by AskWell**: nothing. This is a knowledge assistant, not an operations tool.
 - **Where it would go**: an SRE change request (for example a ServiceNow change ticket) for the on-call team to approve and run.
 - **Before restarting**: the bastion runbook requires announcing in #sre at least 15 minutes ahead, since a reboot ends all active sessions.`,
       executionSteps,
       telemetry: getTelemetryStream(),
       latencyMs: Date.now() - overallStart,
-      modelUsed: 'OmniConnect Action Gatekeeper',
+      modelUsed: 'AskWell Action Gatekeeper',
       tokenStats: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
     };
 
@@ -280,7 +280,7 @@ export async function POST(req: NextRequest) {
         executionSteps,
         telemetry: getTelemetryStream(),
         latencyMs: Date.now() - overallStart,
-        modelUsed: 'OmniConnect Treasury Gatekeeper',
+        modelUsed: 'AskWell Treasury Gatekeeper',
         tokenStats: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
       };
 
@@ -298,7 +298,7 @@ export async function POST(req: NextRequest) {
     executionSteps.push({
       step: 4,
       name: 'Hand-off (Not Executed)',
-      description: 'Request routed to the treasury approval workflow. No payment was made by OmniConnect.',
+      description: 'Request routed to the treasury approval workflow. No payment was made by AskWell.',
       status: 'completed',
       durationMs: 0,
     });
@@ -314,7 +314,7 @@ export async function POST(req: NextRequest) {
       type: 'ALLOWED',
       badge: 'Authorized · Not Executed',
       headline: 'You may approve this payment. No money was moved.',
-      reason: `Verified ${user.name} is Finance Director (L4) with treasury signing authority. OmniConnect is a read-only knowledge assistant: it checks whether you may request an action, but never executes one.`,
+      reason: `Verified ${user.name} is Finance Director (L4) with treasury signing authority. AskWell is a read-only knowledge assistant: it checks whether you may request an action, but never executes one.`,
       policyRule: 'Corporate Treasury Governance: payments over $100,000 require Finance Director approval.',
       authorizedRoles: ['Jane Doe (FinanceDirector - L4)'],
     };
@@ -337,13 +337,13 @@ export async function POST(req: NextRequest) {
       groundedResponse: `### Permission check passed: payment not made
 **${user.name}** (${user.role} • ${user.clearanceLevel}) has the authority to approve invoice #9021 for $150,000.
 
-- **Executed by OmniConnect**: nothing. No approval was recorded and no wire was queued.
+- **Executed by AskWell**: nothing. No approval was recorded and no wire was queued.
 - **Where it would go**: the accounts-payable approval workflow in the finance system, which records the approval and releases the payment.
 - **Status in the documents you can read**: invoice #9021 is awaiting Finance Director approval [FIN-004].`,
       executionSteps,
       telemetry: getTelemetryStream(),
       latencyMs: Date.now() - overallStart,
-      modelUsed: 'OmniConnect Action Gatekeeper',
+      modelUsed: 'AskWell Action Gatekeeper',
       tokenStats: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
     };
 
@@ -408,7 +408,7 @@ export async function POST(req: NextRequest) {
         permittedRecords: [],
         trimmedRecords: [],
         decision,
-        groundedResponse: `**403 Destructive Action Blocked**: Bulk database deletion rejected by OmniConnect Data Governance.
+        groundedResponse: `**403 Destructive Action Blocked**: Bulk database deletion rejected by AskWell Data Governance.
 
 - **Attempted Command**: Hard-delete test customer records from production CRM database.
 - **Access Rule**: Destructive mutations require **Binny Lee (L6 Super Admin)** possessing scope \`admin.crm.delete\`.
@@ -428,7 +428,7 @@ export async function POST(req: NextRequest) {
         executionSteps,
         telemetry: getTelemetryStream(),
         latencyMs: Date.now() - overallStart,
-        modelUsed: 'OmniConnect Data Protection Gatekeeper',
+        modelUsed: 'AskWell Data Protection Gatekeeper',
         tokenStats: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
       };
 
@@ -446,7 +446,7 @@ export async function POST(req: NextRequest) {
     executionSteps.push({
       step: 3,
       name: 'Hand-off (Not Executed)',
-      description: 'Request routed to the data-governance change workflow. No records were deleted by OmniConnect.',
+      description: 'Request routed to the data-governance change workflow. No records were deleted by AskWell.',
       status: 'completed',
       durationMs: 0,
     });
@@ -462,7 +462,7 @@ export async function POST(req: NextRequest) {
       type: 'ALLOWED',
       badge: 'Authorized · Not Executed',
       headline: 'You may request this deletion. No records were deleted.',
-      reason: `Verified ${user.name} holds SuperAdmin (L6) clearance with database write privileges. OmniConnect is a read-only knowledge assistant: it checks whether you may request an action, but never executes one.`,
+      reason: `Verified ${user.name} holds SuperAdmin (L6) clearance with database write privileges. AskWell is a read-only knowledge assistant: it checks whether you may request an action, but never executes one.`,
       policyRule: 'Data Governance Policy: only SuperAdmin may request destructive changes to production data.',
       authorizedRoles: ['Binny Lee (SuperAdmin - L6)'],
     };
@@ -485,12 +485,12 @@ export async function POST(req: NextRequest) {
       groundedResponse: `### Permission check passed: no records deleted
 **${user.name}** (${user.role} • ${user.clearanceLevel}) is authorized to request a deletion of inactive test records from the production CRM.
 
-- **Executed by OmniConnect**: nothing. This is a knowledge assistant and has no write access to the CRM.
+- **Executed by AskWell**: nothing. This is a knowledge assistant and has no write access to the CRM.
 - **Where it would go**: a data-governance change request, run by the CRM owners with a backup taken first.`,
       executionSteps,
       telemetry: getTelemetryStream(),
       latencyMs: Date.now() - overallStart,
-      modelUsed: 'OmniConnect Action Gatekeeper',
+      modelUsed: 'AskWell Action Gatekeeper',
       tokenStats: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
     };
 
@@ -617,7 +617,7 @@ export async function POST(req: NextRequest) {
         badge: 'Not Authorized or Not Found',
         headline: "You're not authorized to see this, or it isn't in any company document",
         reason:
-          "Search ran only over documents your role, department and clearance allow, and none of them answer this question. For security, OmniConnect doesn't say which of the two it is: confirming that a restricted document exists would itself reveal confidential information.",
+          "Search ran only over documents your role, department and clearance allow, and none of them answer this question. For security, AskWell doesn't say which of the two it is: confirming that a restricted document exists would itself reveal confidential information.",
         policyRule: 'Permission-aware retrieval: rank by meaning and filter by access in one query.',
       };
 

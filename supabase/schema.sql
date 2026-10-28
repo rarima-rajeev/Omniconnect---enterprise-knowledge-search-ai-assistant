@@ -1,5 +1,5 @@
 -- ====================================================================
--- OmniConnect: permission-aware retrieval schema (Supabase / Postgres + pgvector)
+-- AskWell: permission-aware retrieval schema (Supabase / Postgres + pgvector)
 --
 -- Run once in the Supabase SQL editor. Safe to re-run.
 --

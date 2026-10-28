@@ -1,8 +1,8 @@
-# OmniConnect — Enterprise Knowledge Search AI Assistant
+# AskWell — Enterprise Knowledge Search AI Assistant
 
 > **Subtitle:** *Ask questions across company documents with automated role-based permission controls.*
 
-OmniConnect is an enterprise AI knowledge assistant that answers employee questions over multi-department company documents (finance, HR, engineering, operations) using **permission-aware retrieval-augmented generation (RAG)**: Gemini embeddings and pgvector similarity search that only ever return documents the asking employee is allowed to read, plus OAuth-gated agent actions.
+AskWell is an enterprise AI knowledge assistant that answers employee questions over multi-department company documents (finance, HR, engineering, operations) using **permission-aware retrieval-augmented generation (RAG)**: Gemini embeddings and pgvector similarity search that only ever return documents the asking employee is allowed to read, plus OAuth-gated agent actions.
 
 > 📖 **AI Product Manager Case Study**: Read the comprehensive problem statement, architectural tradeoffs, persona evaluation matrix, and business impact metrics in [**CASE_STUDY.md**](./CASE_STUDY.md).
 
@@ -16,9 +16,9 @@ In modern enterprise AI architectures, Microsoft 365 Copilot connects to heterog
 
 Enterprises face three existential hurdles when enabling LLMs over private knowledge graphs:
 
-1. **Context Window Data Leakage**: Naive RAG pipelines run semantic search over a central index without identity filters, injecting unauthorized documents directly into the prompt context. Even if prompt instructions tell the model "do not reveal confidential records", the LLM can still leak confidential figures through adversarial prompt injection. **OmniConnect filters by permission inside the vector search query itself, so unauthorized content never reaches the model.**
+1. **Context Window Data Leakage**: Naive RAG pipelines run semantic search over a central index without identity filters, injecting unauthorized documents directly into the prompt context. Even if prompt instructions tell the model "do not reveal confidential records", the LLM can still leak confidential figures through adversarial prompt injection. **AskWell filters by permission inside the vector search query itself, so unauthorized content never reaches the model.**
 2. **Ungated Autonomous Agent Actions**: Read retrieval differs fundamentally from write actions. While semantic search is idempotent, autonomous agent actions (e.g. rebooting a production bastion host, modifying payroll tables) require **explicit administrative consent** and OAuth scope evaluation before any execution code runs.
-3. **Observability Blindspots**: IT compliance and security teams require continuous visibility into trimming deltas (how many records were redacted), connector latency budgets, and unauthorized tool invocations. OmniConnect instruments the entire pipeline with **PostHog** telemetry.
+3. **Observability Blindspots**: IT compliance and security teams require continuous visibility into trimming deltas (how many records were redacted), connector latency budgets, and unauthorized tool invocations. AskWell instruments the entire pipeline with **PostHog** telemetry.
 
 ---
 
@@ -86,9 +86,9 @@ Hard questions only (paraphrases with no shared keywords, near-duplicate traps, 
 
 | Chunk size | Right doc ranked #1 | Right doc in top 3 | Answer text in top 3 chunks | Words sent to model |
 |---|---|---|---|---|
-| **Small (~80 words), chosen** | **95.8%** | **100%** | **100%** | **357** |
-| Medium (~200 words) | 84.5% | 95.8% | 95.7% | 648 |
-| Whole document | 84.5% | 93.0% | 92.8% | 763 |
+| **Small (~80 words), chosen** | **95.8%** | **100%** | **100%** | **356** |
+| Medium (~200 words) | 84.5% | 95.8% | 95.7% | 644 |
+| Whole document | 81.7% | 93.0% | 92.8% | 767 |
 
 - **0 leaked results** in 1,080 permission-filtered searches, checked against an independent TypeScript copy of the access rule.
 - **Without the filter**, 52% of searches would have surfaced a document the user may not read (87% for the intern).

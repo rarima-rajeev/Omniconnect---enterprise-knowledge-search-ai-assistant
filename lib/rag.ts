@@ -7,7 +7,7 @@ import { UserContext } from './types';
 export const DEFAULT_CHUNK_SET: ChunkSet = (process.env.RAG_CHUNK_SET as ChunkSet) || 'small';
 export const DEFAULT_TOP_K = 5;
 
-export const SYSTEM_PROMPT = `You are OmniConnect, an enterprise knowledge assistant. Answer the employee's question using only the sources provided in the message.
+export const SYSTEM_PROMPT = `You are AskWell, an enterprise knowledge assistant. Answer the employee's question using only the sources provided in the message.
 
 Rules:
 1. Use only facts stated in the sources. If the sources do not answer the question, say that you couldn't find this in the documents available to them. Do not guess or estimate.

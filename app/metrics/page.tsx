@@ -23,8 +23,8 @@ import redteam from '@/evals/results/redteam.json';
 import retrievalSet from '@/evals/retrieval-set.json';
 
 export const metadata: Metadata = {
-  title: 'How It Works & Results — OmniConnect',
-  description: 'How OmniConnect answers questions safely, and how it scored on 100 automated test cases.',
+  title: 'How It Works & Results — AskWell',
+  description: 'How AskWell answers questions safely, and how it scored on 100 automated test cases.',
 };
 
 const CASE_STUDY_URL =
@@ -139,7 +139,7 @@ export default function MetricsPage() {
             <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-md shadow-blue-500/20">
               <Cpu className="h-4 w-4 text-white" />
             </div>
-            <span className="font-bold text-sm tracking-tight text-white">OmniConnect</span>
+            <span className="font-bold text-sm tracking-tight text-white">AskWell</span>
           </Link>
           <div className="flex items-center gap-2 text-xs">
             <Link

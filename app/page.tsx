@@ -183,7 +183,7 @@ export default function CopilotChatLandingPage() {
             </div>
             <div>
               <div className="flex items-center space-x-1.5">
-                <span className="font-bold text-sm tracking-tight text-white">OmniConnect</span>
+                <span className="font-bold text-sm tracking-tight text-white">AskWell</span>
                 <span className="hidden sm:inline text-[10px] uppercase font-mono px-1.5 py-0.2 bg-blue-500/10 text-blue-400 border border-blue-500/30 rounded font-semibold">
                   Enterprise AI
                 </span>
@@ -314,7 +314,7 @@ export default function CopilotChatLandingPage() {
             <span>Enterprise Knowledge Gateway • Role-Based</span>
           </div>
           <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
-            OmniConnect — Enterprise Knowledge Search AI Assistant
+            AskWell — Enterprise Knowledge Search AI Assistant
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 mt-1.5 max-w-xl mx-auto leading-relaxed">
             Ask questions across company documents with automated role-based permission controls.

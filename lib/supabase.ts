@@ -81,7 +81,7 @@ export const ENTERPRISE_PERSONAS: EnterprisePersona[] = [
   {
     id: 'persona-jay',
     name: 'Jay Seal',
-    title: 'OmniConnect Platform Administrator',
+    title: 'AskWell Platform Administrator',
     department: 'System',
     role: 'SystemAdmin',
     clearanceLevel: 'L6',
@@ -95,6 +95,6 @@ export const ENTERPRISE_PERSONAS: EnterprisePersona[] = [
       'Cloud.Infrastructure.Write',
     ],
     avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
-    description: 'OmniConnect Platform System Admin. Root privileges and exclusive access to the Admin Observability Deck (/admin).',
+    description: 'AskWell Platform System Admin. Root privileges and exclusive access to the Admin Observability Deck (/admin).',
   },
 ];

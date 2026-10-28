@@ -12,7 +12,7 @@ created_at: 2025-10-12
 ---
 ## Philosophy
 
-OmniConnect pays at the 65th percentile of the market for base salary and the 75th percentile for total compensation, using Pave and Radford data for venture-backed software companies of our size. Pay is set by level and location zone, not negotiated individually beyond the band.
+AskWell pays at the 65th percentile of the market for base salary and the 75th percentile for total compensation, using Pave and Radford data for venture-backed software companies of our size. Pay is set by level and location zone, not negotiated individually beyond the band.
 
 ## Location zones
 

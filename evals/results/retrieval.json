@@ -1,5 +1,5 @@
 {
-  "runAt": "2026-10-24T16:55:41.863Z",
+  "runAt": "2026-10-28T14:42:19.004Z",
   "embeddingModel": "gemini-embedding-001",
   "k": 5,
   "bySet": {
@@ -13,29 +13,29 @@
       "answerAt3": 1,
       "avgContextWords": 356,
       "leakedResults": 0,
-      "wouldHaveLeakedCases": 187
+      "wouldHaveLeakedCases": 188
     },
     "medium": {
       "cases": 360,
       "scoredCases": 232,
-      "hitAt1": 0.9310344827586207,
+      "hitAt1": 0.9181034482758621,
       "hitAt3": 0.9870689655172413,
-      "mrr": 0.9622844827586207,
+      "mrr": 0.9558189655172413,
       "answerCases": 69,
       "answerAt3": 0.9565217391304348,
-      "avgContextWords": 614,
+      "avgContextWords": 611,
       "leakedResults": 0,
-      "wouldHaveLeakedCases": 204
+      "wouldHaveLeakedCases": 202
     },
     "full": {
       "cases": 360,
       "scoredCases": 232,
-      "hitAt1": 0.9224137931034483,
+      "hitAt1": 0.9008620689655172,
       "hitAt3": 0.978448275862069,
-      "mrr": 0.9511494252873564,
+      "mrr": 0.9403735632183909,
       "answerCases": 69,
       "answerAt3": 0.927536231884058,
-      "avgContextWords": 710,
+      "avgContextWords": 707,
       "leakedResults": 0,
       "wouldHaveLeakedCases": 220
     }
@@ -49,9 +49,9 @@
       "mrr": 0.9788732394366197,
       "answerCases": 69,
       "answerAt3": 1,
-      "avgContextWords": 357,
+      "avgContextWords": 356,
       "leakedResults": 0,
-      "wouldHaveLeakedCases": 61
+      "wouldHaveLeakedCases": 58
     },
     "medium": {
       "cases": 120,
@@ -61,19 +61,19 @@
       "mrr": 0.9119718309859155,
       "answerCases": 69,
       "answerAt3": 0.9565217391304348,
-      "avgContextWords": 648,
+      "avgContextWords": 644,
       "leakedResults": 0,
-      "wouldHaveLeakedCases": 64
+      "wouldHaveLeakedCases": 62
     },
     "full": {
       "cases": 120,
       "scoredCases": 71,
-      "hitAt1": 0.8450704225352113,
+      "hitAt1": 0.8169014084507042,
       "hitAt3": 0.9295774647887324,
-      "mrr": 0.8943661971830986,
+      "mrr": 0.8802816901408451,
       "answerCases": 69,
       "answerAt3": 0.927536231884058,
-      "avgContextWords": 763,
+      "avgContextWords": 767,
       "leakedResults": 0,
       "wouldHaveLeakedCases": 69
     }
@@ -112,7 +112,7 @@
       "mrr": 1,
       "answerCases": 12,
       "answerAt3": 1,
-      "avgContextWords": 355,
+      "avgContextWords": 356,
       "leakedResults": 0,
       "wouldHaveLeakedCases": 33
     },
@@ -136,9 +136,9 @@
       "mrr": 1,
       "answerCases": 4,
       "answerAt3": 1,
-      "avgContextWords": 356,
+      "avgContextWords": 353,
       "leakedResults": 0,
-      "wouldHaveLeakedCases": 52
+      "wouldHaveLeakedCases": 53
     },
     "Jay Seal": {
       "cases": 60,
@@ -148,7 +148,7 @@
       "mrr": 0.9916666666666667,
       "answerCases": 20,
       "answerAt3": 1,
-      "avgContextWords": 357,
+      "avgContextWords": 358,
       "leakedResults": 0,
       "wouldHaveLeakedCases": 0
     }
@@ -343,13 +343,13 @@
         "DIR-002",
         "FIN-002",
         "OPS-002",
-        "PAY-8817"
+        "DIR-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 372,
+      "contextWords": 387,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003"
@@ -390,14 +390,13 @@
       "ranked": [
         "DIR-002",
         "DIR-001",
-        "INJ-002",
-        "DIR-003"
+        "INJ-002"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 409,
+      "contextWords": 366,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003",
@@ -1486,8 +1485,8 @@
       "ranked": [
         "NEWS-001",
         "PAY-9041",
-        "PAY-8817",
-        "OPS-001"
+        "OPS-001",
+        "PAY-8817"
       ],
       "hit1": true,
       "hit3": true,
@@ -2415,7 +2414,7 @@
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 361,
+      "contextWords": 398,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -2434,7 +2433,7 @@
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 361,
+      "contextWords": 398,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -2453,7 +2452,7 @@
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 361,
+      "contextWords": 398,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -2472,7 +2471,7 @@
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 361,
+      "contextWords": 398,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -2485,14 +2484,14 @@
       "ranked": [
         "INJ-002",
         "HB-003",
-        "HB-004",
-        "DIR-002"
+        "DIR-003",
+        "HB-004"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 331,
+      "contextWords": 313,
       "leaked": [],
       "wouldHaveLeaked": [
         "ENG-001"
@@ -2513,7 +2512,7 @@
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 361,
+      "contextWords": 398,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -2615,14 +2614,13 @@
       "ranked": [
         "NEWS-001",
         "HB-006",
-        "HB-004",
-        "HB-003"
+        "HB-004"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 337,
+      "contextWords": 358,
       "leaked": [],
       "wouldHaveLeaked": [
         "INC-9012",
@@ -3201,14 +3199,14 @@
       "ranked": [
         "FIN-002",
         "NEWS-001",
-        "HB-006",
-        "DIR-003"
+        "OPS-001",
+        "HB-006"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 363,
+      "contextWords": 341,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003"
@@ -3224,13 +3222,13 @@
         "FIN-002",
         "NEWS-001",
         "PAY-8817",
-        "PAY-9041"
+        "OPS-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 344,
+      "contextWords": 354,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003"
@@ -3245,14 +3243,14 @@
       "ranked": [
         "FIN-002",
         "NEWS-001",
-        "HB-006",
-        "DIR-003"
+        "OPS-001",
+        "HB-006"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 363,
+      "contextWords": 341,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003"
@@ -3962,6 +3960,7 @@
       "expected": [],
       "ranked": [
         "INJ-002",
+        "DIR-003",
         "DIR-001",
         "HB-004"
       ],
@@ -3969,7 +3968,7 @@
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 369,
+      "contextWords": 341,
       "leaked": [],
       "wouldHaveLeaked": [
         "SEC-001",
@@ -4598,8 +4597,8 @@
         "OPS-003",
         "FIN-002",
         "OPS-004",
-        "PAY-9100",
-        "OPS-001"
+        "OPS-001",
+        "PAY-9100"
       ],
       "hit1": null,
       "hit3": null,
@@ -4648,13 +4647,13 @@
         "NEWS-001",
         "INJ-002",
         "DIR-003",
-        "HB-003"
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 366,
+      "contextWords": 365,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-005",
@@ -4695,14 +4694,13 @@
         "OPS-003",
         "PAY-9100",
         "FIN-003",
-        "NEWS-001",
-        "OPS-001"
+        "NEWS-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 381,
+      "contextWords": 370,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-RIF-2026",
@@ -4792,14 +4790,14 @@
       "ranked": [
         "NEWS-001",
         "DIR-003",
-        "DIR-001",
-        "HB-003"
+        "HB-002",
+        "INJ-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 371,
+      "contextWords": 365,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-RIF-2026",
@@ -4932,13 +4930,13 @@
         "DIR-003",
         "HB-002",
         "DIR-002",
-        "DIR-001"
+        "HB-004"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 359,
+      "contextWords": 360,
       "leaked": [],
       "wouldHaveLeaked": [
         "OPS-003"
@@ -5128,7 +5126,9 @@
       "answerHit3": null,
       "contextWords": 358,
       "leaked": [],
-      "wouldHaveLeaked": []
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026"
+      ]
     },
     {
       "questionId": "R38",
@@ -5149,7 +5149,9 @@
       "answerHit3": null,
       "contextWords": 358,
       "leaked": [],
-      "wouldHaveLeaked": []
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026"
+      ]
     },
     {
       "questionId": "R38",
@@ -5162,13 +5164,14 @@
       "ranked": [
         "HB-005",
         "HB-006",
+        "HR-BANDS-2026",
         "HB-002"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 358,
+      "contextWords": 334,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -5191,7 +5194,9 @@
       "answerHit3": null,
       "contextWords": 358,
       "leaked": [],
-      "wouldHaveLeaked": []
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026"
+      ]
     },
     {
       "questionId": "R38",
@@ -5212,7 +5217,9 @@
       "answerHit3": null,
       "contextWords": 358,
       "leaked": [],
-      "wouldHaveLeaked": []
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026"
+      ]
     },
     {
       "questionId": "R38",
@@ -5225,13 +5232,14 @@
       "ranked": [
         "HB-005",
         "HB-006",
+        "HR-BANDS-2026",
         "HB-002"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 358,
+      "contextWords": 334,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -5942,14 +5950,13 @@
         "OPS-003",
         "HB-001",
         "NEWS-001",
-        "HB-002",
-        "HB-005"
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 333,
+      "contextWords": 322,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BERLIN-41",
@@ -5967,14 +5974,13 @@
         "OPS-003",
         "HB-001",
         "NEWS-001",
-        "HB-002",
-        "HB-005"
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 333,
+      "contextWords": 322,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BERLIN-41",
@@ -6014,14 +6020,13 @@
         "OPS-003",
         "HB-001",
         "NEWS-001",
-        "HB-002",
-        "HB-005"
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 333,
+      "contextWords": 322,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BERLIN-41",
@@ -6086,13 +6091,13 @@
         "HB-006",
         "DIR-003",
         "HB-001",
-        "HB-005"
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 361,
+      "contextWords": 350,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026",
@@ -6110,13 +6115,13 @@
         "HB-006",
         "DIR-003",
         "HB-001",
-        "HB-005"
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 361,
+      "contextWords": 350,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026",
@@ -6155,13 +6160,13 @@
         "HB-006",
         "DIR-003",
         "HB-001",
-        "HB-005"
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 361,
+      "contextWords": 350,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026",
@@ -6179,13 +6184,13 @@
         "HB-006",
         "DIR-003",
         "HB-001",
-        "HB-005"
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 361,
+      "contextWords": 350,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026",
@@ -6318,14 +6323,13 @@
         "INJ-002",
         "HB-006",
         "HB-002",
-        "HB-003",
         "DIR-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 331,
+      "contextWords": 315,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026",
@@ -6780,9 +6784,7 @@
       "answerHit3": true,
       "contextWords": 365,
       "leaked": [],
-      "wouldHaveLeaked": [
-        "HR-BANDS-2026"
-      ]
+      "wouldHaveLeaked": []
     },
     {
       "questionId": "H10",
@@ -6804,9 +6806,7 @@
       "answerHit3": true,
       "contextWords": 365,
       "leaked": [],
-      "wouldHaveLeaked": [
-        "HR-BANDS-2026"
-      ]
+      "wouldHaveLeaked": []
     },
     {
       "questionId": "H10",
@@ -6820,13 +6820,13 @@
         "HB-006",
         "IT-SUM-8921",
         "HB-001",
-        "HR-BANDS-2026"
+        "INJ-002"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 340,
+      "contextWords": 365,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -6850,9 +6850,7 @@
       "answerHit3": true,
       "contextWords": 365,
       "leaked": [],
-      "wouldHaveLeaked": [
-        "HR-BANDS-2026"
-      ]
+      "wouldHaveLeaked": []
     },
     {
       "questionId": "H10",
@@ -6875,8 +6873,7 @@
       "contextWords": 418,
       "leaked": [],
       "wouldHaveLeaked": [
-        "IT-SUM-8921",
-        "HR-BANDS-2026"
+        "IT-SUM-8921"
       ]
     },
     {
@@ -6891,13 +6888,13 @@
         "HB-006",
         "IT-SUM-8921",
         "HB-001",
-        "HR-BANDS-2026"
+        "INJ-002"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 340,
+      "contextWords": 365,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -7487,13 +7484,14 @@
       "ranked": [
         "NEWS-001",
         "DIR-003",
-        "INJ-002"
+        "INJ-002",
+        "HB-006"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 359,
+      "contextWords": 374,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003"
@@ -7757,14 +7755,13 @@
       "ranked": [
         "NEWS-001",
         "DIR-003",
-        "HB-005",
-        "INJ-002"
+        "HB-005"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 408,
+      "contextWords": 378,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003"
@@ -8039,7 +8036,7 @@
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 396,
+      "contextWords": 382,
       "leaked": [],
       "wouldHaveLeaked": [
         "ENG-001",
@@ -8221,14 +8218,14 @@
         "DIR-001",
         "DIR-002",
         "INJ-002",
-        "HB-004",
-        "OPS-002"
+        "HB-003",
+        "HB-004"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 569,
+      "contextWords": 603,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-8817",
@@ -8272,14 +8269,14 @@
         "DIR-001",
         "DIR-002",
         "INJ-002",
-        "HB-004",
-        "OPS-002"
+        "HB-003",
+        "HB-004"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 569,
+      "contextWords": 603,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-8817",
@@ -8299,14 +8296,14 @@
         "DIR-001",
         "DIR-002",
         "INJ-002",
-        "HB-004",
-        "DIR-003"
+        "HB-003",
+        "HB-004"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 618,
+      "contextWords": 603,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-8817",
@@ -8348,8 +8345,8 @@
       "ranked": [
         "DIR-002",
         "FIN-002",
-        "OPS-002",
         "DIR-001",
+        "OPS-002",
         "PAY-8817"
       ],
       "hit1": true,
@@ -8371,8 +8368,8 @@
       "ranked": [
         "DIR-002",
         "FIN-002",
-        "OPS-002",
         "DIR-001",
+        "OPS-002",
         "INJ-002"
       ],
       "hit1": true,
@@ -8396,8 +8393,8 @@
       "ranked": [
         "DIR-002",
         "FIN-002",
-        "OPS-002",
         "DIR-001",
+        "OPS-002",
         "PAY-8817"
       ],
       "hit1": true,
@@ -8419,8 +8416,8 @@
       "ranked": [
         "DIR-002",
         "FIN-002",
-        "OPS-002",
         "DIR-001",
+        "OPS-002",
         "INJ-002"
       ],
       "hit1": true,
@@ -8445,8 +8442,8 @@
         "DIR-002",
         "DIR-001",
         "INJ-002",
-        "NEWS-001",
-        "DIR-003"
+        "DIR-003",
+        "NEWS-001"
       ],
       "hit1": true,
       "hit3": true,
@@ -8471,8 +8468,8 @@
       "ranked": [
         "DIR-002",
         "FIN-002",
-        "OPS-002",
         "DIR-001",
+        "OPS-002",
         "PAY-8817"
       ],
       "hit1": true,
@@ -8628,7 +8625,9 @@
       "answerHit3": null,
       "contextWords": 764,
       "leaked": [],
-      "wouldHaveLeaked": []
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026"
+      ]
     },
     {
       "questionId": "R04",
@@ -8649,7 +8648,9 @@
       "answerHit3": null,
       "contextWords": 764,
       "leaked": [],
-      "wouldHaveLeaked": []
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026"
+      ]
     },
     {
       "questionId": "R04",
@@ -8662,13 +8663,13 @@
       "ranked": [
         "HB-001",
         "HB-005",
-        "HB-002"
+        "HR-BANDS-2026"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 764,
+      "contextWords": 817,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -8691,7 +8692,9 @@
       "answerHit3": null,
       "contextWords": 764,
       "leaked": [],
-      "wouldHaveLeaked": []
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026"
+      ]
     },
     {
       "questionId": "R04",
@@ -8712,7 +8715,9 @@
       "answerHit3": null,
       "contextWords": 764,
       "leaked": [],
-      "wouldHaveLeaked": []
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026"
+      ]
     },
     {
       "questionId": "R04",
@@ -8725,13 +8730,13 @@
       "ranked": [
         "HB-001",
         "HB-005",
-        "HB-002"
+        "HR-BANDS-2026"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 764,
+      "contextWords": 817,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -8754,9 +8759,7 @@
       "answerHit3": null,
       "contextWords": 839,
       "leaked": [],
-      "wouldHaveLeaked": [
-        "HR-BANDS-2026"
-      ]
+      "wouldHaveLeaked": []
     },
     {
       "questionId": "R05",
@@ -8777,9 +8780,7 @@
       "answerHit3": null,
       "contextWords": 839,
       "leaked": [],
-      "wouldHaveLeaked": [
-        "HR-BANDS-2026"
-      ]
+      "wouldHaveLeaked": []
     },
     {
       "questionId": "R05",
@@ -8792,13 +8793,13 @@
       "ranked": [
         "HB-001",
         "HB-002",
-        "HR-BANDS-2026"
+        "HB-006"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 808,
+      "contextWords": 839,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -8821,9 +8822,7 @@
       "answerHit3": null,
       "contextWords": 839,
       "leaked": [],
-      "wouldHaveLeaked": [
-        "HR-BANDS-2026"
-      ]
+      "wouldHaveLeaked": []
     },
     {
       "questionId": "R05",
@@ -8844,9 +8843,7 @@
       "answerHit3": null,
       "contextWords": 839,
       "leaked": [],
-      "wouldHaveLeaked": [
-        "HR-BANDS-2026"
-      ]
+      "wouldHaveLeaked": []
     },
     {
       "questionId": "R05",
@@ -8859,13 +8856,13 @@
       "ranked": [
         "HB-001",
         "HB-002",
-        "HR-BANDS-2026"
+        "HB-006"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 808,
+      "contextWords": 839,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -8982,13 +8979,13 @@
         "HB-002",
         "HB-004",
         "HB-001",
-        "HB-005"
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 841,
+      "contextWords": 809,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-001",
@@ -9136,13 +9133,13 @@
         "INJ-002",
         "HB-004",
         "INJ-001",
-        "HB-001"
+        "DIR-002"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 659,
+      "contextWords": 600,
       "leaked": [],
       "wouldHaveLeaked": [
         "SEC-001",
@@ -9185,13 +9182,13 @@
         "INJ-001",
         "INJ-002",
         "HB-003",
-        "ENG-001"
+        "FIN-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 640,
+      "contextWords": 559,
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002"
@@ -9209,8 +9206,8 @@
         "HB-004",
         "INJ-001",
         "INJ-002",
-        "HB-003",
-        "RUN-002"
+        "RUN-002",
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
@@ -9233,13 +9230,13 @@
         "INJ-001",
         "INJ-002",
         "HB-003",
-        "ENG-001"
+        "FIN-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 640,
+      "contextWords": 559,
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002"
@@ -9257,8 +9254,8 @@
         "HB-004",
         "INJ-001",
         "INJ-002",
-        "HB-003",
-        "RUN-002"
+        "RUN-002",
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
@@ -9281,13 +9278,13 @@
         "INJ-001",
         "INJ-002",
         "HB-003",
-        "HB-005"
+        "HB-006"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 621,
+      "contextWords": 663,
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002"
@@ -9305,8 +9302,8 @@
         "HB-004",
         "INJ-001",
         "INJ-002",
-        "HB-003",
-        "RUN-002"
+        "RUN-002",
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
@@ -9327,15 +9324,15 @@
       "ranked": [
         "HB-005",
         "PAY-9100",
-        "DIR-003",
         "HB-002",
-        "HB-001"
+        "HB-001",
+        "OPS-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 729,
+      "contextWords": 705,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026",
@@ -9352,16 +9349,16 @@
       ],
       "ranked": [
         "HB-005",
-        "DIR-003",
         "HB-002",
         "HB-001",
-        "HB-003"
+        "OPS-001",
+        "FIN-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 759,
+      "contextWords": 705,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026",
@@ -9382,13 +9379,13 @@
         "HR-BANDS-2026",
         "PAY-9100",
         "HR-BERLIN-41",
-        "DIR-003"
+        "HB-002"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 617,
+      "contextWords": 625,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -9402,16 +9399,16 @@
       ],
       "ranked": [
         "HB-005",
-        "DIR-003",
         "HB-002",
         "HB-001",
-        "HB-003"
+        "OPS-001",
+        "FIN-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 759,
+      "contextWords": 705,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026",
@@ -9429,16 +9426,16 @@
       ],
       "ranked": [
         "HB-005",
-        "DIR-003",
         "HB-002",
         "HB-001",
-        "HB-003"
+        "DIR-003",
+        "HB-006"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 759,
+      "contextWords": 866,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026",
@@ -9459,13 +9456,13 @@
         "HR-BANDS-2026",
         "PAY-9100",
         "HR-BERLIN-41",
-        "DIR-003"
+        "HB-002"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 617,
+      "contextWords": 625,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -9504,8 +9501,8 @@
       "ranked": [
         "HB-006",
         "RUN-002",
-        "INC-8790",
-        "ENG-001"
+        "ENG-001",
+        "INC-8790"
       ],
       "hit1": true,
       "hit3": true,
@@ -9550,8 +9547,8 @@
       "ranked": [
         "HB-006",
         "RUN-002",
-        "INC-8790",
-        "ENG-001"
+        "ENG-001",
+        "INC-8790"
       ],
       "hit1": true,
       "hit3": true,
@@ -9571,20 +9568,20 @@
       ],
       "ranked": [
         "HB-006",
+        "DIR-003",
         "NEWS-001",
-        "HB-002",
-        "DIR-003"
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 790,
+      "contextWords": 767,
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002",
-        "INC-8790",
-        "ENG-001"
+        "ENG-001",
+        "INC-8790"
       ]
     },
     {
@@ -9598,8 +9595,8 @@
       "ranked": [
         "HB-006",
         "RUN-002",
-        "INC-8790",
-        "ENG-001"
+        "ENG-001",
+        "INC-8790"
       ],
       "hit1": true,
       "hit3": true,
@@ -9867,13 +9864,14 @@
         "NEWS-001",
         "INJ-002",
         "HB-004",
-        "HB-006"
+        "HB-006",
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 763,
+      "contextWords": 704,
       "leaked": [],
       "wouldHaveLeaked": [
         "IT-SUM-8921",
@@ -10094,13 +10092,13 @@
         "FIN-002",
         "NEWS-001",
         "OPS-003",
-        "HB-005"
+        "FIN-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 510,
+      "contextWords": 448,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-9100",
@@ -10143,13 +10141,13 @@
         "FIN-002",
         "NEWS-001",
         "OPS-003",
-        "HB-005"
+        "FIN-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 510,
+      "contextWords": 448,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-9100",
@@ -10241,13 +10239,13 @@
         "INJ-002",
         "FIN-002",
         "DIR-002",
-        "DIR-001"
+        "FIN-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 504,
+      "contextWords": 468,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-004",
@@ -10292,13 +10290,13 @@
         "INJ-002",
         "FIN-002",
         "DIR-002",
-        "DIR-001"
+        "FIN-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 504,
+      "contextWords": 468,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-004",
@@ -10315,8 +10313,8 @@
         "INJ-002",
         "DIR-002",
         "DIR-001",
-        "HB-002",
-        "HB-003"
+        "HB-003",
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
@@ -10364,8 +10362,8 @@
       ],
       "ranked": [
         "FIN-001",
-        "HB-003",
         "HB-002",
+        "HB-003",
         "OPS-002",
         "INJ-002"
       ],
@@ -10387,8 +10385,8 @@
       ],
       "ranked": [
         "FIN-001",
-        "HB-003",
         "HB-002",
+        "HB-003",
         "OPS-002",
         "INJ-002"
       ],
@@ -10410,8 +10408,8 @@
       ],
       "ranked": [
         "FIN-001",
-        "HB-003",
         "HB-002",
+        "HB-003",
         "OPS-002",
         "INJ-002"
       ],
@@ -10433,8 +10431,8 @@
       ],
       "ranked": [
         "FIN-001",
-        "HB-003",
         "HB-002",
+        "HB-003",
         "OPS-002",
         "INJ-002"
       ],
@@ -10453,17 +10451,17 @@
       "chunkSet": "medium",
       "expected": [],
       "ranked": [
-        "HB-003",
         "HB-002",
+        "HB-003",
         "INJ-002",
-        "HB-005",
-        "HB-001"
+        "HB-001",
+        "HB-004"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 684,
+      "contextWords": 679,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-001",
@@ -10480,8 +10478,8 @@
       ],
       "ranked": [
         "FIN-001",
-        "HB-003",
         "HB-002",
+        "HB-003",
         "OPS-002",
         "INJ-002"
       ],
@@ -10553,14 +10551,14 @@
         "FIN-002",
         "OPS-002",
         "PAY-9100",
-        "HR-BANDS-2026",
-        "OPS-004"
+        "OPS-004",
+        "OPS-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 506,
+      "contextWords": 384,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003"
@@ -10601,9 +10599,9 @@
       "ranked": [
         "NEWS-001",
         "HB-006",
-        "INJ-001",
         "HB-001",
-        "HB-002"
+        "HB-002",
+        "INJ-001"
       ],
       "hit1": null,
       "hit3": null,
@@ -10676,13 +10674,13 @@
         "ENG-001",
         "INJ-002",
         "OPS-002",
-        "RUN-002"
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 676,
+      "contextWords": 692,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-RIF-2026"
@@ -10724,13 +10722,13 @@
         "ENG-001",
         "INJ-002",
         "OPS-002",
-        "SEC-001"
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 680,
+      "contextWords": 692,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-RIF-2026"
@@ -10747,13 +10745,13 @@
         "HB-003",
         "HB-004",
         "INJ-001",
-        "DIR-002"
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 600,
+      "contextWords": 604,
       "leaked": [],
       "wouldHaveLeaked": [
         "ENG-001",
@@ -10817,15 +10815,15 @@
         "INC-9012"
       ],
       "ranked": [
-        "INC-9012",
         "IT-SUM-8877",
+        "INC-9012",
         "IT-SUM-8921",
         "INC-8877",
         "INC-8921"
       ],
-      "hit1": true,
+      "hit1": false,
       "hit3": true,
-      "rr": 1,
+      "rr": 0.5,
       "answerHit3": null,
       "contextWords": 566,
       "leaked": [],
@@ -10865,15 +10863,15 @@
         "INC-9012"
       ],
       "ranked": [
-        "INC-9012",
         "IT-SUM-8877",
+        "INC-9012",
         "IT-SUM-8921",
         "INC-8877",
         "INC-8921"
       ],
-      "hit1": true,
+      "hit1": false,
       "hit3": true,
-      "rr": 1,
+      "rr": 0.5,
       "answerHit3": null,
       "contextWords": 566,
       "leaked": [],
@@ -10899,8 +10897,8 @@
       "contextWords": 720,
       "leaked": [],
       "wouldHaveLeaked": [
-        "INC-9012",
         "IT-SUM-8877",
+        "INC-9012",
         "IT-SUM-8921",
         "INC-8877",
         "INC-8921"
@@ -10915,15 +10913,15 @@
         "INC-9012"
       ],
       "ranked": [
-        "INC-9012",
         "IT-SUM-8877",
+        "INC-9012",
         "IT-SUM-8921",
         "INC-8877",
         "INC-8921"
       ],
-      "hit1": true,
+      "hit1": false,
       "hit3": true,
-      "rr": 1,
+      "rr": 0.5,
       "answerHit3": null,
       "contextWords": 566,
       "leaked": [],
@@ -11078,7 +11076,7 @@
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 835,
+      "contextWords": 770,
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002"
@@ -11122,7 +11120,7 @@
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 835,
+      "contextWords": 770,
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002"
@@ -11229,13 +11227,13 @@
         "HB-005",
         "OPS-001",
         "INJ-002",
-        "DIR-001"
+        "OPS-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 584,
+      "contextWords": 532,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-9041",
@@ -11280,13 +11278,13 @@
         "HB-005",
         "OPS-001",
         "INJ-002",
-        "DIR-001"
+        "OPS-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 584,
+      "contextWords": 532,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-9041",
@@ -11407,8 +11405,8 @@
         "PAY-9100",
         "PAY-9041",
         "PAY-8817",
-        "HB-005",
-        "HR-BANDS-2026"
+        "HR-BANDS-2026",
+        "HB-005"
       ],
       "hit1": true,
       "hit3": true,
@@ -11455,13 +11453,13 @@
         "NEWS-001",
         "INJ-002",
         "DIR-002",
-        "HB-003"
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 598,
+      "contextWords": 621,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-9100",
@@ -11482,8 +11480,8 @@
         "PAY-9100",
         "PAY-9041",
         "PAY-8817",
-        "HB-005",
-        "HR-BANDS-2026"
+        "HR-BANDS-2026",
+        "HB-005"
       ],
       "hit1": true,
       "hit3": true,
@@ -11524,9 +11522,9 @@
       "ranked": [
         "FIN-002",
         "NEWS-001",
+        "OPS-001",
         "OPS-002",
-        "INJ-002",
-        "OPS-001"
+        "INJ-002"
       ],
       "hit1": null,
       "hit3": null,
@@ -11550,13 +11548,13 @@
         "PAY-8817",
         "NEWS-001",
         "PAY-9041",
-        "PAY-9100"
+        "OPS-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 432,
+      "contextWords": 453,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003"
@@ -11571,9 +11569,9 @@
       "ranked": [
         "FIN-002",
         "NEWS-001",
+        "OPS-001",
         "OPS-002",
-        "INJ-002",
-        "OPS-001"
+        "INJ-002"
       ],
       "hit1": null,
       "hit3": null,
@@ -12080,10 +12078,10 @@
       "expected": [],
       "ranked": [
         "OPS-003",
+        "DIR-003",
         "INJ-002",
         "INJ-001",
-        "HB-004",
-        "DIR-003"
+        "HB-004"
       ],
       "hit1": null,
       "hit3": null,
@@ -12105,10 +12103,10 @@
       "expected": [],
       "ranked": [
         "OPS-003",
+        "DIR-003",
         "INJ-002",
         "INJ-001",
-        "HB-004",
-        "DIR-003"
+        "HB-004"
       ],
       "hit1": null,
       "hit3": null,
@@ -12135,13 +12133,13 @@
         "HR-LONDON-88",
         "OPS-003",
         "HR-BANDS-2026",
-        "INJ-002"
+        "DIR-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 504,
+      "contextWords": 535,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -12153,10 +12151,10 @@
       "expected": [],
       "ranked": [
         "OPS-003",
+        "DIR-003",
         "INJ-002",
         "INJ-001",
-        "HB-004",
-        "DIR-003"
+        "HB-004"
       ],
       "hit1": null,
       "hit3": null,
@@ -12177,10 +12175,10 @@
       "chunkSet": "medium",
       "expected": [],
       "ranked": [
+        "DIR-003",
         "INJ-002",
         "INJ-001",
         "HB-004",
-        "DIR-003",
         "NEWS-001"
       ],
       "hit1": null,
@@ -12209,13 +12207,13 @@
         "HR-LONDON-88",
         "OPS-003",
         "HR-BANDS-2026",
-        "INJ-002"
+        "DIR-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 504,
+      "contextWords": 535,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -12321,8 +12319,8 @@
       "expected": [],
       "ranked": [
         "INJ-002",
-        "HB-004",
         "DIR-003",
+        "HB-004",
         "HB-003",
         "DIR-001"
       ],
@@ -12470,15 +12468,15 @@
       "ranked": [
         "NEWS-001",
         "INJ-002",
+        "DIR-003",
         "HB-004",
-        "HB-002",
-        "DIR-002"
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 616,
+      "contextWords": 620,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-004",
@@ -12613,8 +12611,8 @@
         "NEWS-001",
         "INJ-002",
         "HB-006",
-        "HB-004",
-        "DIR-003"
+        "DIR-003",
+        "HB-004"
       ],
       "hit1": null,
       "hit3": null,
@@ -12998,8 +12996,8 @@
       "ranked": [
         "OPS-003",
         "FIN-002",
-        "OPS-004",
         "OPS-001",
+        "OPS-004",
         "PAY-9100"
       ],
       "hit1": null,
@@ -13050,13 +13048,13 @@
         "INJ-002",
         "HB-003",
         "DIR-003",
-        "HB-005"
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 602,
+      "contextWords": 593,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-005",
@@ -13099,8 +13097,8 @@
         "OPS-003",
         "PAY-9100",
         "NEWS-001",
-        "OPS-001",
-        "FIN-003"
+        "FIN-003",
+        "OPS-001"
       ],
       "hit1": null,
       "hit3": null,
@@ -13110,8 +13108,7 @@
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-RIF-2026",
-        "HR-PIP-17",
-        "HR-BANDS-2026"
+        "HR-PIP-17"
       ]
     },
     {
@@ -13125,19 +13122,18 @@
         "NEWS-001",
         "OPS-001",
         "FIN-002",
-        "DIR-003"
+        "OPS-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 493,
+      "contextWords": 444,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-RIF-2026",
         "PAY-9100",
-        "HR-PIP-17",
-        "HR-BANDS-2026"
+        "HR-PIP-17"
       ]
     },
     {
@@ -13150,14 +13146,14 @@
         "OPS-003",
         "PAY-9100",
         "HR-PIP-17",
-        "HR-BANDS-2026",
-        "NEWS-001"
+        "NEWS-001",
+        "OPS-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 537,
+      "contextWords": 452,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-RIF-2026"
@@ -13174,19 +13170,18 @@
         "NEWS-001",
         "OPS-001",
         "FIN-002",
-        "DIR-003"
+        "OPS-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 493,
+      "contextWords": 444,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-RIF-2026",
         "PAY-9100",
-        "HR-PIP-17",
-        "HR-BANDS-2026"
+        "HR-PIP-17"
       ]
     },
     {
@@ -13198,22 +13193,21 @@
       "ranked": [
         "NEWS-001",
         "DIR-003",
-        "DIR-002",
-        "HB-005",
-        "HB-003"
+        "HB-002",
+        "HB-003",
+        "DIR-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 629,
+      "contextWords": 620,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-RIF-2026",
         "OPS-003",
         "PAY-9100",
-        "HR-PIP-17",
-        "HR-BANDS-2026"
+        "HR-PIP-17"
       ]
     },
     {
@@ -13229,13 +13223,13 @@
         "OPS-003",
         "PAY-9100",
         "HR-PIP-17",
-        "HR-BANDS-2026"
+        "NEWS-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 503,
+      "contextWords": 423,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -13251,8 +13245,8 @@
         "DIR-003",
         "HB-002",
         "OPS-003",
-        "DIR-002",
-        "HB-004"
+        "HB-004",
+        "DIR-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -13274,8 +13268,8 @@
         "DIR-003",
         "HB-002",
         "OPS-003",
-        "DIR-002",
-        "HB-004"
+        "HB-004",
+        "DIR-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -13297,8 +13291,8 @@
         "DIR-003",
         "HB-002",
         "OPS-003",
-        "DIR-002",
-        "HB-004"
+        "HB-004",
+        "DIR-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -13320,8 +13314,8 @@
         "DIR-003",
         "HB-002",
         "OPS-003",
-        "DIR-002",
-        "HB-004"
+        "HB-004",
+        "DIR-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -13342,15 +13336,15 @@
       "ranked": [
         "DIR-003",
         "HB-002",
-        "DIR-002",
         "HB-004",
-        "INJ-001"
+        "DIR-002",
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 654,
+      "contextWords": 651,
       "leaked": [],
       "wouldHaveLeaked": [
         "OPS-003"
@@ -13368,8 +13362,8 @@
         "DIR-003",
         "HB-002",
         "OPS-003",
-        "DIR-002",
-        "HB-004"
+        "HB-004",
+        "DIR-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -13415,13 +13409,13 @@
         "FIN-002",
         "NEWS-001",
         "INJ-002",
-        "OPS-002"
+        "OPS-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 437,
+      "contextWords": 462,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003",
@@ -13439,14 +13433,14 @@
         "OPS-003",
         "FIN-002",
         "PAY-9100",
-        "HR-BANDS-2026",
-        "OPS-004"
+        "OPS-004",
+        "NEWS-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 494,
+      "contextWords": 414,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003",
@@ -13464,13 +13458,13 @@
         "FIN-002",
         "NEWS-001",
         "INJ-002",
-        "OPS-002"
+        "OPS-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 437,
+      "contextWords": 462,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003",
@@ -13540,13 +13534,14 @@
         "HB-005",
         "HB-002",
         "HB-001",
-        "FIN-001"
+        "FIN-001",
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 664,
+      "contextWords": 714,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026"
@@ -13564,13 +13559,14 @@
         "HB-005",
         "HB-002",
         "HB-001",
-        "FIN-001"
+        "FIN-001",
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 664,
+      "contextWords": 714,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026"
@@ -13586,10 +13582,10 @@
       ],
       "ranked": [
         "HB-005",
+        "HR-BANDS-2026",
         "HB-002",
         "HB-001",
-        "FIN-001",
-        "HR-BANDS-2026"
+        "FIN-001"
       ],
       "hit1": true,
       "hit3": true,
@@ -13611,13 +13607,14 @@
         "HB-005",
         "HB-002",
         "HB-001",
-        "FIN-001"
+        "FIN-001",
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 664,
+      "contextWords": 714,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026"
@@ -13634,17 +13631,18 @@
       "ranked": [
         "HB-005",
         "HB-002",
-        "HB-001"
+        "HB-001",
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 764,
+      "contextWords": 694,
       "leaked": [],
       "wouldHaveLeaked": [
-        "FIN-001",
-        "HR-BANDS-2026"
+        "HR-BANDS-2026",
+        "FIN-001"
       ]
     },
     {
@@ -13657,10 +13655,10 @@
       ],
       "ranked": [
         "HB-005",
+        "HR-BANDS-2026",
         "HB-002",
         "HB-001",
-        "FIN-001",
-        "HR-BANDS-2026"
+        "FIN-001"
       ],
       "hit1": true,
       "hit3": true,
@@ -13767,9 +13765,9 @@
       "ranked": [
         "INJ-002",
         "NEWS-001",
-        "DIR-002",
         "DIR-003",
-        "HB-003"
+        "HB-003",
+        "DIR-002"
       ],
       "hit1": null,
       "hit3": null,
@@ -13812,17 +13810,17 @@
       "chunkSet": "medium",
       "expected": [],
       "ranked": [
-        "OPS-001",
         "PAY-9100",
+        "OPS-001",
         "OPS-003",
         "NEWS-001",
-        "DIR-003"
+        "HB-004"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 501,
+      "contextWords": 513,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-PIP-17",
@@ -13840,8 +13838,8 @@
         "OPS-001",
         "OPS-003",
         "NEWS-001",
-        "DIR-003",
-        "HB-004"
+        "HB-004",
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
@@ -13867,8 +13865,8 @@
       "ranked": [
         "HR-PIP-17",
         "OPS-004",
-        "OPS-001",
         "PAY-9100",
+        "OPS-001",
         "OPS-003"
       ],
       "hit1": true,
@@ -13891,8 +13889,8 @@
         "OPS-001",
         "OPS-003",
         "NEWS-001",
-        "DIR-003",
-        "HB-004"
+        "HB-004",
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
@@ -13915,23 +13913,23 @@
       "expected": [],
       "ranked": [
         "NEWS-001",
-        "DIR-003",
         "HB-004",
+        "DIR-003",
         "INJ-002",
-        "HB-005"
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 629,
+      "contextWords": 620,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-PIP-17",
         "OPS-004",
-        "OPS-001",
         "PAY-9100",
-        "HR-RIF-2026"
+        "HR-RIF-2026",
+        "OPS-001"
       ]
     },
     {
@@ -13945,9 +13943,9 @@
       "ranked": [
         "HR-PIP-17",
         "OPS-004",
-        "OPS-001",
         "PAY-9100",
-        "HR-RIF-2026"
+        "HR-RIF-2026",
+        "OPS-001"
       ],
       "hit1": true,
       "hit3": true,
@@ -13991,15 +13989,15 @@
       "ranked": [
         "FIN-001",
         "FIN-002",
-        "HB-005",
         "NEWS-001",
-        "INJ-002"
+        "INJ-002",
+        "OPS-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 519,
+      "contextWords": 453,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-8817",
@@ -14040,15 +14038,15 @@
       "ranked": [
         "FIN-001",
         "FIN-002",
-        "HB-005",
         "NEWS-001",
-        "INJ-002"
+        "INJ-002",
+        "OPS-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 519,
+      "contextWords": 453,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-8817",
@@ -14064,9 +14062,9 @@
       "chunkSet": "medium",
       "expected": [],
       "ranked": [
-        "HB-005",
         "NEWS-001",
         "INJ-002",
+        "HB-005",
         "HB-004",
         "HB-006"
       ],
@@ -14143,14 +14141,14 @@
         "NEWS-001",
         "OPS-003",
         "INJ-002",
-        "FIN-002",
+        "DIR-002",
         "OPS-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 462,
+      "contextWords": 511,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-8817",
@@ -14192,14 +14190,14 @@
         "NEWS-001",
         "OPS-003",
         "INJ-002",
-        "FIN-002",
+        "DIR-002",
         "OPS-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 462,
+      "contextWords": 511,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-8817",
@@ -14217,9 +14215,9 @@
       "ranked": [
         "NEWS-001",
         "INJ-002",
+        "DIR-002",
         "HB-006",
-        "HB-005",
-        "DIR-002"
+        "HB-005"
       ],
       "hit1": null,
       "hit3": null,
@@ -14265,8 +14263,8 @@
       "expected": [],
       "ranked": [
         "DIR-003",
-        "HB-001",
         "HB-005",
+        "HB-001",
         "HB-006",
         "INJ-002"
       ],
@@ -14290,8 +14288,8 @@
       "expected": [],
       "ranked": [
         "DIR-003",
-        "HB-001",
         "HB-005",
+        "HB-001",
         "HB-006",
         "INJ-002"
       ],
@@ -14317,9 +14315,9 @@
       ],
       "ranked": [
         "HR-LONDON-88",
+        "DIR-003",
         "HR-BERLIN-41",
-        "HR-BANDS-2026",
-        "DIR-003"
+        "HR-BANDS-2026"
       ],
       "hit1": true,
       "hit3": true,
@@ -14337,8 +14335,8 @@
       "expected": [],
       "ranked": [
         "DIR-003",
-        "HB-001",
         "HB-005",
+        "HB-001",
         "HB-006",
         "INJ-002"
       ],
@@ -14362,8 +14360,8 @@
       "expected": [],
       "ranked": [
         "DIR-003",
-        "HB-001",
         "HB-005",
+        "HB-001",
         "HB-006",
         "INJ-002"
       ],
@@ -14389,9 +14387,9 @@
       ],
       "ranked": [
         "HR-LONDON-88",
+        "DIR-003",
         "HR-BERLIN-41",
-        "HR-BANDS-2026",
-        "DIR-003"
+        "HR-BANDS-2026"
       ],
       "hit1": true,
       "hit3": true,
@@ -14409,8 +14407,8 @@
       "expected": [],
       "ranked": [
         "OPS-003",
-        "HB-005",
         "DIR-003",
+        "HB-005",
         "PAY-9100",
         "HB-002"
       ],
@@ -14434,8 +14432,8 @@
       "expected": [],
       "ranked": [
         "OPS-003",
-        "HB-005",
         "DIR-003",
+        "HB-005",
         "HB-002",
         "NEWS-001"
       ],
@@ -14464,13 +14462,13 @@
         "HR-LONDON-88",
         "HR-BANDS-2026",
         "OPS-003",
-        "HB-005"
+        "DIR-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 544,
+      "contextWords": 527,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -14482,8 +14480,8 @@
       "expected": [],
       "ranked": [
         "OPS-003",
-        "HB-005",
         "DIR-003",
+        "HB-005",
         "HB-002",
         "NEWS-001"
       ],
@@ -14506,8 +14504,8 @@
       "chunkSet": "medium",
       "expected": [],
       "ranked": [
-        "HB-005",
         "DIR-003",
+        "HB-005",
         "HB-002",
         "NEWS-001",
         "INJ-002"
@@ -14538,13 +14536,13 @@
         "HR-LONDON-88",
         "HR-BANDS-2026",
         "OPS-003",
-        "HB-005"
+        "DIR-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 544,
+      "contextWords": 527,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -14556,8 +14554,8 @@
       "expected": [],
       "ranked": [
         "DIR-003",
-        "HB-005",
         "HB-001",
+        "HB-005",
         "HB-002"
       ],
       "hit1": null,
@@ -14580,8 +14578,8 @@
       "expected": [],
       "ranked": [
         "DIR-003",
-        "HB-005",
         "HB-001",
+        "HB-005",
         "HB-002"
       ],
       "hit1": null,
@@ -14606,16 +14604,15 @@
       ],
       "ranked": [
         "HR-BANDS-2026",
-        "HR-BERLIN-41",
         "DIR-003",
-        "HR-LONDON-88",
-        "HB-005"
+        "HR-BERLIN-41",
+        "HR-LONDON-88"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 605,
+      "contextWords": 519,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -14627,8 +14624,8 @@
       "expected": [],
       "ranked": [
         "DIR-003",
-        "HB-005",
         "HB-001",
+        "HB-005",
         "HB-002"
       ],
       "hit1": null,
@@ -14651,8 +14648,8 @@
       "expected": [],
       "ranked": [
         "DIR-003",
-        "HB-005",
         "HB-001",
+        "HB-005",
         "HB-002"
       ],
       "hit1": null,
@@ -14677,16 +14674,15 @@
       ],
       "ranked": [
         "HR-BANDS-2026",
-        "HR-BERLIN-41",
         "DIR-003",
-        "HR-LONDON-88",
-        "HB-005"
+        "HR-BERLIN-41",
+        "HR-LONDON-88"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 605,
+      "contextWords": 519,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -15071,13 +15067,13 @@
         "HB-006",
         "NEWS-001",
         "HB-004",
-        "INJ-002"
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 763,
+      "contextWords": 794,
       "leaked": [],
       "wouldHaveLeaked": [
         "INC-8790",
@@ -15223,13 +15219,13 @@
         "INJ-002",
         "HB-004",
         "HB-003",
-        "DIR-001"
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 588,
+      "contextWords": 597,
       "leaked": [],
       "wouldHaveLeaked": [
         "IT-SUM-8877",
@@ -15274,18 +15270,17 @@
       "ranked": [
         "HB-006",
         "HB-001",
-        "HB-005",
-        "INJ-002"
+        "INJ-002",
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 882,
+      "contextWords": 850,
       "leaked": [],
       "wouldHaveLeaked": [
-        "RUN-002",
-        "HR-BANDS-2026"
+        "RUN-002"
       ]
     },
     {
@@ -15300,17 +15295,15 @@
         "HB-006",
         "HB-001",
         "RUN-002",
-        "HB-005"
+        "INJ-002"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 882,
+      "contextWords": 834,
       "leaked": [],
-      "wouldHaveLeaked": [
-        "HR-BANDS-2026"
-      ]
+      "wouldHaveLeaked": []
     },
     {
       "questionId": "H10",
@@ -15323,14 +15316,14 @@
       "ranked": [
         "HB-006",
         "HB-001",
-        "HR-BANDS-2026",
-        "HB-005"
+        "INJ-002",
+        "HR-BANDS-2026"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 974,
+      "contextWords": 926,
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002"
@@ -15348,17 +15341,15 @@
         "HB-006",
         "HB-001",
         "RUN-002",
-        "HB-005"
+        "INJ-002"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 882,
+      "contextWords": 834,
       "leaked": [],
-      "wouldHaveLeaked": [
-        "HR-BANDS-2026"
-      ]
+      "wouldHaveLeaked": []
     },
     {
       "questionId": "H10",
@@ -15371,18 +15362,17 @@
       "ranked": [
         "HB-006",
         "HB-001",
-        "HB-005",
-        "INJ-002"
+        "INJ-002",
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 882,
+      "contextWords": 850,
       "leaked": [],
       "wouldHaveLeaked": [
-        "RUN-002",
-        "HR-BANDS-2026"
+        "RUN-002"
       ]
     },
     {
@@ -15397,13 +15387,13 @@
         "HB-006",
         "HB-001",
         "RUN-002",
-        "HR-BANDS-2026"
+        "INJ-002"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 926,
+      "contextWords": 834,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -15417,8 +15407,8 @@
       ],
       "ranked": [
         "HB-001",
-        "HB-002",
-        "HB-005"
+        "HB-005",
+        "HB-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -15438,8 +15428,8 @@
       ],
       "ranked": [
         "HB-001",
-        "HB-002",
-        "HB-005"
+        "HB-005",
+        "HB-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -15459,8 +15449,8 @@
       ],
       "ranked": [
         "HB-001",
-        "HB-002",
-        "HB-005"
+        "HB-005",
+        "HB-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -15480,8 +15470,8 @@
       ],
       "ranked": [
         "HB-001",
-        "HB-002",
-        "HB-005"
+        "HB-005",
+        "HB-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -15501,8 +15491,8 @@
       ],
       "ranked": [
         "HB-001",
-        "HB-002",
-        "HB-005"
+        "HB-005",
+        "HB-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -15522,8 +15512,8 @@
       ],
       "ranked": [
         "HB-001",
-        "HB-002",
-        "HB-005"
+        "HB-005",
+        "HB-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -15992,13 +15982,13 @@
         "OPS-002",
         "IT-SUM-8921",
         "IT-SUM-8877",
-        "OPS-001"
+        "HB-006"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 469,
+      "contextWords": 585,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003"
@@ -16035,16 +16025,16 @@
       "expected": [],
       "ranked": [
         "NEWS-001",
-        "DIR-003",
         "HB-006",
+        "DIR-003",
         "INJ-002",
-        "HB-003"
+        "HB-004"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 677,
+      "contextWords": 704,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003",
@@ -16184,8 +16174,8 @@
       "ranked": [
         "NEWS-001",
         "INJ-002",
-        "HB-002",
         "DIR-002",
+        "HB-002",
         "INJ-001"
       ],
       "hit1": null,
@@ -16389,7 +16379,7 @@
       "wouldHaveLeaked": [
         "INC-8877",
         "INC-8921",
-        "RUN-002"
+        "INC-9012"
       ]
     },
     {
@@ -16405,13 +16395,13 @@
         "IT-SUM-8877",
         "INC-8921",
         "ENG-001",
-        "RUN-002"
+        "INC-9012"
       ],
       "hit1": false,
       "hit3": false,
       "rr": 0.25,
       "answerHit3": false,
-      "contextWords": 705,
+      "contextWords": 703,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -16439,7 +16429,7 @@
       "wouldHaveLeaked": [
         "INC-8877",
         "INC-8921",
-        "RUN-002"
+        "INC-9012"
       ]
     },
     {
@@ -16455,13 +16445,13 @@
         "IT-SUM-8877",
         "INC-8921",
         "ENG-001",
-        "RUN-002"
+        "INC-9012"
       ],
       "hit1": false,
       "hit3": false,
       "rr": 0.25,
       "answerHit3": false,
-      "contextWords": 705,
+      "contextWords": 703,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -16489,7 +16479,7 @@
         "IT-SUM-8877",
         "INC-8921",
         "ENG-001",
-        "RUN-002"
+        "INC-9012"
       ]
     },
     {
@@ -16505,13 +16495,13 @@
         "IT-SUM-8877",
         "INC-8921",
         "ENG-001",
-        "RUN-002"
+        "INC-9012"
       ],
       "hit1": false,
       "hit3": false,
       "rr": 0.25,
       "answerHit3": false,
-      "contextWords": 705,
+      "contextWords": 703,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -16527,13 +16517,14 @@
         "ENG-001",
         "IT-SUM-8921",
         "DIR-003",
-        "HB-006"
+        "HB-006",
+        "IT-SUM-8877"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 810,
+      "contextWords": 721,
       "leaked": [],
       "wouldHaveLeaked": [
         "INC-8790"
@@ -16550,14 +16541,15 @@
       "ranked": [
         "ENG-001",
         "IT-SUM-8921",
+        "DIR-003",
         "INC-8790",
-        "DIR-003"
+        "HB-006"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 693,
+      "contextWords": 716,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -16573,13 +16565,14 @@
         "ENG-001",
         "IT-SUM-8921",
         "DIR-003",
-        "HB-006"
+        "HB-006",
+        "IT-SUM-8877"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 810,
+      "contextWords": 721,
       "leaked": [],
       "wouldHaveLeaked": [
         "INC-8790"
@@ -16596,14 +16589,15 @@
       "ranked": [
         "ENG-001",
         "IT-SUM-8921",
+        "DIR-003",
         "INC-8790",
-        "DIR-003"
+        "HB-006"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 693,
+      "contextWords": 716,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -16617,14 +16611,14 @@
         "DIR-003",
         "HB-006",
         "HB-004",
-        "HB-003",
-        "HB-002"
+        "HB-002",
+        "NEWS-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 714,
+      "contextWords": 710,
       "leaked": [],
       "wouldHaveLeaked": [
         "ENG-001",
@@ -16643,14 +16637,15 @@
       "ranked": [
         "ENG-001",
         "IT-SUM-8921",
+        "DIR-003",
         "INC-8790",
-        "DIR-003"
+        "HB-006"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 693,
+      "contextWords": 716,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -16817,14 +16812,14 @@
         "DIR-001",
         "DIR-002",
         "INJ-002",
-        "HB-004",
-        "OPS-002"
+        "HB-003",
+        "HB-004"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 569,
+      "contextWords": 603,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-8817",
@@ -16868,14 +16863,14 @@
         "DIR-001",
         "DIR-002",
         "INJ-002",
-        "HB-004",
-        "OPS-002"
+        "HB-003",
+        "HB-004"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 569,
+      "contextWords": 603,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-8817",
@@ -16895,14 +16890,14 @@
         "DIR-001",
         "DIR-002",
         "INJ-002",
-        "HB-004",
-        "DIR-003"
+        "HB-003",
+        "HB-004"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 618,
+      "contextWords": 603,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-8817",
@@ -16944,8 +16939,8 @@
       "ranked": [
         "DIR-002",
         "FIN-002",
-        "OPS-002",
         "DIR-001",
+        "OPS-002",
         "FIN-003"
       ],
       "hit1": true,
@@ -16967,8 +16962,8 @@
       "ranked": [
         "DIR-002",
         "FIN-002",
-        "OPS-002",
         "DIR-001",
+        "OPS-002",
         "INJ-002"
       ],
       "hit1": true,
@@ -16992,8 +16987,8 @@
       "ranked": [
         "DIR-002",
         "FIN-002",
-        "OPS-002",
         "DIR-001",
+        "OPS-002",
         "PAY-8817"
       ],
       "hit1": true,
@@ -17017,8 +17012,8 @@
       "ranked": [
         "DIR-002",
         "FIN-002",
-        "OPS-002",
         "DIR-001",
+        "OPS-002",
         "INJ-002"
       ],
       "hit1": true,
@@ -17043,8 +17038,8 @@
         "DIR-002",
         "DIR-001",
         "INJ-002",
-        "NEWS-001",
-        "DIR-003"
+        "DIR-003",
+        "NEWS-001"
       ],
       "hit1": true,
       "hit3": true,
@@ -17069,8 +17064,8 @@
       "ranked": [
         "DIR-002",
         "FIN-002",
-        "OPS-002",
         "DIR-001",
+        "OPS-002",
         "FIN-003"
       ],
       "hit1": true,
@@ -17288,8 +17283,8 @@
       "ranked": [
         "HB-001",
         "HB-005",
-        "HB-002",
         "HR-BANDS-2026",
+        "HB-002",
         "HB-006"
       ],
       "hit1": true,
@@ -17361,8 +17356,8 @@
       "ranked": [
         "HB-001",
         "HB-005",
-        "HB-002",
         "HR-BANDS-2026",
+        "HB-002",
         "HB-006"
       ],
       "hit1": true,
@@ -17436,8 +17431,8 @@
       "ranked": [
         "HB-001",
         "HB-002",
-        "HR-BANDS-2026",
         "HB-006",
+        "HR-BANDS-2026",
         "HR-BERLIN-41"
       ],
       "hit1": true,
@@ -17511,8 +17506,8 @@
       "ranked": [
         "HB-001",
         "HB-002",
-        "HR-BANDS-2026",
         "HB-006",
+        "HR-BANDS-2026",
         "HR-BERLIN-41"
       ],
       "hit1": true,
@@ -17536,13 +17531,13 @@
         "HB-002",
         "HB-004",
         "HB-001",
-        "HB-005"
+        "HB-003"
       ],
       "hit1": false,
       "hit3": true,
       "rr": 0.5,
       "answerHit3": null,
-      "contextWords": 917,
+      "contextWords": 885,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-LONDON-88",
@@ -17563,13 +17558,13 @@
         "HB-002",
         "HB-004",
         "HB-001",
-        "HB-005"
+        "HB-003"
       ],
       "hit1": false,
       "hit3": true,
       "rr": 0.5,
       "answerHit3": null,
-      "contextWords": 917,
+      "contextWords": 885,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-LONDON-88",
@@ -17613,13 +17608,13 @@
         "HB-002",
         "HB-004",
         "HB-001",
-        "HB-005"
+        "HB-003"
       ],
       "hit1": false,
       "hit3": true,
       "rr": 0.5,
       "answerHit3": null,
-      "contextWords": 917,
+      "contextWords": 885,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-LONDON-88",
@@ -17639,8 +17634,8 @@
         "HB-002",
         "HB-004",
         "HB-001",
-        "HB-005",
-        "HB-003"
+        "HB-003",
+        "HB-005"
       ],
       "hit1": true,
       "hit3": true,
@@ -17843,13 +17838,13 @@
         "INJ-001",
         "INJ-002",
         "HB-003",
-        "ENG-001"
+        "FIN-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 838,
+      "contextWords": 559,
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002"
@@ -17867,8 +17862,8 @@
         "HB-004",
         "INJ-001",
         "INJ-002",
-        "HB-003",
-        "RUN-002"
+        "RUN-002",
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
@@ -17891,13 +17886,13 @@
         "INJ-001",
         "INJ-002",
         "HB-003",
-        "ENG-001"
+        "FIN-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 838,
+      "contextWords": 559,
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002"
@@ -17915,8 +17910,8 @@
         "HB-004",
         "INJ-001",
         "INJ-002",
-        "HB-003",
-        "RUN-002"
+        "RUN-002",
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
@@ -17939,13 +17934,13 @@
         "INJ-001",
         "INJ-002",
         "HB-003",
-        "HB-005"
+        "HB-006"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 621,
+      "contextWords": 852,
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002"
@@ -17963,8 +17958,8 @@
         "HB-004",
         "INJ-001",
         "INJ-002",
-        "HB-003",
-        "RUN-002"
+        "RUN-002",
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
@@ -17985,266 +17980,266 @@
       "ranked": [
         "HB-005",
         "PAY-9100",
-        "DIR-003",
         "HB-001",
+        "HB-002",
+        "HB-006"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 1153,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026",
+        "HR-BERLIN-41"
+      ]
+    },
+    {
+      "questionId": "R09",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "full",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-001",
+        "HB-002",
+        "HB-006",
+        "OPS-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 1174,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026",
+        "PAY-9100",
+        "HR-BERLIN-41"
+      ]
+    },
+    {
+      "questionId": "R09",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "full",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HR-BANDS-2026",
+        "PAY-9100",
+        "HR-BERLIN-41",
+        "HB-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 915,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R09",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "full",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-001",
+        "HB-002",
+        "HB-006",
+        "OPS-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 1174,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026",
+        "PAY-9100",
+        "HR-BERLIN-41"
+      ]
+    },
+    {
+      "questionId": "R09",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "full",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HB-001",
+        "HB-002",
+        "HB-006",
+        "DIR-003"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 1198,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "HR-BANDS-2026",
+        "PAY-9100",
+        "HR-BERLIN-41"
+      ]
+    },
+    {
+      "questionId": "R09",
+      "difficulty": "easy",
+      "persona": "Jay Seal",
+      "chunkSet": "full",
+      "expected": [
+        "HB-005"
+      ],
+      "ranked": [
+        "HB-005",
+        "HR-BANDS-2026",
+        "PAY-9100",
+        "HR-BERLIN-41",
+        "HB-001"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 915,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R10",
+      "difficulty": "easy",
+      "persona": "Jane Doe",
+      "chunkSet": "full",
+      "expected": [
+        "HB-006"
+      ],
+      "ranked": [
+        "HB-006",
+        "ENG-001",
+        "IT-SUM-8921",
+        "OPS-002",
+        "DIR-003"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 1047,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "RUN-002",
+        "INC-8790"
+      ]
+    },
+    {
+      "questionId": "R10",
+      "difficulty": "easy",
+      "persona": "Alex Rivera",
+      "chunkSet": "full",
+      "expected": [
+        "HB-006"
+      ],
+      "ranked": [
+        "HB-006",
+        "RUN-002",
+        "ENG-001",
+        "INC-8790",
+        "IT-SUM-8921"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 1007,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R10",
+      "difficulty": "easy",
+      "persona": "Sarah Chen",
+      "chunkSet": "full",
+      "expected": [
+        "HB-006"
+      ],
+      "ranked": [
+        "HB-006",
+        "ENG-001",
+        "IT-SUM-8921",
+        "OPS-002",
+        "DIR-003"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 1047,
+      "leaked": [],
+      "wouldHaveLeaked": [
+        "RUN-002",
+        "INC-8790"
+      ]
+    },
+    {
+      "questionId": "R10",
+      "difficulty": "easy",
+      "persona": "Binny Lee",
+      "chunkSet": "full",
+      "expected": [
+        "HB-006"
+      ],
+      "ranked": [
+        "HB-006",
+        "RUN-002",
+        "ENG-001",
+        "INC-8790",
+        "IT-SUM-8921"
+      ],
+      "hit1": true,
+      "hit3": true,
+      "rr": 1,
+      "answerHit3": null,
+      "contextWords": 1007,
+      "leaked": [],
+      "wouldHaveLeaked": []
+    },
+    {
+      "questionId": "R10",
+      "difficulty": "easy",
+      "persona": "Neil Wright",
+      "chunkSet": "full",
+      "expected": [
+        "HB-006"
+      ],
+      "ranked": [
+        "HB-006",
+        "DIR-003",
+        "NEWS-001",
+        "HB-003",
         "HB-002"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 905,
-      "leaked": [],
-      "wouldHaveLeaked": [
-        "HR-BANDS-2026",
-        "HR-BERLIN-41"
-      ]
-    },
-    {
-      "questionId": "R09",
-      "difficulty": "easy",
-      "persona": "Alex Rivera",
-      "chunkSet": "full",
-      "expected": [
-        "HB-005"
-      ],
-      "ranked": [
-        "HB-005",
-        "DIR-003",
-        "HB-001",
-        "HB-002",
-        "HB-006"
-      ],
-      "hit1": true,
-      "hit3": true,
-      "rr": 1,
-      "answerHit3": null,
-      "contextWords": 1198,
-      "leaked": [],
-      "wouldHaveLeaked": [
-        "HR-BANDS-2026",
-        "PAY-9100",
-        "HR-BERLIN-41"
-      ]
-    },
-    {
-      "questionId": "R09",
-      "difficulty": "easy",
-      "persona": "Sarah Chen",
-      "chunkSet": "full",
-      "expected": [
-        "HB-005"
-      ],
-      "ranked": [
-        "HB-005",
-        "HR-BANDS-2026",
-        "PAY-9100",
-        "HR-BERLIN-41",
-        "DIR-003"
-      ],
-      "hit1": true,
-      "hit3": true,
-      "rr": 1,
-      "answerHit3": null,
-      "contextWords": 640,
-      "leaked": [],
-      "wouldHaveLeaked": []
-    },
-    {
-      "questionId": "R09",
-      "difficulty": "easy",
-      "persona": "Binny Lee",
-      "chunkSet": "full",
-      "expected": [
-        "HB-005"
-      ],
-      "ranked": [
-        "HB-005",
-        "DIR-003",
-        "HB-001",
-        "HB-002",
-        "HB-006"
-      ],
-      "hit1": true,
-      "hit3": true,
-      "rr": 1,
-      "answerHit3": null,
-      "contextWords": 1198,
-      "leaked": [],
-      "wouldHaveLeaked": [
-        "HR-BANDS-2026",
-        "PAY-9100",
-        "HR-BERLIN-41"
-      ]
-    },
-    {
-      "questionId": "R09",
-      "difficulty": "easy",
-      "persona": "Neil Wright",
-      "chunkSet": "full",
-      "expected": [
-        "HB-005"
-      ],
-      "ranked": [
-        "HB-005",
-        "DIR-003",
-        "HB-001",
-        "HB-002",
-        "HB-006"
-      ],
-      "hit1": true,
-      "hit3": true,
-      "rr": 1,
-      "answerHit3": null,
-      "contextWords": 1198,
-      "leaked": [],
-      "wouldHaveLeaked": [
-        "HR-BANDS-2026",
-        "PAY-9100",
-        "HR-BERLIN-41"
-      ]
-    },
-    {
-      "questionId": "R09",
-      "difficulty": "easy",
-      "persona": "Jay Seal",
-      "chunkSet": "full",
-      "expected": [
-        "HB-005"
-      ],
-      "ranked": [
-        "HB-005",
-        "HR-BANDS-2026",
-        "PAY-9100",
-        "HR-BERLIN-41",
-        "DIR-003"
-      ],
-      "hit1": true,
-      "hit3": true,
-      "rr": 1,
-      "answerHit3": null,
-      "contextWords": 640,
-      "leaked": [],
-      "wouldHaveLeaked": []
-    },
-    {
-      "questionId": "R10",
-      "difficulty": "easy",
-      "persona": "Jane Doe",
-      "chunkSet": "full",
-      "expected": [
-        "HB-006"
-      ],
-      "ranked": [
-        "HB-006",
-        "ENG-001",
-        "IT-SUM-8921",
-        "OPS-002",
-        "NEWS-001"
-      ],
-      "hit1": true,
-      "hit3": true,
-      "rr": 1,
-      "answerHit3": null,
-      "contextWords": 1028,
-      "leaked": [],
-      "wouldHaveLeaked": [
-        "RUN-002",
-        "INC-8790"
-      ]
-    },
-    {
-      "questionId": "R10",
-      "difficulty": "easy",
-      "persona": "Alex Rivera",
-      "chunkSet": "full",
-      "expected": [
-        "HB-006"
-      ],
-      "ranked": [
-        "HB-006",
-        "RUN-002",
-        "ENG-001",
-        "INC-8790",
-        "IT-SUM-8921"
-      ],
-      "hit1": true,
-      "hit3": true,
-      "rr": 1,
-      "answerHit3": null,
-      "contextWords": 1007,
-      "leaked": [],
-      "wouldHaveLeaked": []
-    },
-    {
-      "questionId": "R10",
-      "difficulty": "easy",
-      "persona": "Sarah Chen",
-      "chunkSet": "full",
-      "expected": [
-        "HB-006"
-      ],
-      "ranked": [
-        "HB-006",
-        "ENG-001",
-        "IT-SUM-8921",
-        "OPS-002",
-        "NEWS-001"
-      ],
-      "hit1": true,
-      "hit3": true,
-      "rr": 1,
-      "answerHit3": null,
-      "contextWords": 1028,
-      "leaked": [],
-      "wouldHaveLeaked": [
-        "RUN-002",
-        "INC-8790"
-      ]
-    },
-    {
-      "questionId": "R10",
-      "difficulty": "easy",
-      "persona": "Binny Lee",
-      "chunkSet": "full",
-      "expected": [
-        "HB-006"
-      ],
-      "ranked": [
-        "HB-006",
-        "RUN-002",
-        "ENG-001",
-        "INC-8790",
-        "IT-SUM-8921"
-      ],
-      "hit1": true,
-      "hit3": true,
-      "rr": 1,
-      "answerHit3": null,
-      "contextWords": 1007,
-      "leaked": [],
-      "wouldHaveLeaked": []
-    },
-    {
-      "questionId": "R10",
-      "difficulty": "easy",
-      "persona": "Neil Wright",
-      "chunkSet": "full",
-      "expected": [
-        "HB-006"
-      ],
-      "ranked": [
-        "HB-006",
-        "NEWS-001",
-        "HB-002",
-        "DIR-003",
-        "INJ-002"
-      ],
-      "hit1": true,
-      "hit3": true,
-      "rr": 1,
-      "answerHit3": null,
-      "contextWords": 856,
+      "contextWords": 872,
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002",
@@ -18773,13 +18768,13 @@
         "FIN-002",
         "NEWS-001",
         "OPS-003",
-        "HB-005"
+        "FIN-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 510,
+      "contextWords": 448,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-9100",
@@ -18822,13 +18817,13 @@
         "FIN-002",
         "NEWS-001",
         "OPS-003",
-        "HB-005"
+        "FIN-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 510,
+      "contextWords": 448,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-9100",
@@ -18920,13 +18915,13 @@
         "INJ-002",
         "FIN-002",
         "DIR-002",
-        "DIR-001"
+        "FIN-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 504,
+      "contextWords": 468,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-004",
@@ -18971,13 +18966,13 @@
         "INJ-002",
         "FIN-002",
         "DIR-002",
-        "DIR-001"
+        "FIN-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 504,
+      "contextWords": 468,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-004",
@@ -18994,8 +18989,8 @@
         "INJ-002",
         "DIR-002",
         "DIR-001",
-        "HB-002",
-        "HB-003"
+        "HB-003",
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
@@ -19043,8 +19038,8 @@
       ],
       "ranked": [
         "FIN-001",
-        "HB-003",
         "HB-002",
+        "HB-003",
         "OPS-002",
         "INJ-002"
       ],
@@ -19066,8 +19061,8 @@
       ],
       "ranked": [
         "FIN-001",
-        "HB-003",
         "HB-002",
+        "HB-003",
         "OPS-002",
         "INJ-002"
       ],
@@ -19089,8 +19084,8 @@
       ],
       "ranked": [
         "FIN-001",
-        "HB-003",
         "HB-002",
+        "HB-003",
         "OPS-002",
         "INJ-002"
       ],
@@ -19112,8 +19107,8 @@
       ],
       "ranked": [
         "FIN-001",
-        "HB-003",
         "HB-002",
+        "HB-003",
         "OPS-002",
         "INJ-002"
       ],
@@ -19132,17 +19127,17 @@
       "chunkSet": "full",
       "expected": [],
       "ranked": [
-        "HB-003",
         "HB-002",
+        "HB-003",
         "INJ-002",
-        "HB-005",
-        "HB-001"
+        "HB-001",
+        "HB-004"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 904,
+      "contextWords": 899,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-001",
@@ -19159,8 +19154,8 @@
       ],
       "ranked": [
         "FIN-001",
-        "HB-003",
         "HB-002",
+        "HB-003",
         "OPS-002",
         "INJ-002"
       ],
@@ -19237,13 +19232,13 @@
         "OPS-002",
         "PAY-9100",
         "OPS-004",
-        "HR-BANDS-2026"
+        "OPS-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 529,
+      "contextWords": 384,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003"
@@ -19286,8 +19281,8 @@
         "NEWS-001",
         "HB-006",
         "HB-001",
-        "INJ-001",
-        "HB-002"
+        "HB-002",
+        "INJ-001"
       ],
       "hit1": null,
       "hit3": null,
@@ -19364,8 +19359,8 @@
         "ENG-001",
         "INJ-002",
         "OPS-002",
-        "RUN-002",
-        "HB-003"
+        "HB-003",
+        "RUN-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -19416,14 +19411,14 @@
         "ENG-001",
         "INJ-002",
         "OPS-002",
-        "SEC-001",
-        "RUN-002"
+        "HB-003",
+        "SEC-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 746,
+      "contextWords": 762,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-RIF-2026",
@@ -19441,13 +19436,13 @@
         "HB-003",
         "HB-004",
         "INJ-001",
-        "DIR-002"
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 600,
+      "contextWords": 604,
       "leaked": [],
       "wouldHaveLeaked": [
         "ENG-001",
@@ -19513,15 +19508,15 @@
         "INC-9012"
       ],
       "ranked": [
-        "INC-9012",
         "IT-SUM-8877",
+        "INC-9012",
         "IT-SUM-8921",
         "INC-8877",
         "INC-8921"
       ],
-      "hit1": true,
+      "hit1": false,
       "hit3": true,
-      "rr": 1,
+      "rr": 0.5,
       "answerHit3": null,
       "contextWords": 632,
       "leaked": [],
@@ -19561,15 +19556,15 @@
         "INC-9012"
       ],
       "ranked": [
-        "INC-9012",
         "IT-SUM-8877",
+        "INC-9012",
         "IT-SUM-8921",
         "INC-8877",
         "INC-8921"
       ],
-      "hit1": true,
+      "hit1": false,
       "hit3": true,
-      "rr": 1,
+      "rr": 0.5,
       "answerHit3": null,
       "contextWords": 632,
       "leaked": [],
@@ -19586,17 +19581,17 @@
         "HB-004",
         "DIR-003",
         "HB-003",
-        "INJ-002"
+        "INJ-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 597,
+      "contextWords": 616,
       "leaked": [],
       "wouldHaveLeaked": [
-        "INC-9012",
         "IT-SUM-8877",
+        "INC-9012",
         "IT-SUM-8921",
         "INC-8877",
         "INC-8921"
@@ -19611,15 +19606,15 @@
         "INC-9012"
       ],
       "ranked": [
-        "INC-9012",
         "IT-SUM-8877",
+        "INC-9012",
         "IT-SUM-8921",
         "INC-8877",
         "INC-8921"
       ],
-      "hit1": true,
+      "hit1": false,
       "hit3": true,
-      "rr": 1,
+      "rr": 0.5,
       "answerHit3": null,
       "contextWords": 632,
       "leaked": [],
@@ -19781,16 +19776,16 @@
       "expected": [],
       "ranked": [
         "HB-006",
-        "INJ-002",
         "ENG-001",
+        "INJ-002",
         "IT-SUM-8921",
-        "IT-SUM-8877"
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 1012,
+      "contextWords": 1065,
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002"
@@ -19807,8 +19802,8 @@
       "ranked": [
         "RUN-002",
         "HB-006",
-        "INJ-002",
         "ENG-001",
+        "INJ-002",
         "IT-SUM-8921"
       ],
       "hit1": true,
@@ -19827,16 +19822,16 @@
       "expected": [],
       "ranked": [
         "HB-006",
-        "INJ-002",
         "ENG-001",
+        "INJ-002",
         "IT-SUM-8921",
-        "IT-SUM-8877"
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 1012,
+      "contextWords": 1065,
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002"
@@ -19853,8 +19848,8 @@
       "ranked": [
         "RUN-002",
         "HB-006",
-        "INJ-002",
         "ENG-001",
+        "INJ-002",
         "IT-SUM-8921"
       ],
       "hit1": true,
@@ -19901,8 +19896,8 @@
       "ranked": [
         "RUN-002",
         "HB-006",
-        "INJ-002",
         "ENG-001",
+        "INJ-002",
         "IT-SUM-8921"
       ],
       "hit1": true,
@@ -19947,13 +19942,13 @@
         "HB-005",
         "OPS-001",
         "INJ-002",
-        "DIR-001"
+        "OPS-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 584,
+      "contextWords": 532,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-9041",
@@ -19998,13 +19993,13 @@
         "HB-005",
         "OPS-001",
         "INJ-002",
-        "DIR-001"
+        "OPS-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 584,
+      "contextWords": 532,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-9041",
@@ -20173,13 +20168,13 @@
         "NEWS-001",
         "INJ-002",
         "DIR-002",
-        "HB-003"
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 598,
+      "contextWords": 621,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-9100",
@@ -20243,9 +20238,9 @@
       "ranked": [
         "FIN-002",
         "NEWS-001",
+        "OPS-001",
         "OPS-002",
-        "INJ-002",
-        "OPS-001"
+        "INJ-002"
       ],
       "hit1": null,
       "hit3": null,
@@ -20270,13 +20265,13 @@
         "PAY-8817",
         "NEWS-001",
         "PAY-9041",
-        "PAY-9100"
+        "OPS-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 432,
+      "contextWords": 453,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003"
@@ -20291,9 +20286,9 @@
       "ranked": [
         "FIN-002",
         "NEWS-001",
+        "OPS-001",
         "OPS-002",
-        "INJ-002",
-        "OPS-001"
+        "INJ-002"
       ],
       "hit1": null,
       "hit3": null,
@@ -20811,10 +20806,10 @@
       "expected": [],
       "ranked": [
         "OPS-003",
+        "DIR-003",
         "INJ-002",
         "INJ-001",
-        "HB-004",
-        "DIR-003"
+        "HB-004"
       ],
       "hit1": null,
       "hit3": null,
@@ -20836,10 +20831,10 @@
       "expected": [],
       "ranked": [
         "OPS-003",
+        "DIR-003",
         "INJ-002",
         "INJ-001",
-        "HB-004",
-        "DIR-003"
+        "HB-004"
       ],
       "hit1": null,
       "hit3": null,
@@ -20866,13 +20861,13 @@
         "HR-LONDON-88",
         "OPS-003",
         "HR-BANDS-2026",
-        "INJ-002"
+        "DIR-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 527,
+      "contextWords": 558,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -20884,10 +20879,10 @@
       "expected": [],
       "ranked": [
         "OPS-003",
+        "DIR-003",
         "INJ-002",
         "INJ-001",
-        "HB-004",
-        "DIR-003"
+        "HB-004"
       ],
       "hit1": null,
       "hit3": null,
@@ -20908,10 +20903,10 @@
       "chunkSet": "full",
       "expected": [],
       "ranked": [
+        "DIR-003",
         "INJ-002",
         "INJ-001",
         "HB-004",
-        "DIR-003",
         "NEWS-001"
       ],
       "hit1": null,
@@ -20940,13 +20935,13 @@
         "HR-LONDON-88",
         "OPS-003",
         "HR-BANDS-2026",
-        "INJ-002"
+        "DIR-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 527,
+      "contextWords": 558,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -20961,13 +20956,13 @@
         "INJ-002",
         "IT-SUM-8921",
         "ENG-001",
-        "HB-004"
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 776,
+      "contextWords": 764,
       "leaked": [],
       "wouldHaveLeaked": [
         "SEC-001",
@@ -21009,13 +21004,13 @@
         "INJ-002",
         "IT-SUM-8921",
         "ENG-001",
-        "HB-004"
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 776,
+      "contextWords": 764,
       "leaked": [],
       "wouldHaveLeaked": [
         "SEC-001",
@@ -21054,8 +21049,8 @@
       "expected": [],
       "ranked": [
         "INJ-002",
-        "HB-004",
         "DIR-003",
+        "HB-004",
         "HB-003",
         "DIR-001"
       ],
@@ -21203,15 +21198,15 @@
       "ranked": [
         "NEWS-001",
         "INJ-002",
+        "DIR-003",
         "HB-004",
-        "HB-002",
-        "DIR-002"
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 616,
+      "contextWords": 620,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-004",
@@ -21350,8 +21345,8 @@
         "NEWS-001",
         "INJ-002",
         "HB-006",
-        "HB-004",
-        "DIR-003"
+        "DIR-003",
+        "HB-004"
       ],
       "hit1": null,
       "hit3": null,
@@ -21401,13 +21396,13 @@
         "NEWS-001",
         "IT-SUM-8877",
         "HB-006",
-        "ENG-001"
+        "PAY-8817"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 1024,
+      "contextWords": 730,
       "leaked": [],
       "wouldHaveLeaked": [
         "INC-8790",
@@ -21745,8 +21740,8 @@
       "ranked": [
         "OPS-003",
         "FIN-002",
-        "OPS-004",
         "OPS-001",
+        "OPS-004",
         "PAY-9100"
       ],
       "hit1": null,
@@ -21797,13 +21792,13 @@
         "INJ-002",
         "HB-003",
         "DIR-003",
-        "HB-005"
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 602,
+      "contextWords": 593,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-005",
@@ -21846,8 +21841,8 @@
         "OPS-003",
         "PAY-9100",
         "NEWS-001",
-        "OPS-001",
-        "FIN-003"
+        "FIN-003",
+        "OPS-001"
       ],
       "hit1": null,
       "hit3": null,
@@ -21871,13 +21866,13 @@
         "NEWS-001",
         "OPS-001",
         "FIN-002",
-        "DIR-003"
+        "OPS-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 493,
+      "contextWords": 444,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-RIF-2026",
@@ -21919,13 +21914,13 @@
         "NEWS-001",
         "OPS-001",
         "FIN-002",
-        "DIR-003"
+        "OPS-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 493,
+      "contextWords": 444,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-RIF-2026",
@@ -21942,15 +21937,15 @@
       "ranked": [
         "NEWS-001",
         "DIR-003",
-        "DIR-002",
-        "HB-005",
-        "HB-003"
+        "HB-002",
+        "HB-003",
+        "DIR-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 629,
+      "contextWords": 620,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-RIF-2026",
@@ -21994,8 +21989,8 @@
         "DIR-003",
         "HB-002",
         "OPS-003",
-        "DIR-002",
-        "HB-004"
+        "HB-004",
+        "DIR-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -22017,8 +22012,8 @@
         "DIR-003",
         "HB-002",
         "OPS-003",
-        "DIR-002",
-        "HB-004"
+        "HB-004",
+        "DIR-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -22040,8 +22035,8 @@
         "DIR-003",
         "HB-002",
         "OPS-003",
-        "DIR-002",
-        "HB-004"
+        "HB-004",
+        "DIR-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -22063,8 +22058,8 @@
         "DIR-003",
         "HB-002",
         "OPS-003",
-        "DIR-002",
-        "HB-004"
+        "HB-004",
+        "DIR-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -22085,15 +22080,15 @@
       "ranked": [
         "DIR-003",
         "HB-002",
-        "DIR-002",
         "HB-004",
-        "INJ-001"
+        "DIR-002",
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 654,
+      "contextWords": 651,
       "leaked": [],
       "wouldHaveLeaked": [
         "OPS-003"
@@ -22111,8 +22106,8 @@
         "DIR-003",
         "HB-002",
         "OPS-003",
-        "DIR-002",
-        "HB-004"
+        "HB-004",
+        "DIR-002"
       ],
       "hit1": true,
       "hit3": true,
@@ -22158,13 +22153,13 @@
         "FIN-002",
         "NEWS-001",
         "INJ-002",
-        "OPS-002"
+        "OPS-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 437,
+      "contextWords": 462,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003",
@@ -22207,13 +22202,13 @@
         "FIN-002",
         "NEWS-001",
         "INJ-002",
-        "OPS-002"
+        "OPS-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 437,
+      "contextWords": 462,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003",
@@ -22283,14 +22278,14 @@
         "HB-005",
         "HB-002",
         "FIN-001",
-        "HB-001",
-        "PAY-9100"
+        "HB-003",
+        "HB-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 860,
+      "contextWords": 890,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026"
@@ -22308,14 +22303,14 @@
         "HB-005",
         "HB-002",
         "FIN-001",
-        "HB-001",
-        "HB-006"
+        "HB-003",
+        "HB-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 1153,
+      "contextWords": 890,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026"
@@ -22331,16 +22326,16 @@
       ],
       "ranked": [
         "HB-005",
+        "HR-BANDS-2026",
         "HB-002",
         "FIN-001",
-        "HR-BANDS-2026",
-        "HB-001"
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 989,
+      "contextWords": 699,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -22356,14 +22351,14 @@
         "HB-005",
         "HB-002",
         "FIN-001",
-        "HB-001",
-        "HB-006"
+        "HB-003",
+        "HB-001"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 1153,
+      "contextWords": 890,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026"
@@ -22380,19 +22375,19 @@
       "ranked": [
         "HB-005",
         "HB-002",
+        "HB-003",
         "HB-001",
-        "HB-006",
-        "HB-004"
+        "DIR-002"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 1210,
+      "contextWords": 931,
       "leaked": [],
       "wouldHaveLeaked": [
-        "FIN-001",
-        "HR-BANDS-2026"
+        "HR-BANDS-2026",
+        "FIN-001"
       ]
     },
     {
@@ -22405,16 +22400,16 @@
       ],
       "ranked": [
         "HB-005",
+        "HR-BANDS-2026",
         "HB-002",
         "FIN-001",
-        "HR-BANDS-2026",
-        "HB-001"
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": null,
-      "contextWords": 989,
+      "contextWords": 699,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -22454,13 +22449,13 @@
         "INJ-002",
         "ENG-001",
         "NEWS-001",
-        "INC-8790"
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 727,
+      "contextWords": 785,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-004",
@@ -22502,13 +22497,13 @@
         "INJ-002",
         "ENG-001",
         "NEWS-001",
-        "INC-8790"
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 727,
+      "contextWords": 785,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-004",
@@ -22524,9 +22519,9 @@
       "ranked": [
         "INJ-002",
         "NEWS-001",
-        "DIR-002",
         "DIR-003",
-        "HB-003"
+        "HB-003",
+        "DIR-002"
       ],
       "hit1": null,
       "hit3": null,
@@ -22571,17 +22566,17 @@
       "chunkSet": "full",
       "expected": [],
       "ranked": [
-        "OPS-001",
         "PAY-9100",
+        "OPS-001",
         "OPS-003",
         "NEWS-001",
-        "DIR-003"
+        "HB-004"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 501,
+      "contextWords": 513,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-PIP-17",
@@ -22599,8 +22594,8 @@
         "OPS-001",
         "OPS-003",
         "NEWS-001",
-        "DIR-003",
-        "HB-004"
+        "HB-004",
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
@@ -22626,8 +22621,8 @@
       "ranked": [
         "HR-PIP-17",
         "OPS-004",
-        "OPS-001",
         "PAY-9100",
+        "OPS-001",
         "OPS-003"
       ],
       "hit1": true,
@@ -22650,8 +22645,8 @@
         "OPS-001",
         "OPS-003",
         "NEWS-001",
-        "DIR-003",
-        "HB-004"
+        "HB-004",
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
@@ -22674,23 +22669,23 @@
       "expected": [],
       "ranked": [
         "NEWS-001",
-        "DIR-003",
         "HB-004",
+        "DIR-003",
         "INJ-002",
-        "HB-005"
+        "HB-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 629,
+      "contextWords": 620,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-PIP-17",
         "OPS-004",
-        "OPS-001",
         "PAY-9100",
-        "HR-RIF-2026"
+        "HR-RIF-2026",
+        "OPS-001"
       ]
     },
     {
@@ -22704,9 +22699,9 @@
       "ranked": [
         "HR-PIP-17",
         "OPS-004",
-        "OPS-001",
         "PAY-9100",
-        "HR-RIF-2026"
+        "HR-RIF-2026",
+        "OPS-001"
       ],
       "hit1": true,
       "hit3": true,
@@ -22750,15 +22745,15 @@
       "ranked": [
         "FIN-001",
         "FIN-002",
-        "HB-005",
         "NEWS-001",
-        "INJ-002"
+        "INJ-002",
+        "OPS-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 519,
+      "contextWords": 453,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-8817",
@@ -22799,15 +22794,15 @@
       "ranked": [
         "FIN-001",
         "FIN-002",
-        "HB-005",
         "NEWS-001",
-        "INJ-002"
+        "INJ-002",
+        "OPS-002"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 519,
+      "contextWords": 453,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-8817",
@@ -22823,9 +22818,9 @@
       "chunkSet": "full",
       "expected": [],
       "ranked": [
-        "HB-005",
         "NEWS-001",
         "INJ-002",
+        "HB-005",
         "HB-004",
         "HB-006"
       ],
@@ -22902,14 +22897,14 @@
         "NEWS-001",
         "OPS-003",
         "INJ-002",
-        "FIN-002",
+        "DIR-002",
         "OPS-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 462,
+      "contextWords": 511,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-8817",
@@ -22951,14 +22946,14 @@
         "NEWS-001",
         "OPS-003",
         "INJ-002",
-        "FIN-002",
+        "DIR-002",
         "OPS-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 462,
+      "contextWords": 511,
       "leaked": [],
       "wouldHaveLeaked": [
         "PAY-8817",
@@ -22976,9 +22971,9 @@
       "ranked": [
         "NEWS-001",
         "INJ-002",
-        "HB-005",
         "DIR-002",
-        "HB-006"
+        "HB-006",
+        "HB-005"
       ],
       "hit1": null,
       "hit3": null,
@@ -23037,8 +23032,8 @@
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-LONDON-88",
-        "HR-BERLIN-41",
-        "HR-BANDS-2026"
+        "HR-BANDS-2026",
+        "HR-BERLIN-41"
       ]
     },
     {
@@ -23062,8 +23057,8 @@
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-LONDON-88",
-        "HR-BERLIN-41",
-        "HR-BANDS-2026"
+        "HR-BANDS-2026",
+        "HR-BERLIN-41"
       ]
     },
     {
@@ -23076,9 +23071,9 @@
       ],
       "ranked": [
         "HR-LONDON-88",
-        "HR-BERLIN-41",
         "HR-BANDS-2026",
         "DIR-003",
+        "HR-BERLIN-41",
         "HB-006"
       ],
       "hit1": true,
@@ -23110,8 +23105,8 @@
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-LONDON-88",
-        "HR-BERLIN-41",
-        "HR-BANDS-2026"
+        "HR-BANDS-2026",
+        "HR-BERLIN-41"
       ]
     },
     {
@@ -23135,8 +23130,8 @@
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-LONDON-88",
-        "HR-BERLIN-41",
-        "HR-BANDS-2026"
+        "HR-BANDS-2026",
+        "HR-BERLIN-41"
       ]
     },
     {
@@ -23149,9 +23144,9 @@
       ],
       "ranked": [
         "HR-LONDON-88",
-        "HR-BERLIN-41",
         "HR-BANDS-2026",
         "DIR-003",
+        "HR-BERLIN-41",
         "HB-006"
       ],
       "hit1": true,
@@ -23170,8 +23165,8 @@
       "expected": [],
       "ranked": [
         "OPS-003",
-        "HB-005",
         "DIR-003",
+        "HB-005",
         "PAY-9100",
         "HB-002"
       ],
@@ -23195,8 +23190,8 @@
       "expected": [],
       "ranked": [
         "OPS-003",
-        "HB-005",
         "DIR-003",
+        "HB-005",
         "HB-002",
         "NEWS-001"
       ],
@@ -23225,13 +23220,13 @@
         "HR-LONDON-88",
         "HR-BANDS-2026",
         "OPS-003",
-        "HB-005"
+        "DIR-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 567,
+      "contextWords": 550,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -23243,8 +23238,8 @@
       "expected": [],
       "ranked": [
         "OPS-003",
-        "HB-005",
         "DIR-003",
+        "HB-005",
         "HB-002",
         "NEWS-001"
       ],
@@ -23267,8 +23262,8 @@
       "chunkSet": "full",
       "expected": [],
       "ranked": [
-        "HB-005",
         "DIR-003",
+        "HB-005",
         "HB-002",
         "NEWS-001",
         "INJ-002"
@@ -23299,13 +23294,13 @@
         "HR-LONDON-88",
         "HR-BANDS-2026",
         "OPS-003",
-        "HB-005"
+        "DIR-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 567,
+      "contextWords": 550,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -23369,8 +23364,8 @@
       ],
       "ranked": [
         "HR-BANDS-2026",
-        "HR-BERLIN-41",
         "DIR-003",
+        "HR-BERLIN-41",
         "HR-LONDON-88",
         "HB-005"
       ],
@@ -23442,8 +23437,8 @@
       ],
       "ranked": [
         "HR-BANDS-2026",
-        "HR-BERLIN-41",
         "DIR-003",
+        "HR-BERLIN-41",
         "HR-LONDON-88",
         "HB-005"
       ],
@@ -23514,15 +23509,15 @@
         "HR-BANDS-2026"
       ],
       "ranked": [
-        "HR-BANDS-2026",
         "OPS-002",
+        "HR-BANDS-2026",
         "HR-LONDON-88",
         "INJ-002",
         "HR-BERLIN-41"
       ],
-      "hit1": true,
+      "hit1": false,
       "hit3": true,
-      "rr": 1,
+      "rr": 0.5,
       "answerHit3": true,
       "contextWords": 531,
       "leaked": [],
@@ -23563,18 +23558,18 @@
         "INJ-002",
         "HB-002",
         "NEWS-001",
-        "DIR-002",
-        "HB-005"
+        "HB-006",
+        "HB-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 621,
+      "contextWords": 1131,
       "leaked": [],
       "wouldHaveLeaked": [
-        "HR-BANDS-2026",
         "OPS-002",
+        "HR-BANDS-2026",
         "HR-LONDON-88",
         "HR-BERLIN-41"
       ]
@@ -23588,15 +23583,15 @@
         "HR-BANDS-2026"
       ],
       "ranked": [
-        "HR-BANDS-2026",
         "OPS-002",
+        "HR-BANDS-2026",
         "HR-LONDON-88",
         "INJ-002",
         "HR-BERLIN-41"
       ],
-      "hit1": true,
+      "hit1": false,
       "hit3": true,
-      "rr": 1,
+      "rr": 0.5,
       "answerHit3": true,
       "contextWords": 531,
       "leaked": [],
@@ -23854,8 +23849,8 @@
         "HB-006",
         "NEWS-001",
         "HB-004",
-        "INJ-002",
-        "DIR-003"
+        "DIR-003",
+        "INJ-002"
       ],
       "hit1": null,
       "hit3": null,
@@ -24007,13 +24002,13 @@
         "INJ-002",
         "HB-004",
         "HB-003",
-        "DIR-001"
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 588,
+      "contextWords": 597,
       "leaked": [],
       "wouldHaveLeaked": [
         "IT-SUM-8877",
@@ -24058,20 +24053,20 @@
       "ranked": [
         "HB-006",
         "HB-001",
-        "HB-005",
         "INJ-002",
-        "IT-SUM-8921"
+        "HB-003",
+        "HB-005"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 1123,
+      "contextWords": 1144,
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002",
-        "HR-BANDS-2026",
-        "RUN-001"
+        "RUN-001",
+        "HR-BANDS-2026"
       ]
     },
     {
@@ -24087,13 +24082,13 @@
         "HB-001",
         "RUN-002",
         "RUN-001",
-        "HB-005"
+        "INJ-002"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 1331,
+      "contextWords": 1283,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026"
@@ -24111,14 +24106,14 @@
         "HB-006",
         "HB-001",
         "HR-BANDS-2026",
-        "HB-005",
-        "INJ-002"
+        "INJ-002",
+        "HB-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 1243,
+      "contextWords": 1211,
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002",
@@ -24138,13 +24133,13 @@
         "HB-001",
         "RUN-002",
         "RUN-001",
-        "HB-005"
+        "INJ-002"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 1331,
+      "contextWords": 1283,
       "leaked": [],
       "wouldHaveLeaked": [
         "HR-BANDS-2026"
@@ -24161,9 +24156,9 @@
       "ranked": [
         "HB-006",
         "HB-001",
-        "HB-005",
         "INJ-002",
-        "HB-003"
+        "HB-003",
+        "HB-005"
       ],
       "hit1": true,
       "hit3": true,
@@ -24173,8 +24168,8 @@
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002",
-        "HR-BANDS-2026",
-        "RUN-001"
+        "RUN-001",
+        "HR-BANDS-2026"
       ]
     },
     {
@@ -24189,8 +24184,8 @@
         "HB-006",
         "HB-001",
         "RUN-002",
-        "HR-BANDS-2026",
-        "RUN-001"
+        "RUN-001",
+        "HR-BANDS-2026"
       ],
       "hit1": true,
       "hit3": true,
@@ -24210,20 +24205,19 @@
       ],
       "ranked": [
         "HB-001",
-        "HB-002",
         "HB-005",
+        "HB-002",
         "HB-003",
-        "OPS-003"
+        "DIR-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 874,
+      "contextWords": 935,
       "leaked": [],
       "wouldHaveLeaked": [
-        "OPS-004",
-        "HR-BANDS-2026"
+        "OPS-004"
       ]
     },
     {
@@ -24236,20 +24230,19 @@
       ],
       "ranked": [
         "HB-001",
-        "HB-002",
         "HB-005",
+        "HB-002",
         "HB-003",
-        "OPS-003"
+        "DIR-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 874,
+      "contextWords": 935,
       "leaked": [],
       "wouldHaveLeaked": [
-        "OPS-004",
-        "HR-BANDS-2026"
+        "OPS-004"
       ]
     },
     {
@@ -24262,16 +24255,16 @@
       ],
       "ranked": [
         "HB-001",
-        "HB-002",
         "HB-005",
-        "OPS-004",
-        "HR-BANDS-2026"
+        "HB-002",
+        "HB-003",
+        "OPS-004"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 976,
+      "contextWords": 877,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -24285,20 +24278,19 @@
       ],
       "ranked": [
         "HB-001",
-        "HB-002",
         "HB-005",
+        "HB-002",
         "HB-003",
-        "OPS-003"
+        "DIR-003"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 874,
+      "contextWords": 935,
       "leaked": [],
       "wouldHaveLeaked": [
-        "OPS-004",
-        "HR-BANDS-2026"
+        "OPS-004"
       ]
     },
     {
@@ -24311,8 +24303,8 @@
       ],
       "ranked": [
         "HB-001",
-        "HB-002",
         "HB-005",
+        "HB-002",
         "HB-003",
         "DIR-003"
       ],
@@ -24323,8 +24315,7 @@
       "contextWords": 935,
       "leaked": [],
       "wouldHaveLeaked": [
-        "OPS-004",
-        "HR-BANDS-2026"
+        "OPS-004"
       ]
     },
     {
@@ -24337,16 +24328,16 @@
       ],
       "ranked": [
         "HB-001",
-        "HB-002",
         "HB-005",
-        "OPS-004",
-        "HR-BANDS-2026"
+        "HB-002",
+        "HB-003",
+        "OPS-004"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 976,
+      "contextWords": 877,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -24597,13 +24588,13 @@
         "NEWS-001",
         "HB-001",
         "INJ-002",
-        "INJ-001"
+        "DIR-003"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 1111,
+      "contextWords": 1123,
       "leaked": [],
       "wouldHaveLeaked": [
         "INC-8921",
@@ -24644,9 +24635,9 @@
       "expected": [],
       "ranked": [
         "INJ-002",
-        "ENG-001",
         "IT-SUM-8877",
         "HB-006",
+        "ENG-001",
         "HB-001"
       ],
       "hit1": null,
@@ -24671,9 +24662,9 @@
       "ranked": [
         "RUN-002",
         "INJ-002",
-        "ENG-001",
         "IT-SUM-8877",
-        "HB-006"
+        "HB-006",
+        "ENG-001"
       ],
       "hit1": true,
       "hit3": true,
@@ -24693,9 +24684,9 @@
       "expected": [],
       "ranked": [
         "INJ-002",
-        "ENG-001",
         "IT-SUM-8877",
         "HB-006",
+        "ENG-001",
         "HB-001"
       ],
       "hit1": null,
@@ -24720,15 +24711,15 @@
       "ranked": [
         "RUN-002",
         "INJ-002",
-        "ENG-001",
         "IT-SUM-8877",
-        "SEC-001"
+        "SEC-001",
+        "HB-006"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 742,
+      "contextWords": 756,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -24753,7 +24744,6 @@
       "leaked": [],
       "wouldHaveLeaked": [
         "RUN-002",
-        "ENG-001",
         "IT-SUM-8877",
         "SEC-001"
       ]
@@ -24769,15 +24759,15 @@
       "ranked": [
         "RUN-002",
         "INJ-002",
-        "ENG-001",
         "IT-SUM-8877",
-        "SEC-001"
+        "SEC-001",
+        "HB-006"
       ],
       "hit1": true,
       "hit3": true,
       "rr": 1,
       "answerHit3": true,
-      "contextWords": 742,
+      "contextWords": 756,
       "leaked": [],
       "wouldHaveLeaked": []
     },
@@ -24884,13 +24874,13 @@
         "DIR-003",
         "INJ-002",
         "HB-006",
-        "HB-003"
+        "HB-004"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 833,
+      "contextWords": 860,
       "leaked": [],
       "wouldHaveLeaked": [
         "FIN-003",
@@ -25033,8 +25023,8 @@
       "ranked": [
         "NEWS-001",
         "INJ-002",
-        "HB-002",
         "DIR-002",
+        "HB-002",
         "INJ-001"
       ],
       "hit1": null,
@@ -25242,9 +25232,9 @@
       "leaked": [],
       "wouldHaveLeaked": [
         "INC-8877",
+        "INC-9012",
         "RUN-002",
-        "INC-8790",
-        "INC-9012"
+        "INC-8790"
       ]
     },
     {
@@ -25258,9 +25248,9 @@
       "ranked": [
         "INC-8877",
         "IT-SUM-8877",
+        "INC-9012",
         "RUN-002",
-        "INC-8790",
-        "INC-9012"
+        "INC-8790"
       ],
       "hit1": false,
       "hit3": false,
@@ -25293,9 +25283,9 @@
       "leaked": [],
       "wouldHaveLeaked": [
         "INC-8877",
+        "INC-9012",
         "RUN-002",
-        "INC-8790",
-        "INC-9012"
+        "INC-8790"
       ]
     },
     {
@@ -25309,9 +25299,9 @@
       "ranked": [
         "INC-8877",
         "IT-SUM-8877",
+        "INC-9012",
         "RUN-002",
-        "INC-8790",
-        "INC-9012"
+        "INC-8790"
       ],
       "hit1": false,
       "hit3": false,
@@ -25343,9 +25333,9 @@
       "wouldHaveLeaked": [
         "INC-8877",
         "IT-SUM-8877",
+        "INC-9012",
         "RUN-002",
-        "INC-8790",
-        "INC-9012"
+        "INC-8790"
       ]
     },
     {
@@ -25359,9 +25349,9 @@
       "ranked": [
         "INC-8877",
         "IT-SUM-8877",
+        "INC-9012",
         "RUN-002",
-        "INC-8790",
-        "INC-9012"
+        "INC-8790"
       ],
       "hit1": false,
       "hit3": false,
@@ -25407,8 +25397,8 @@
       "ranked": [
         "ENG-001",
         "IT-SUM-8921",
-        "INC-8790",
         "DIR-003",
+        "INC-8790",
         "IT-SUM-8877"
       ],
       "hit1": true,
@@ -25455,8 +25445,8 @@
       "ranked": [
         "ENG-001",
         "IT-SUM-8921",
-        "INC-8790",
         "DIR-003",
+        "INC-8790",
         "IT-SUM-8877"
       ],
       "hit1": true,
@@ -25477,14 +25467,14 @@
         "DIR-003",
         "HB-006",
         "HB-004",
-        "HB-003",
-        "HB-002"
+        "HB-002",
+        "NEWS-001"
       ],
       "hit1": null,
       "hit3": null,
       "rr": null,
       "answerHit3": null,
-      "contextWords": 903,
+      "contextWords": 899,
       "leaked": [],
       "wouldHaveLeaked": [
         "ENG-001",
@@ -25504,8 +25494,8 @@
       "ranked": [
         "ENG-001",
         "IT-SUM-8921",
-        "INC-8790",
         "DIR-003",
+        "INC-8790",
         "IT-SUM-8877"
       ],
       "hit1": true,

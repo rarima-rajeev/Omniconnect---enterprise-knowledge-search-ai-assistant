@@ -3,7 +3,7 @@ import './globals.css';
 import { PostHogProvider } from './providers';
 
 export const metadata: Metadata = {
-  title: 'OmniConnect — Enterprise Knowledge Search AI Assistant',
+  title: 'AskWell — Enterprise Knowledge Search AI Assistant',
   description:
     'Ask questions across company documents with automated role-based permission controls.',
 };
