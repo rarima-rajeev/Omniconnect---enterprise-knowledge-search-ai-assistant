@@ -21,6 +21,9 @@ import {
 import retrieval from '@/evals/results/retrieval.json';
 import redteam from '@/evals/results/redteam.json';
 import retrievalSet from '@/evals/retrieval-set.json';
+import { CHUNK_SETS, chunkDocument } from '@/lib/chunking';
+import { loadCorpus } from '@/lib/corpus';
+import { ENTERPRISE_PERSONAS } from '@/lib/supabase';
 
 export const metadata: Metadata = {
   title: 'How It Works & Results — AskWell',
@@ -148,6 +151,33 @@ export default function MetricsPage() {
       measures: 'Proves the access filter is essential, not decoration',
     },
   ];
+  // Knowledge base contents, computed from the actual corpus and personas at build time.
+  const corpus = loadCorpus();
+  const words = corpus.reduce((n, d) => n + d.body.split(/\s+/).filter(Boolean).length, 0);
+  const byClass = (c: string) => corpus.filter((d) => d.classification === c).length;
+  const chunkCount = CHUNK_SETS.reduce((n, s) => n + corpus.reduce((m, d) => m + chunkDocument(d, s).length, 0), 0);
+  const dataRows = [
+    {
+      emoji: '👥',
+      name: 'User personas',
+      count: ENTERPRISE_PERSONAS.length,
+      holds: 'The sample employees, from intern to system admin, each with a role, department and clearance level that decides what they can see',
+    },
+    {
+      emoji: '📄',
+      name: 'Organization documents',
+      count: corpus.length,
+      holds: `Fictional company documents, each tagged with who may read it: about ${(Math.round(words / 1000) * 1000).toLocaleString()} words in total (roughly 10 pages) · ${byClass('Public')} public · ${byClass('Internal')} internal · ${byClass('Confidential')} confidential · ${byClass('Restricted')} restricted`,
+    },
+    {
+      emoji: '🧩',
+      name: 'Searchable passages',
+      alias: 'chunks',
+      count: chunkCount,
+      holds: 'The documents cut into pieces, each with its 768-number "meaning fingerprint" (768: Gemini-specific numbering)',
+    },
+  ];
+
   const TAG_STYLE: Record<string, string> = {
     'Eval suite': 'border-zinc-300 text-zinc-700 bg-zinc-100',
     'RAG eval': 'border-cyan-200 text-cyan-700 bg-cyan-50',
@@ -248,6 +278,37 @@ export default function MetricsPage() {
               <div className="px-3 py-1 md:py-2 text-[13px] text-zinc-600 leading-snug">{r.measures}</div>
             </div>
           ))}
+        </div>
+
+        {/* Knowledge base */}
+        <div>
+          <div className="text-base font-bold tracking-tight text-zinc-900 mb-1.5">What's in the knowledge base</div>
+          <div className="rounded-xl border border-zinc-300 bg-white overflow-hidden">
+            <div className="hidden md:grid md:grid-cols-[52px_250px_120px_1fr] divide-x divide-zinc-300 border-b border-zinc-300 bg-cyan-50 text-sm font-bold text-zinc-900">
+              <span className="px-3 py-2 text-center">#</span>
+              <span className="px-3 py-2">Data</span>
+              <span className="px-3 py-2">Count</span>
+              <span className="px-3 py-2">What it holds</span>
+            </div>
+            {dataRows.map((r, i) => (
+              <div
+                key={r.name}
+                className="grid grid-cols-1 md:grid-cols-[52px_250px_120px_1fr] md:divide-x divide-zinc-200 border-b border-zinc-200 last:border-b-0 py-2 md:py-0"
+              >
+                <div className="hidden md:flex items-center justify-center px-3 py-2 text-sm font-bold text-zinc-400 font-mono">
+                  {i + 1}
+                </div>
+                <div className="px-3 py-1 md:py-2 md:self-center text-sm font-semibold text-zinc-900">
+                  <span className="md:hidden text-zinc-400 font-mono mr-1">{i + 1}.</span>
+                  <span className="mr-1.5">{r.emoji}</span>
+                  {r.name}
+                  {r.alias && <span className="ml-1.5 text-xs text-zinc-500 font-mono font-normal">({r.alias})</span>}
+                </div>
+                <div className="px-3 py-1 md:py-2 flex items-center text-2xl font-bold font-mono text-cyan-700">{r.count}</div>
+                <div className="px-3 py-1 md:py-2 flex items-center text-[13px] text-zinc-800 leading-snug">{r.holds}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* How a question is answered */}
