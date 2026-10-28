@@ -177,9 +177,9 @@ export default function MetricsPage() {
             <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-lime-400 flex items-center justify-center shadow-md shadow-cyan-500/20">
               <Cpu className="h-4 w-4 text-white" />
             </div>
-            <span className="font-bold text-sm tracking-tight text-zinc-900">AskWell</span>
+            <span className="font-bold text-base tracking-tight text-zinc-900">AskWell</span>
           </Link>
-          <div className="flex items-center gap-2 text-xs">
+          <div className="flex items-center gap-2 text-sm">
             <Link
               href="/"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-300 bg-white hover:border-zinc-400 text-zinc-800"
@@ -201,15 +201,15 @@ export default function MetricsPage() {
 
         {/* Title */}
         <div>
-          <div className="text-[10px] uppercase tracking-[0.18em] font-mono text-cyan-700">How it works & results</div>
-          <h1 className="text-xl sm:text-2xl font-bold text-zinc-900 tracking-tight mt-0.5">
+          <div className="text-xs uppercase tracking-[0.18em] font-mono text-cyan-700">How it works & results</div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight mt-0.5">
             An AI search assistant that only shows each employee what they're allowed to see
           </h1>
         </div>
 
         {/* Evals table */}
         <div className="rounded-xl border border-zinc-200 bg-white overflow-hidden">
-          <div className="hidden md:grid grid-cols-[200px_130px_1fr_210px] gap-3 px-3 py-1.5 border-b border-zinc-200 text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+          <div className="hidden md:grid grid-cols-[230px_160px_1fr_250px] gap-3 px-3 py-1.5 border-b border-zinc-200 text-xs font-bold uppercase tracking-wider text-zinc-500">
             <span>Eval</span>
             <span>Score</span>
             <span>What did we test?</span>
@@ -218,28 +218,28 @@ export default function MetricsPage() {
           {evalRows.map((r) => (
             <div
               key={r.name}
-              className="grid grid-cols-1 md:grid-cols-[200px_130px_1fr_210px] gap-1 md:gap-3 px-3 py-1.5 border-b border-zinc-200 last:border-b-0 items-center"
+              className="grid grid-cols-1 md:grid-cols-[230px_160px_1fr_250px] gap-1 md:gap-3 px-3 py-1.5 border-b border-zinc-200 last:border-b-0 items-center"
             >
               <div>
-                <div className="text-xs font-semibold text-zinc-900">{r.name}</div>
+                <div className="text-sm font-semibold text-zinc-900">{r.name}</div>
                 <div className="flex items-center gap-1.5 mt-0.5">
-                  <span className={`text-[9.5px] font-semibold px-1.5 py-px rounded border ${TAG_STYLE[r.tag]}`}>{r.tag}</span>
-                  <span className="text-[10px] text-zinc-500 font-mono">{r.alias}</span>
+                  <span className={`text-[11px] font-semibold px-1.5 py-px rounded border ${TAG_STYLE[r.tag]}`}>{r.tag}</span>
+                  <span className="text-xs text-zinc-500 font-mono">{r.alias}</span>
                 </div>
               </div>
               <div className="flex items-baseline gap-1.5 md:block">
-                <div className={`text-xl font-bold font-mono leading-none ${r.tone}`}>{r.score}</div>
-                <div className="text-[10px] text-zinc-500 md:mt-0.5">{r.unit}</div>
+                <div className={`text-2xl font-bold font-mono leading-none ${r.tone}`}>{r.score}</div>
+                <div className="text-xs text-zinc-500 md:mt-0.5">{r.unit}</div>
               </div>
-              <div className="text-[11px] text-zinc-500 leading-snug">{r.test}</div>
-              <div className="text-[11px] text-zinc-500 leading-snug">{r.measures}</div>
+              <div className="text-[13px] text-zinc-500 leading-snug">{r.test}</div>
+              <div className="text-[13px] text-zinc-500 leading-snug">{r.measures}</div>
             </div>
           ))}
         </div>
 
         {/* How a question is answered */}
         <div className="rounded-xl border border-zinc-200 bg-white px-3 py-2.5">
-          <div className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-1.5">
+          <div className="text-[13px] font-bold uppercase tracking-wider text-zinc-500 mb-1.5">
             How a question gets answered
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-5 gap-2">
@@ -247,12 +247,12 @@ export default function MetricsPage() {
               <div key={step.title} className="relative rounded-lg bg-cyan-50/50 border border-cyan-100 px-2.5 py-2">
                 <div className="flex items-center gap-1.5">
                   <step.icon className="h-4 w-4 text-cyan-700 flex-shrink-0" />
-                  <span className="text-xs font-semibold text-zinc-900">
+                  <span className="text-sm font-semibold text-zinc-900">
                     {i + 1}. {step.title}
                   </span>
                 </div>
-                <p className="text-[11px] text-zinc-700 leading-snug mt-1">{step.body}</p>
-                <p className="text-[10px] text-zinc-500 font-mono mt-1">{step.term}</p>
+                <p className="text-[13px] text-zinc-700 leading-snug mt-1">{step.body}</p>
+                <p className="text-xs text-zinc-500 font-mono mt-1">{step.term}</p>
                 {i < steps.length - 1 && (
                   <ArrowRight className="hidden sm:block absolute -right-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-zinc-400 z-10" />
                 )}
@@ -267,18 +267,18 @@ export default function MetricsPage() {
           <div className="rounded-xl border border-zinc-200 bg-white p-3">
             <div className="flex items-center gap-1.5 mb-1">
               <FileSearch className="h-4 w-4 text-cyan-700" />
-              <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">
+              <span className="text-[13px] font-bold uppercase tracking-wider text-zinc-500">
                 Experiment: best passage size
               </span>
             </div>
-            <p className="text-[11px] text-zinc-500 mb-2">
+            <p className="text-[13px] text-zinc-500 mb-2">
               Documents are cut into passages. On the {hardCount} hardest questions, small ones found the answer
               most often. Bar = text the AI reads (cost).
             </p>
             <div className="space-y-2">
               {SETS.map((s) => (
                 <div key={s}>
-                  <div className="flex justify-between text-[11px]">
+                  <div className="flex justify-between text-[13px]">
                     <span className={s === best ? 'text-zinc-900 font-semibold' : 'text-zinc-700'}>
                       {SET_LABEL[s]}
                       {s === best && <span className="ml-1.5 text-emerald-700">chosen</span>}
@@ -302,18 +302,18 @@ export default function MetricsPage() {
           <div className="rounded-xl border border-zinc-200 bg-white p-3">
             <div className="flex items-center gap-1.5 mb-1">
               <Swords className="h-4 w-4 text-rose-700" />
-              <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">
+              <span className="text-[13px] font-bold uppercase tracking-wider text-zinc-500">
                 Hacking attempts blocked
               </span>
             </div>
-            <p className="text-[11px] text-zinc-500 mb-2">
+            <p className="text-[13px] text-zinc-500 mb-2">
               Each secret document holds unique facts. If one ever appeared in an answer, the test failed.
             </p>
             <div className="space-y-1">
               {attackRows.map((a) => (
-                <div key={a.type} className="flex items-center justify-between gap-2 text-[11px]">
+                <div key={a.type} className="flex items-center justify-between gap-2 text-[13px]">
                   <span className="text-zinc-700">
-                    {a.label} <span className="text-zinc-400 font-mono text-[10px]">· {a.term}</span>
+                    {a.label} <span className="text-zinc-400 font-mono text-xs">· {a.term}</span>
                   </span>
                   <span className={`font-mono flex-shrink-0 ${a.passed === a.total ? 'text-emerald-700' : 'text-amber-700'}`}>
                     {a.passed}/{a.total}
@@ -327,18 +327,18 @@ export default function MetricsPage() {
           <div className="rounded-xl border border-zinc-200 bg-white p-3">
             <div className="flex items-center gap-1.5 mb-2">
               <ShieldCheck className="h-4 w-4 text-cyan-700" />
-              <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">Built with</span>
+              <span className="text-[13px] font-bold uppercase tracking-wider text-zinc-500">Built with</span>
             </div>
             <div className="flex flex-wrap gap-1.5">
               {builtWith.map((t) => (
-                <span key={t} className="text-[10.5px] px-2 py-0.5 rounded-md border border-cyan-200 bg-cyan-50 text-cyan-700">
+                <span key={t} className="text-xs px-2 py-0.5 rounded-md border border-cyan-200 bg-cyan-50 text-cyan-700">
                   {t}
                 </span>
               ))}
             </div>
             <div className="flex flex-wrap gap-1.5 mt-2.5 pt-2.5 border-t border-zinc-200">
               {stack.map((t) => (
-                <span key={t} className="text-[10.5px] px-2 py-0.5 rounded-md border border-zinc-300 bg-zinc-100 text-zinc-700 font-mono">
+                <span key={t} className="text-xs px-2 py-0.5 rounded-md border border-zinc-300 bg-zinc-100 text-zinc-700 font-mono">
                   {t}
                 </span>
               ))}
@@ -349,8 +349,8 @@ export default function MetricsPage() {
         {/* More projects */}
         <div className="rounded-xl bg-gradient-to-br from-cyan-600 to-cyan-800 px-4 py-3 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
           <div>
-            <div className="text-sm font-bold text-white">More projects and the full case study</div>
-            <div className="text-[11px] text-cyan-100/80">The write-up, code and other AI product projects live here.</div>
+            <div className="text-base font-bold text-white">More projects and the full case study</div>
+            <div className="text-[13px] text-cyan-100/80">The write-up, code and other AI product projects live here.</div>
           </div>
           <div className="grid grid-cols-3 gap-2 md:w-[440px]">
             {PROFILE_LINKS.map((l) => (
@@ -359,7 +359,7 @@ export default function MetricsPage() {
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between gap-1.5 rounded-lg bg-white/10 hover:bg-white/20 px-2.5 py-1.5 text-xs font-semibold text-white transition-colors"
+                className="flex items-center justify-between gap-1.5 rounded-lg bg-white/10 hover:bg-white/20 px-2.5 py-1.5 text-sm font-semibold text-white transition-colors"
               >
                 <span className="flex items-center gap-1.5">
                   <l.icon className="h-3.5 w-3.5" />

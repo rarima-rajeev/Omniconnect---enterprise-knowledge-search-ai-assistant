@@ -248,8 +248,8 @@ export default function CopilotChatLandingPage() {
 
               {/* Persona Dropdown Menu */}
               {isPersonaDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-80 rounded-xl bg-white border border-zinc-200 shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-100">
-                  <div className="px-3 py-2 border-b border-zinc-200 text-[10px] font-bold text-zinc-500 uppercase tracking-wider">
+                <div className="absolute right-0 mt-2 w-80 rounded-xl bg-zinc-800 border border-zinc-700 shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-100">
+                  <div className="px-3 py-2 border-b border-zinc-700 text-[10px] font-bold text-zinc-400 uppercase tracking-wider">
                     Switch Active Enterprise Persona
                   </div>
                   <div className="mt-1 space-y-1">
@@ -261,36 +261,36 @@ export default function CopilotChatLandingPage() {
                           onClick={() => handleSelectPersona(p)}
                           className={`w-full flex items-start space-x-3 p-2.5 rounded-lg text-left transition-all ${
                             isCurrent
-                              ? 'bg-cyan-50 border border-cyan-200 text-zinc-900'
-                              : 'hover:bg-zinc-100 text-zinc-700 border border-transparent'
+                              ? 'bg-cyan-500/15 border border-cyan-400/40 text-white'
+                              : 'hover:bg-zinc-700 text-zinc-200 border border-transparent'
                           }`}
                         >
                           <img
                             src={p.avatar}
                             alt={p.name}
-                            className="h-8 w-8 rounded-full object-cover ring-1 ring-zinc-300 mt-0.5"
+                            className="h-8 w-8 rounded-full object-cover ring-1 ring-zinc-600 mt-0.5"
                           />
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between">
-                              <span className="text-xs font-bold text-zinc-900 truncate">{p.name}</span>
+                              <span className="text-xs font-bold text-white truncate">{p.name}</span>
                               <span
                                 className={`text-[9px] font-mono px-1.5 py-0.2 rounded font-bold ${
                                   p.clearanceLevel === 'L6'
-                                    ? 'bg-cyan-50 text-cyan-700'
+                                    ? 'bg-lime-400/15 text-lime-300'
                                     : p.clearanceLevel === 'L4'
-                                    ? 'bg-cyan-50 text-cyan-700'
+                                    ? 'bg-cyan-400/15 text-cyan-300'
                                     : p.clearanceLevel === 'L3'
-                                    ? 'bg-emerald-50 text-emerald-700'
-                                    : 'bg-zinc-100 text-zinc-500'
+                                    ? 'bg-emerald-400/15 text-emerald-300'
+                                    : 'bg-zinc-700 text-zinc-300'
                                 }`}
                               >
                                 {p.levelDisplay}
                               </span>
                             </div>
-                            <div className="text-[10px] text-cyan-700 truncate">
+                            <div className="text-[10px] text-cyan-300 truncate">
                               {p.department} • {p.role}
                             </div>
-                            <div className="text-[10px] text-zinc-500 mt-0.5 line-clamp-1">{p.description}</div>
+                            <div className="text-[10px] text-zinc-400 mt-0.5 line-clamp-1">{p.description}</div>
                           </div>
                         </button>
                       );
