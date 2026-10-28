@@ -2,6 +2,8 @@
 
 > **Subtitle:** *Ask questions across company documents with automated role-based permission controls.*
 
+**Live demo:** [askwell-ai.vercel.app](https://askwell-ai.vercel.app) · **Results & how it works:** [askwell-ai.vercel.app/metrics](https://askwell-ai.vercel.app/metrics)
+
 AskWell is an enterprise AI knowledge assistant that answers employee questions over multi-department company documents (finance, HR, engineering, operations) using **permission-aware retrieval-augmented generation (RAG)**: Gemini embeddings and pgvector similarity search that only ever return documents the asking employee is allowed to read, plus OAuth-gated agent actions.
 
 > 📖 **AI Product Manager Case Study**: Read the comprehensive problem statement, architectural tradeoffs, persona evaluation matrix, and business impact metrics in [**CASE_STUDY.md**](./CASE_STUDY.md).

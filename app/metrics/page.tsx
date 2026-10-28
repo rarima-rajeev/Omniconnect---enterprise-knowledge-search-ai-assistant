@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 };
 
 const CASE_STUDY_URL =
-  'https://github.com/rarima-rajeev/Omniconnect---enterprise-knowledge-search-ai-assistant/blob/main/CASE_STUDY.md';
+  'https://github.com/rarima-rajeev/askwell/blob/main/CASE_STUDY.md';
 
 const PROFILE_LINKS = [
   { label: 'Portfolio', href: 'https://rarima-rajeev.my.canva.site/', icon: Globe },
