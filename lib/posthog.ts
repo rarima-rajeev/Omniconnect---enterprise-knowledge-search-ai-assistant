@@ -1,45 +1,8 @@
 import { PostHog } from 'posthog-node';
 import { TelemetryEvent, UserContext } from './types';
 
-// In-memory telemetry log buffer for workbench Tab 3 live stream
-const telemetryBuffer: TelemetryEvent[] = [
-  {
-    id: 'evt-init-01',
-    eventName: 'connector_invoked',
-    timestamp: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
-    properties: {
-      connector_id: 'm365-connector-it-incidents',
-      domain: 'it_incidents',
-      query: 'System health check probe',
-      persona_department: 'IT',
-      persona_role: 'DevOpsEngineer',
-      user_id: 'usr_it_582',
-    },
-  },
-  {
-    id: 'evt-init-02',
-    eventName: 'acl_records_trimmed',
-    timestamp: new Date(Date.now() - 1000 * 60 * 11).toISOString(),
-    properties: {
-      records_scanned: 5,
-      records_returned: 4,
-      trim_ratio: 20,
-      user_id: 'usr_it_582',
-      security_note: '1 record trimmed by clearance policy',
-    },
-  },
-  {
-    id: 'evt-init-03',
-    eventName: 'llm_latency_recorded',
-    timestamp: new Date(Date.now() - 1000 * 60 * 10).toISOString(),
-    properties: {
-      model_used: 'AskWell Enterprise Orchestrator',
-      ttft_ms: 112,
-      total_tokens: 348,
-      latency_ms: 284,
-    },
-  },
-];
+// In-memory telemetry log buffer for the admin live stream. Starts empty: only real events are shown.
+const telemetryBuffer: TelemetryEvent[] = [];
 
 let serverPostHog: PostHog | null = null;
 
